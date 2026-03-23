@@ -8,7 +8,7 @@ import styles from './Hero.module.css';
 
 const heroFacts = [EVENT_DATE_DISPLAY, EVENT_TIME, EVENT_LOCATION, `Venue ${EVENT_VENUE}`];
 
-const labReadouts = [
+const eventPacketItems = [
   {
     label: 'Bench mix',
     value: 'Beginners, return builders, and people already carrying half-routed ideas.',
@@ -83,7 +83,7 @@ function Hero() {
             </div>
           </motion.div>
 
-          <motion.div className={styles.aside} variants={itemVariants}>
+          <motion.div className={styles.packetColumn} variants={itemVariants}>
             <Card className={styles.panel}>
               <div className={styles.panelHeader}>
                 <SectionLabel label="event packet" />
@@ -91,15 +91,24 @@ function Hero() {
               </div>
 
               <div className={styles.readouts}>
-                {labReadouts.map((readout) => (
-                  <div key={readout.label} className={styles.readout}>
-                    <p className={styles.readoutLabel}>{readout.label}</p>
-                    <p className={styles.readoutValue}>{readout.value}</p>
+                {eventPacketItems.map((item) => (
+                  <div key={item.label} className={styles.readout}>
+                    <p className={styles.readoutLabel}>{item.label}</p>
+                    <p className={styles.readoutValue}>{item.value}</p>
                   </div>
                 ))}
               </div>
             </Card>
+          </motion.div>
+        </motion.div>
 
+        <motion.div
+          className={styles.countdownWrap}
+          initial="hidden"
+          animate="visible"
+          variants={containerVariants}
+        >
+          <motion.div variants={itemVariants}>
             <Card className={styles.countdownFrame}>
               <div className={styles.countdownHeader}>
                 <SectionLabel label="bench timer" />

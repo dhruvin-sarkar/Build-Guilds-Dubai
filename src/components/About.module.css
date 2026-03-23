@@ -19,7 +19,7 @@
 
 .header {
   display: grid;
-  grid-template-columns: minmax(15rem, 0.72fr) minmax(0, 1.28fr);
+  grid-template-columns: minmax(15rem, 0.68fr) minmax(0, 1.32fr);
   gap: var(--space-8);
   align-items: start;
 }
@@ -49,7 +49,6 @@
 }
 
 .statEyebrow,
-.kicker,
 .stripCommand {
   color: var(--text-secondary);
 }
@@ -73,10 +72,17 @@
 
 .copyColumn {
   gap: var(--space-4);
+  max-width: 44rem;
+}
+
+.kicker {
+  max-width: 34rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
 }
 
 .title {
-  max-width: 11ch;
+  max-width: 13ch;
   color: var(--text-primary);
   font-size: var(--step-title);
   font-weight: 800;
@@ -87,7 +93,7 @@
 .lead,
 .stripText,
 .footerText {
-  max-width: 48rem;
+  max-width: 40rem;
   color: var(--text-muted);
   font-size: var(--text-sm);
   line-height: 1.85;
@@ -142,6 +148,10 @@
     grid-template-columns: 1fr;
   }
 
+  .copyColumn {
+    max-width: 100%;
+  }
+
   .strip {
     grid-template-columns: 1fr;
   }
@@ -150,5 +160,11 @@
 @media (max-width: 768px) {
   .section {
     padding: 0 var(--page-padding) var(--section-space-mobile);
+  }
+
+  .title,
+  .lead,
+  .kicker {
+    max-width: 100%;
   }
 }
