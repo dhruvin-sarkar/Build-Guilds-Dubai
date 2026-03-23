@@ -1,8 +1,10 @@
 .section {
+  position: relative;
   padding: calc(var(--nav-height) + var(--space-8)) var(--page-padding) var(--section-space);
 }
 
 .inner {
+  position: relative;
   width: min(100%, var(--container));
   margin: 0 auto;
 }

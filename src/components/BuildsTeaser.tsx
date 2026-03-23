@@ -1,41 +1,26 @@
-import { AnimatePresence, motion } from 'framer-motion';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { blueprintProjects } from '../data/projects';
 import SectionLabel from './ui/SectionLabel';
 import styles from './BuildsTeaser.module.css';
 
-const previewProjects = blueprintProjects.slice(0, 2);
-
 function BuildsTeaser() {
-  const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const safeIndex = ((currentIndex % blueprintProjects.length) + blueprintProjects.length) % blueprintProjects.length;
 
-  const expandedProject = useMemo(
-    () => previewProjects.find((project) => project.id === expandedId) ?? null,
-    [expandedId],
-  );
+  const currentProject = useMemo(() => blueprintProjects[safeIndex], [safeIndex]);
 
-  useEffect(() => {
-    if (!expandedProject) {
-      return undefined;
-    }
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        setExpandedId(null);
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [expandedProject]);
-
-  const handleToggle = (projectId: string) => {
-    setExpandedId((currentId) => (currentId === projectId ? null : projectId));
+  const handlePrevious = () => {
+    setCurrentIndex((index) => (index - 1 + blueprintProjects.length) % blueprintProjects.length);
   };
+
+  const handleNext = () => {
+    setCurrentIndex((index) => (index + 1) % blueprintProjects.length);
+  };
+
+  if (!currentProject) {
+    return null;
+  }
 
   return (
     <section className={styles.section} aria-labelledby="builds-teaser-title">
@@ -58,77 +43,58 @@ function BuildsTeaser() {
           </div>
 
           <div className={styles.previewArea}>
-            <div className={styles.previewRail}>
-              {previewProjects.map((project) => {
-                const isExpanded = project.id === expandedId;
+            <div className={styles.carouselFrame}>
+              <button
+                type="button"
+                className={styles.arrowButton}
+                onClick={handlePrevious}
+                aria-label="Show previous project"
+              >
+                &larr;
+              </button>
 
-                return (
-                  <button
-                    key={project.id}
-                    type="button"
-                    className={`${styles.previewCard} ${isExpanded ? styles.previewCardActive : ''}`}
-                    onClick={() => handleToggle(project.id)}
-                    aria-expanded={isExpanded}
-                    aria-controls={`build-teaser-detail-${project.id}`}
-                  >
-                    <img src={project.imageUrl} alt={project.name} className={styles.previewImage} />
-                    <div className={styles.previewCopy}>
-                      <p className={styles.previewCreator}>{project.creator}</p>
-                      <p className={styles.previewTitle}>{project.name}</p>
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
+              <article className={styles.detailPanel}>
+                <div className={styles.detailInner}>
+                  <div className={styles.detailMedia}>
+                    <img src={currentProject.imageUrl} alt={currentProject.name} className={styles.detailImage} />
+                  </div>
 
-            <AnimatePresence initial={false}>
-              {expandedProject ? (
-                <motion.article
-                  key={expandedProject.id}
-                  id={`build-teaser-detail-${expandedProject.id}`}
-                  className={styles.detailPanel}
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: 'auto', opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.22, ease: 'easeOut' }}
-                >
-                  <div className={styles.detailInner}>
-                    <div className={styles.detailMedia}>
-                      <img
-                        src={expandedProject.imageUrl}
-                        alt={expandedProject.name}
-                        className={styles.detailImage}
-                      />
-                    </div>
+                  <div className={styles.detailCopy}>
+                    <p className={styles.detailCreator}>Creator // {currentProject.creator}</p>
+                    <h3 className={styles.detailTitle}>{currentProject.name}</h3>
+                    <p className={styles.detailSummary}>{currentProject.summary}</p>
 
-                    <div className={styles.detailCopy}>
-                      <p className={styles.detailCreator}>Creator // {expandedProject.creator}</p>
-                      <h3 className={styles.detailTitle}>{expandedProject.name}</h3>
-                      <p className={styles.detailSummary}>{expandedProject.summary}</p>
-
-                      <div className={styles.detailActions}>
-                        <a
-                          href={expandedProject.githubUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={styles.detailAction}
-                        >
-                          View GitHub
-                        </a>
-                        <a
-                          href={expandedProject.blueprintUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={styles.detailActionSecondary}
-                        >
-                          Open Blueprint Page
-                        </a>
-                      </div>
+                    <div className={styles.detailActions}>
+                      <a
+                        href={currentProject.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.detailAction}
+                      >
+                        View GitHub
+                      </a>
+                      <a
+                        href={currentProject.blueprintUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.detailActionSecondary}
+                      >
+                        Open Blueprint Page
+                      </a>
                     </div>
                   </div>
-                </motion.article>
-              ) : null}
-            </AnimatePresence>
+                </div>
+              </article>
+
+              <button
+                type="button"
+                className={styles.arrowButton}
+                onClick={handleNext}
+                aria-label="Show next project"
+              >
+                &rarr;
+              </button>
+            </div>
           </div>
         </article>
       </div>

@@ -18,9 +18,7 @@
 }
 
 .copy,
-.previewArea,
-.previewCopy,
-.previewRail {
+.previewArea {
   display: grid;
 }
 
@@ -75,54 +73,17 @@
 }
 
 .previewArea {
-  gap: var(--space-5);
+  align-content: center;
 }
 
-.previewRail {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-5);
-}
-
-.previewCard {
+.carouselFrame {
   display: grid;
-  align-content: start;
-  min-height: 100%;
-  padding: 0;
-  text-align: left;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  transition:
-    border-color 0.2s ease,
-    background 0.2s ease;
-}
-
-.previewCardActive {
-  border-color: var(--border-strong);
-  background: var(--bg-card-hover);
-}
-
-.previewImage {
-  width: 100%;
-  aspect-ratio: 1.08 / 1;
-  object-fit: cover;
-}
-
-.previewCopy {
-  gap: var(--space-2);
-  min-height: 9.5rem;
-  padding: var(--space-5);
-}
-
-.previewTitle {
-  color: var(--text-primary);
-  font-size: var(--text-md);
-  font-weight: 700;
-  line-height: 1.3;
-  text-transform: uppercase;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: stretch;
+  gap: var(--space-4);
 }
 
 .detailPanel {
-  overflow: hidden;
   background: var(--bg-secondary);
   border: 1px solid var(--border-strong);
 }
@@ -178,6 +139,25 @@
   gap: var(--space-3);
 }
 
+.arrowButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  min-width: 3.5rem;
+  padding: 0 var(--space-3);
+  color: var(--text-primary);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  line-height: 1;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-strong);
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
 .detailAction,
 .detailActionSecondary {
   display: inline-flex;
@@ -214,12 +194,6 @@
     border-color: var(--text-primary);
   }
 
-  .previewCard:hover,
-  .previewCard:focus-visible {
-    border-color: var(--text-primary);
-    background: var(--bg-card-hover);
-  }
-
   .detailAction:hover,
   .detailAction:focus-visible {
     color: var(--bg-primary);
@@ -232,6 +206,13 @@
     color: var(--text-primary);
     background: var(--bg-card-hover);
     border-color: var(--text-primary);
+  }
+
+  .arrowButton:hover,
+  .arrowButton:focus-visible {
+    color: var(--bg-primary);
+    background: var(--accent-yellow);
+    border-color: var(--accent-yellow);
   }
 }
 
@@ -248,6 +229,14 @@
     border-right: 0;
     border-bottom: 1px solid var(--border);
   }
+
+  .carouselFrame {
+    grid-template-columns: 1fr;
+  }
+
+  .arrowButton {
+    min-height: 3rem;
+  }
 }
 
 @media (max-width: 768px) {
@@ -260,11 +249,6 @@
     padding: var(--space-5);
   }
 
-  .previewRail {
-    grid-template-columns: 1fr;
-  }
-
-  .previewCopy,
   .detailCopy {
     padding: var(--space-4);
   }
