@@ -1,23 +1,18 @@
 import './App.css';
+import About from './components/About';
 import Hero from './components/Hero';
 import Nav from './components/Nav';
 import Card from './components/ui/Card';
 import SectionLabel from './components/ui/SectionLabel';
 
 interface SectionStub {
-  id: 'about' | 'schedule' | 'organizers' | 'faq' | 'rsvp';
+  id: 'schedule' | 'organizers' | 'faq' | 'rsvp';
   label: string;
   title: string;
   body: string;
 }
 
 const sectionStubs: SectionStub[] = [
-  {
-    id: 'about',
-    label: 'phase 5 queued',
-    title: 'About section lands next',
-    body: 'The overview section is reserved here so navigation stays wired while the real Build Guild story gets implemented in the next phase.',
-  },
   {
     id: 'schedule',
     label: 'phase 6 queued',
@@ -50,6 +45,7 @@ function App() {
       <Nav />
       <main id="top" className="appMain" aria-label="Build Guild Dubai">
         <Hero />
+        <About />
         <div className="appMain__container">
           {sectionStubs.map((section, index) => (
             <section
