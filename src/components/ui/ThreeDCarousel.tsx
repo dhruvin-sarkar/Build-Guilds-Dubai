@@ -1,5 +1,14 @@
-import { memo, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { AnimatePresence, motion, type PanInfo, useMotionValue } from 'framer-motion';
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+  type CSSProperties,
+  type PointerEvent as ReactPointerEvent,
+} from 'react';
+import { AnimatePresence, motion, useMotionValue } from 'framer-motion';
 import type { BlueprintProject } from '../../data/projects';
 import styles from './ThreeDCarousel.module.css';
 
@@ -10,9 +19,22 @@ type UseMediaQueryOptions = {
   initializeWithValue?: boolean;
 };
 
+interface ThreeDCarouselProps {
+  projects: BlueprintProject[];
+}
+
+interface PointerState {
+  pointerId: number | null;
+  lastX: number;
+  lastTime: number;
+  velocity: number;
+  distance: number;
+}
+
 const IS_SERVER = typeof window === 'undefined';
-const ROTATION_DRAG_FACTOR = 0.28;
-const VELOCITY_FACTOR = 0.05;
+const ROTATION_DRAG_FACTOR = 0.32;
+const RELEASE_ROTATION_FACTOR = 120;
+const MAX_RELEASE_ROTATION = 48;
 
 export function useMediaQuery(
   query: string,
@@ -54,145 +76,179 @@ export function useMediaQuery(
   return matches;
 }
 
-type RotationDirection = 1 | -1;
-
-interface ThreeDCarouselProps {
-  projects: BlueprintProject[];
+function clamp(value: number, min: number, max: number) {
+  return Math.min(Math.max(value, min), max);
 }
 
-interface CarouselRingProps {
-  projects: BlueprintProject[];
-  isActive: boolean;
-  onCycle: (direction: RotationDirection) => void;
-  onSelect: (project: BlueprintProject) => void;
-}
+function normalizeRotation(value: number, span: number) {
+  let nextValue = value;
 
-function wrapIndex(value: number, length: number) {
-  return ((value % length) + length) % length;
-}
+  while (nextValue >= span) {
+    nextValue -= span;
+  }
 
-function getBatch(projects: BlueprintProject[], start: number, size: number) {
-  return Array.from({ length: size }, (_, index) => projects[wrapIndex(start + index, projects.length)]);
+  while (nextValue < -span) {
+    nextValue += span;
+  }
+
+  return nextValue;
 }
 
 function getFaceSummary(summary: string) {
   const collapsed = summary.replace(/\s+/g, ' ').trim();
-  return collapsed.length > 88 ? `${collapsed.slice(0, 85).trimEnd()}…` : collapsed;
+  return collapsed.length > 116 ? `${collapsed.slice(0, 113).trimEnd()}…` : collapsed;
 }
-
-const CarouselRing = memo(function CarouselRing({ projects, isActive, onCycle, onSelect }: CarouselRingProps) {
-  const isScreenSizeSm = useMediaQuery('(max-width: 640px)');
-  const isScreenSizeMd = useMediaQuery('(max-width: 980px)');
-  const cylinderWidth = isScreenSizeSm ? 1040 : isScreenSizeMd ? 1480 : 1980;
-  const faceCount = projects.length;
-  const faceWidth = cylinderWidth / faceCount;
-  const radius = cylinderWidth / (2 * Math.PI);
-  const rotation = useMotionValue(0);
-  const lastCycleThresholdRef = useRef(0);
-
-  useEffect(() => {
-    const unsubscribe = rotation.on('change', (value) => {
-      while (value - lastCycleThresholdRef.current >= 360) {
-        lastCycleThresholdRef.current += 360;
-        onCycle(1);
-      }
-
-      while (value - lastCycleThresholdRef.current <= -360) {
-        lastCycleThresholdRef.current -= 360;
-        onCycle(-1);
-      }
-    });
-
-    return () => {
-      unsubscribe();
-    };
-  }, [onCycle, rotation]);
-
-  const handleDrag = (_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
-    if (!isActive) {
-      return;
-    }
-
-    rotation.set(rotation.get() + info.delta.x * ROTATION_DRAG_FACTOR);
-  };
-
-  const handleDragEnd = (_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
-    if (!isActive) {
-      return;
-    }
-
-    const nextRotation = rotation.get() + info.velocity.x * VELOCITY_FACTOR;
-    rotation.stop();
-    rotation.set(nextRotation);
-  };
-
-  return (
-    <div className={styles.viewport}>
-      <div className={styles.scene}>
-        <motion.div
-          drag={isActive ? 'x' : false}
-          className={`${styles.ring} ${!isActive ? styles.ringInactive : ''}`}
-          style={{
-            width: cylinderWidth,
-            rotateY: rotation,
-          }}
-          onDrag={handleDrag}
-          onDragEnd={handleDragEnd}
-        >
-          {projects.map((project, index) => (
-            <motion.button
-              key={`${project.id}-${index}`}
-              type="button"
-              className={styles.face}
-              style={{
-                width: `${faceWidth}px`,
-                transform: `translate(-50%, -50%) rotateY(${index * (360 / faceCount)}deg) translateZ(${radius}px)`,
-              }}
-              onClick={() => onSelect(project)}
-            >
-              <article className={styles.faceCard}>
-                <div className={styles.faceImageWrap}>
-                  <img src={project.imageUrl} alt={project.name} className={styles.faceImage} />
-                </div>
-                <div className={styles.faceCopy}>
-                  <p className={styles.faceCreator}>{project.creator}</p>
-                  <h3 className={styles.faceTitle}>{project.name}</h3>
-                  <p className={styles.faceSummary}>{getFaceSummary(project.summary)}</p>
-                </div>
-              </article>
-            </motion.button>
-          ))}
-        </motion.div>
-      </div>
-    </div>
-  );
-});
 
 function ThreeDCarousel({ projects }: ThreeDCarouselProps) {
   const isScreenSizeSm = useMediaQuery('(max-width: 640px)');
   const isScreenSizeMd = useMediaQuery('(max-width: 980px)');
-  const batchSize = isScreenSizeSm ? 4 : isScreenSizeMd ? 5 : 6;
+  const rotation = useMotionValue(0);
   const [activeProject, setActiveProject] = useState<BlueprintProject | null>(null);
   const [isCarouselActive, setIsCarouselActive] = useState(true);
-  const [batchStart, setBatchStart] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const pointerStateRef = useRef<PointerState>({
+    pointerId: null,
+    lastX: 0,
+    lastTime: 0,
+    velocity: 0,
+    distance: 0,
+  });
 
-  const visibleProjects = useMemo(
-    () => getBatch(projects, batchStart, Math.min(batchSize, projects.length)),
-    [batchSize, batchStart, projects],
+  const duplicatedProjects = useMemo(() => [...projects, ...projects], [projects]);
+  const faceCount = duplicatedProjects.length;
+  const faceWidth = isScreenSizeSm ? 190 : isScreenSizeMd ? 228 : 264;
+  const faceHeight = isScreenSizeSm ? 318 : isScreenSizeMd ? 362 : 410;
+  const circumference = faceWidth * Math.max(faceCount, 1);
+  const radius = circumference / (2 * Math.PI);
+  const stepAngle = faceCount > 0 ? 360 / faceCount : 0;
+  const seamlessSpan = faceCount > 0 ? stepAngle * projects.length : 180;
+
+  const carouselVars = useMemo(
+    () =>
+      ({
+        '--carousel-face-width': `${faceWidth}px`,
+        '--carousel-face-height': `${faceHeight}px`,
+      }) as CSSProperties,
+    [faceHeight, faceWidth],
+  );
+
+  const setWrappedRotation = useCallback(
+    (nextValue: number) => {
+      rotation.set(normalizeRotation(nextValue, seamlessSpan));
+    },
+    [rotation, seamlessSpan],
   );
 
   useEffect(() => {
-    setBatchStart((currentStart) => wrapIndex(currentStart, projects.length));
-  }, [projects.length]);
+    setWrappedRotation(0);
+    pointerStateRef.current = {
+      pointerId: null,
+      lastX: 0,
+      lastTime: 0,
+      velocity: 0,
+      distance: 0,
+    };
+    setIsDragging(false);
+  }, [projects.length, setWrappedRotation]);
 
-  const handleCycle = useCallback(
-    (direction: RotationDirection) => {
-      setBatchStart((currentStart) => wrapIndex(currentStart + direction * batchSize, projects.length));
+  useEffect(() => {
+    if (!activeProject) {
+      return undefined;
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setActiveProject(null);
+        setIsCarouselActive(true);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [activeProject]);
+
+  const handlePointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (!isCarouselActive || faceCount === 0) {
+      return;
+    }
+
+    pointerStateRef.current = {
+      pointerId: event.pointerId,
+      lastX: event.clientX,
+      lastTime: performance.now(),
+      velocity: 0,
+      distance: 0,
+    };
+    setIsDragging(true);
+    event.currentTarget.setPointerCapture(event.pointerId);
+  };
+
+  const handlePointerMove = (event: ReactPointerEvent<HTMLDivElement>) => {
+    const pointerState = pointerStateRef.current;
+
+    if (!isCarouselActive || pointerState.pointerId !== event.pointerId) {
+      return;
+    }
+
+    const now = performance.now();
+    const deltaX = event.clientX - pointerState.lastX;
+    const deltaTime = Math.max(now - pointerState.lastTime, 1);
+
+    pointerStateRef.current = {
+      pointerId: pointerState.pointerId,
+      lastX: event.clientX,
+      lastTime: now,
+      velocity: deltaX / deltaTime,
+      distance: pointerState.distance + Math.abs(deltaX),
+    };
+
+    setWrappedRotation(rotation.get() + deltaX * ROTATION_DRAG_FACTOR);
+  };
+
+  const finishPointerDrag = useCallback(
+    (pointerId: number | null) => {
+      const pointerState = pointerStateRef.current;
+
+      if (pointerState.pointerId !== pointerId) {
+        return;
+      }
+
+      const releaseRotation = clamp(
+        pointerState.velocity * RELEASE_ROTATION_FACTOR,
+        -MAX_RELEASE_ROTATION,
+        MAX_RELEASE_ROTATION,
+      );
+
+      setWrappedRotation(rotation.get() + releaseRotation);
+      pointerStateRef.current = {
+        pointerId: null,
+        lastX: 0,
+        lastTime: 0,
+        velocity: 0,
+        distance: pointerState.distance,
+      };
+      setIsDragging(false);
     },
-    [batchSize, projects.length],
+    [rotation, setWrappedRotation],
   );
 
+  const handlePointerUp = (event: ReactPointerEvent<HTMLDivElement>) => {
+    finishPointerDrag(event.pointerId);
+    event.currentTarget.releasePointerCapture(event.pointerId);
+  };
+
+  const handlePointerCancel = (event: ReactPointerEvent<HTMLDivElement>) => {
+    finishPointerDrag(event.pointerId);
+  };
+
   const handleSelect = useCallback((project: BlueprintProject) => {
+    if (pointerStateRef.current.distance > 8) {
+      return;
+    }
+
     setActiveProject(project);
     setIsCarouselActive(false);
   }, []);
@@ -203,18 +259,52 @@ function ThreeDCarousel({ projects }: ThreeDCarouselProps) {
   }, []);
 
   return (
-    <div className={styles.root}>
+    <div className={styles.root} style={carouselVars}>
       <div className={styles.toolbar}>
         <p className={styles.toolbarLabel}>Drag to rotate // click a build for detail</p>
         <p className={styles.toolbarLabel}>Looping through Blueprint projects locally</p>
       </div>
 
-      <CarouselRing
-        projects={visibleProjects}
-        isActive={isCarouselActive}
-        onCycle={handleCycle}
-        onSelect={handleSelect}
-      />
+      <div
+        className={styles.viewport}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        onPointerCancel={handlePointerCancel}
+      >
+        <div className={`${styles.scene} ${isDragging ? styles.sceneDragging : ''}`}>
+          <motion.div
+            className={`${styles.ring} ${!isCarouselActive ? styles.ringInactive : ''}`}
+            style={{
+              width: `${circumference}px`,
+              rotateY: rotation,
+            }}
+          >
+            {duplicatedProjects.map((project, index) => (
+              <button
+                key={`${project.id}-${index}`}
+                type="button"
+                className={styles.face}
+                style={{
+                  transform: `translate(-50%, -50%) rotateY(${index * stepAngle}deg) translateZ(${radius}px)`,
+                }}
+                onClick={() => handleSelect(project)}
+              >
+                <article className={styles.faceCard}>
+                  <div className={styles.faceImageWrap}>
+                    <img src={project.imageUrl} alt={project.name} className={styles.faceImage} />
+                  </div>
+                  <div className={styles.faceCopy}>
+                    <p className={styles.faceCreator}>{project.creator}</p>
+                    <h3 className={styles.faceTitle}>{project.name}</h3>
+                    <p className={styles.faceSummary}>{getFaceSummary(project.summary)}</p>
+                  </div>
+                </article>
+              </button>
+            ))}
+          </motion.div>
+        </div>
+      </div>
 
       <AnimatePresence>
         {activeProject ? (
