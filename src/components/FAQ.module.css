@@ -1,0 +1,121 @@
+.section {
+  position: relative;
+  padding: 2rem 1.5rem 4rem;
+  scroll-margin-top: 7rem;
+}
+
+.inner {
+  width: min(100%, 1280px);
+  margin: 0 auto;
+  display: grid;
+  gap: 1.6rem;
+}
+
+.header {
+  display: grid;
+  gap: 1rem;
+  max-width: 54rem;
+}
+
+.title {
+  color: var(--text-primary);
+  font-size: clamp(2rem, 5vw, 3.7rem);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.list {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.item {
+  background: color-mix(in srgb, var(--bg-card) 88%, transparent);
+  border: 1px solid var(--border);
+  border-left: 2px solid var(--border);
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.itemOpen {
+  background: color-mix(in srgb, var(--accent-cyan) 8%, var(--bg-card));
+  border-left-color: var(--accent-cyan);
+  box-shadow: 0 0 18px color-mix(in srgb, var(--trace) 85%, transparent);
+}
+
+.trigger {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  padding: 1.15rem 1.15rem 1rem;
+  color: inherit;
+  text-align: left;
+  background: transparent;
+  border: 0;
+}
+
+.question {
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.6;
+  text-transform: uppercase;
+}
+
+.icon {
+  flex: 0 0 auto;
+  color: var(--accent-cyan);
+  font-size: 0.84rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  line-height: 1.6;
+  text-transform: uppercase;
+}
+
+.answerWrap {
+  overflow: hidden;
+}
+
+.answer {
+  padding: 0 1.15rem 1.15rem;
+  color: var(--text-secondary);
+  font-size: 0.96rem;
+  line-height: 1.9;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 1.5rem 1rem 3rem;
+    scroll-margin-top: 5.75rem;
+  }
+
+  .trigger {
+    padding: 1rem 0.95rem 0.9rem;
+  }
+
+  .question {
+    font-size: 0.94rem;
+  }
+
+  .icon {
+    font-size: 0.78rem;
+  }
+
+  .answer {
+    padding: 0 0.95rem 1rem;
+    font-size: 0.92rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .item {
+    transition: none;
+  }
+}
