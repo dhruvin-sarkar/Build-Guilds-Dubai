@@ -1,5 +1,6 @@
 import './App.css';
 import About from './components/About';
+import FAQ from './components/FAQ';
 import Hero from './components/Hero';
 import Nav from './components/Nav';
 import Organizers from './components/Organizers';
@@ -8,19 +9,13 @@ import Card from './components/ui/Card';
 import SectionLabel from './components/ui/SectionLabel';
 
 interface SectionStub {
-  id: 'faq' | 'rsvp';
+  id: 'rsvp';
   label: string;
   title: string;
   body: string;
 }
 
 const sectionStubs: SectionStub[] = [
-  {
-    id: 'faq',
-    label: 'phase 8 queued',
-    title: 'FAQ section placeholder',
-    body: 'The FAQ accordion will replace this stub once the next content phase is ready.',
-  },
   {
     id: 'rsvp',
     label: 'phase 9 queued',
@@ -38,6 +33,7 @@ function App() {
         <About />
         <Schedule />
         <Organizers />
+        <FAQ />
         <div className="appMain__container">
           {sectionStubs.map((section, index) => (
             <section
