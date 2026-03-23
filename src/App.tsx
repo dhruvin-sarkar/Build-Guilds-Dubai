@@ -2,24 +2,19 @@ import './App.css';
 import About from './components/About';
 import Hero from './components/Hero';
 import Nav from './components/Nav';
+import Organizers from './components/Organizers';
 import Schedule from './components/Schedule';
 import Card from './components/ui/Card';
 import SectionLabel from './components/ui/SectionLabel';
 
 interface SectionStub {
-  id: 'organizers' | 'faq' | 'rsvp';
+  id: 'faq' | 'rsvp';
   label: string;
   title: string;
   body: string;
 }
 
 const sectionStubs: SectionStub[] = [
-  {
-    id: 'organizers',
-    label: 'phase 7 queued',
-    title: 'Organizers section placeholder',
-    body: 'This anchor remains in place for the organizer cards so the fixed nav keeps working as the page fills out.',
-  },
   {
     id: 'faq',
     label: 'phase 8 queued',
@@ -42,6 +37,7 @@ function App() {
         <Hero />
         <About />
         <Schedule />
+        <Organizers />
         <div className="appMain__container">
           {sectionStubs.map((section, index) => (
             <section
