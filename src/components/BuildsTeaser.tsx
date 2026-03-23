@@ -1,22 +1,59 @@
-import { useMemo, useState } from 'react';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { blueprintProjects } from '../data/projects';
 import SectionLabel from './ui/SectionLabel';
 import styles from './BuildsTeaser.module.css';
 
-function BuildsTeaser() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const safeIndex = ((currentIndex % blueprintProjects.length) + blueprintProjects.length) % blueprintProjects.length;
+const swipeThreshold = 88;
+const carouselVariants = {
+  enter: (direction: number) => ({
+    opacity: 0,
+    x: direction >= 0 ? '8%' : '-8%',
+  }),
+  center: {
+    opacity: 1,
+    x: 0,
+  },
+  exit: (direction: number) => ({
+    opacity: 0,
+    x: direction >= 0 ? '-8%' : '8%',
+  }),
+};
 
+function BuildsTeaser() {
+  const [carouselState, setCarouselState] = useState({ index: 0, direction: 0 });
+  const [isPaused, setIsPaused] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const projectCount = blueprintProjects.length;
+  const shouldReduceMotion = useReducedMotion();
+
+  const safeIndex = ((carouselState.index % projectCount) + projectCount) % projectCount;
   const currentProject = useMemo(() => blueprintProjects[safeIndex], [safeIndex]);
 
-  const handlePrevious = () => {
-    setCurrentIndex((index) => (index - 1 + blueprintProjects.length) % blueprintProjects.length);
-  };
+  const paginate = useCallback(
+    (direction: number) => {
+      setCarouselState((state) => ({
+        index: (state.index + direction + projectCount) % projectCount,
+        direction,
+      }));
+    },
+    [projectCount],
+  );
 
-  const handleNext = () => {
-    setCurrentIndex((index) => (index + 1) % blueprintProjects.length);
-  };
+  useEffect(() => {
+    if (shouldReduceMotion || isPaused || isDragging || projectCount < 2) {
+      return undefined;
+    }
+
+    const intervalId = window.setInterval(() => {
+      paginate(1);
+    }, 4800);
+
+    return () => {
+      window.clearInterval(intervalId);
+    };
+  }, [isDragging, isPaused, paginate, projectCount, shouldReduceMotion]);
 
   if (!currentProject) {
     return null;
@@ -44,62 +81,87 @@ function BuildsTeaser() {
 
           <div className={styles.previewArea}>
             <div className={styles.carouselFrame}>
-              <button
-                type="button"
-                className={styles.arrowButton}
-                data-direction="previous"
-                onClick={handlePrevious}
-                aria-label="Show previous project"
+              <div
+                className={styles.carouselViewport}
+                onMouseEnter={() => setIsPaused(true)}
+                onMouseLeave={() => setIsPaused(false)}
+                onFocusCapture={() => setIsPaused(true)}
+                onBlurCapture={(event) => {
+                  const nextFocusedElement = event.relatedTarget as Node | null;
+
+                  if (!nextFocusedElement || !event.currentTarget.contains(nextFocusedElement)) {
+                    setIsPaused(false);
+                  }
+                }}
               >
-                <span className={styles.arrowGlyph} aria-hidden="true">
-                  &#8592;
-                </span>
-              </button>
+                <AnimatePresence initial={false} custom={carouselState.direction} mode="wait">
+                  <motion.article
+                    key={currentProject.id}
+                    className={`${styles.detailPanel} ${styles.carouselSlide}`}
+                    custom={carouselState.direction}
+                    variants={carouselVariants}
+                    initial="enter"
+                    animate="center"
+                    exit="exit"
+                    transition={{
+                      duration: shouldReduceMotion ? 0 : 0.42,
+                      ease: [0.22, 0.61, 0.36, 1],
+                    }}
+                    drag="x"
+                    dragConstraints={{ left: 0, right: 0 }}
+                    dragElastic={0.14}
+                    dragMomentum={false}
+                    onDragStart={() => {
+                      setIsDragging(true);
+                      setIsPaused(true);
+                    }}
+                    onDragEnd={(_, info) => {
+                      setIsDragging(false);
+                      setIsPaused(false);
 
-              <article className={styles.detailPanel}>
-                <div className={styles.detailInner}>
-                  <div className={styles.detailMedia}>
-                    <img src={currentProject.imageUrl} alt={currentProject.name} className={styles.detailImage} />
-                  </div>
+                      if (info.offset.x <= -swipeThreshold || info.velocity.x < -420) {
+                        paginate(1);
+                        return;
+                      }
 
-                  <div className={styles.detailCopy}>
-                    <p className={styles.detailCreator}>Creator // {currentProject.creator}</p>
-                    <h3 className={styles.detailTitle}>{currentProject.name}</h3>
-                    <p className={styles.detailSummary}>{currentProject.summary}</p>
+                      if (info.offset.x >= swipeThreshold || info.velocity.x > 420) {
+                        paginate(-1);
+                      }
+                    }}
+                  >
+                    <div className={styles.detailInner}>
+                      <div className={styles.detailMedia}>
+                        <img src={currentProject.imageUrl} alt={currentProject.name} className={styles.detailImage} />
+                      </div>
 
-                    <div className={styles.detailActions}>
-                      <a
-                        href={currentProject.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={styles.detailAction}
-                      >
-                        View GitHub
-                      </a>
-                      <a
-                        href={currentProject.blueprintUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={styles.detailActionSecondary}
-                      >
-                        Open Blueprint Page
-                      </a>
+                      <div className={styles.detailCopy}>
+                        <p className={styles.detailCreator}>Creator // {currentProject.creator}</p>
+                        <h3 className={styles.detailTitle}>{currentProject.name}</h3>
+                        <p className={styles.detailSummary}>{currentProject.summary}</p>
+
+                        <div className={styles.detailActions}>
+                          <a
+                            href={currentProject.githubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={styles.detailAction}
+                          >
+                            View GitHub
+                          </a>
+                          <a
+                            href={currentProject.blueprintUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={styles.detailActionSecondary}
+                          >
+                            Open Blueprint Page
+                          </a>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
-              </article>
-
-              <button
-                type="button"
-                className={styles.arrowButton}
-                data-direction="next"
-                onClick={handleNext}
-                aria-label="Show next project"
-              >
-                <span className={styles.arrowGlyph} aria-hidden="true">
-                  &#8594;
-                </span>
-              </button>
+                  </motion.article>
+                </AnimatePresence>
+              </div>
             </div>
           </div>
         </article>
