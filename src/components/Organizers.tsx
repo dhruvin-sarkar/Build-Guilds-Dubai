@@ -47,6 +47,10 @@ function Organizers() {
           <motion.h2 className={styles.title} variants={itemVariants}>
             Organized by people building this for the actual Dubai community.
           </motion.h2>
+          <motion.p className={styles.lead} variants={itemVariants}>
+            Dhruv and Aly are shaping this like the kind of hardware day they would want to attend themselves:
+            practical, welcoming, and genuinely worth clearing a Saturday for.
+          </motion.p>
         </motion.div>
 
         <motion.div

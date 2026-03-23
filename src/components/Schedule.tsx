@@ -51,7 +51,8 @@ function Schedule() {
             What we&apos;re actually doing all day.
           </motion.h2>
           <motion.p className={styles.lead} variants={itemVariants}>
-            Fast context, build time, PCB design, demos from other teens, and real next steps once the day is over.
+            Bench-style pacing: component context, build time, PCB routing, demos from other teens, and real next
+            steps once the power rails go quiet.
           </motion.p>
         </motion.div>
 
@@ -89,7 +90,9 @@ function Schedule() {
           </motion.div>
         </div>
 
-        <p className={styles.note}>Schedule subject to change; exact timings confirmed closer to the event.</p>
+        <p className={styles.note}>
+          Bench timing may shift slightly as venue logistics lock in, but the build flow stays the same.
+        </p>
       </div>
     </section>
   );

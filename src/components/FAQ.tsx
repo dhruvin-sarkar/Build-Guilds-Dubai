@@ -44,6 +44,9 @@ function FAQ() {
           <motion.h2 className={styles.title} variants={itemVariants}>
             The practical questions, answered.
           </motion.h2>
+          <motion.p className={styles.lead} variants={itemVariants}>
+            Travel light, ask the obvious questions, and show up curious — here’s the rest of the pre-flight check.
+          </motion.p>
         </motion.div>
 
         <motion.div

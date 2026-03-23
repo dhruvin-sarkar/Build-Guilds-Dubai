@@ -17,7 +17,7 @@ export interface ExternalLinks {
 export const eventDetails: EventDetails = {
   eventDate: '2026-04-18T10:00:00+04:00',
   eventDateDisplay: 'April 18, 2026',
-  eventTime: '10:00 AM – 8:00 PM',
+  eventTime: '10:00 AM \u2013 8:00 PM',
   eventLocation: 'Dubai, UAE',
   eventVenue: 'TBD',
 };

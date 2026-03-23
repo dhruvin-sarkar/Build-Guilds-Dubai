@@ -70,7 +70,7 @@ function Merch() {
             Designed for Build Guild Dubai.
           </motion.h2>
           <motion.p className={styles.lead} variants={itemVariants}>
-            Stickers, posters, and more - dropping closer to the event.
+            Stickers, posters, and more — dropping closer to the event.
           </motion.p>
         </motion.div>
 

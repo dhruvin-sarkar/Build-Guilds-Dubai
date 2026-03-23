@@ -4,8 +4,8 @@ import { useSignupModal } from '../context/SignupModal';
 import styles from './Nav.module.css';
 
 interface NavLink {
-  id: 'about' | 'showcase' | 'schedule' | 'organizers' | 'merch' | 'faq';
-  label: 'About' | 'Builds' | 'Schedule' | 'Organizers' | 'Merch' | 'FAQ';
+  id: 'about' | 'showcase' | 'schedule' | 'organizers' | 'merch' | 'faq' | 'rsvp';
+  label: 'About' | 'Builds' | 'Schedule' | 'Organizers' | 'Merch' | 'FAQ' | 'RSVP';
 }
 
 const navLinks: NavLink[] = [
@@ -15,6 +15,7 @@ const navLinks: NavLink[] = [
   { id: 'organizers', label: 'Organizers' },
   { id: 'merch', label: 'Merch' },
   { id: 'faq', label: 'FAQ' },
+  { id: 'rsvp', label: 'RSVP' },
 ];
 
 function Nav() {

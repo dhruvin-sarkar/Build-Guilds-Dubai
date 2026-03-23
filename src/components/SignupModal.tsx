@@ -69,10 +69,6 @@ function validateSignup(values: SignupFormState) {
     errors.howHeard = 'Tell us how you heard about Build Guild Dubai.';
   }
 
-  if (values.comingWithFriend && !values.friendName.trim()) {
-    errors.friendName = 'Add your friend’s name or turn the friend toggle off.';
-  }
-
   return errors;
 }
 
@@ -233,17 +229,13 @@ function SignupModal() {
 
             <label className={styles.field}>
               <span className={styles.fieldLabel}>Pronouns</span>
-              <select
+              <input
+                type="text"
                 value={formState.pronouns}
                 onChange={handleTextChange('pronouns')}
                 className={styles.input}
-              >
-                <option value="">Select one</option>
-                <option value="he/him">he/him</option>
-                <option value="she/her">she/her</option>
-                <option value="they/them">they/them</option>
-                <option value="other">other</option>
-              </select>
+                placeholder="he/him, she/her, they/them, or other"
+              />
               {errors.pronouns ? <span className={styles.error}>{errors.pronouns}</span> : null}
             </label>
 
@@ -331,7 +323,7 @@ function SignupModal() {
 
             {formState.comingWithFriend ? (
               <label className={`${styles.field} ${styles.fieldWide}`}>
-                <span className={styles.fieldLabel}>Friend’s Name</span>
+                <span className={styles.fieldLabel}>Friend’s Name // Optional</span>
                 <input
                   type="text"
                   value={formState.friendName}
