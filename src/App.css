@@ -1,61 +1,9 @@
-.appMain {
+.appShell {
   min-height: 100vh;
 }
 
-.appMain__container {
-  width: min(100%, 1280px);
-  margin: 0 auto;
-  padding: 0 1.5rem 4rem;
-}
-
-.sectionStub {
-  min-height: 16rem;
-  padding: 2rem 0 0;
-  scroll-margin-top: 7rem;
-}
-
-.sectionStub--alt {
+.appMain {
+  min-height: 100vh;
   position: relative;
-}
-
-.sectionStub--alt::before {
-  content: '';
-  position: absolute;
-  inset: 0 0 auto;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--border), transparent);
-}
-
-.sectionStub__inner {
-  display: grid;
-  gap: 1.4rem;
-}
-
-.sectionStub__title {
-  color: var(--text-primary);
-  font-size: clamp(1.4rem, 3vw, 2rem);
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  line-height: 1.08;
-  text-transform: uppercase;
-}
-
-.sectionStub__body {
-  margin-top: 0.9rem;
-  max-width: 44rem;
-  color: var(--text-secondary);
-  font-size: 0.96rem;
-  line-height: 1.85;
-}
-
-@media (max-width: 768px) {
-  .appMain__container {
-    padding: 0 1rem 3rem;
-  }
-
-  .sectionStub {
-    min-height: 13rem;
-    padding-top: 1.5rem;
-    scroll-margin-top: 5.75rem;
-  }
+  isolation: isolate;
 }
