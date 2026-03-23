@@ -116,27 +116,25 @@ function ThreeDCarousel({ projects }: ThreeDCarouselProps) {
   const realProjectCount = projects.length;
   // Render all projects, but let's keep the radius manageable
   const faceCount = realProjectCount;
-  const faceWidth = isScreenSizeSm ? 210 : isScreenSizeMd ? 260 : 310;
-  const faceHeight = isScreenSizeSm ? 300 : isScreenSizeMd ? 360 : 420;
+  // Card sizes confirmed as perfect by user
+  const faceWidth = isScreenSizeSm ? 260 : isScreenSizeMd ? 320 : 380;
+  const faceHeight = isScreenSizeSm ? 360 : isScreenSizeMd ? 440 : 520;
   
   const stepAngle = realProjectCount > 0 ? 360 / realProjectCount : 0;
   // Cast to number to avoid literal type inference lint errors in normalizeRotation
   const cycleSpan = 360 as number; 
   const startingRotation = 0;
   
-  // For large counts, we allow a bit more overlap but keep the radius within a "sweet spot"
-  // Radius for 100 projects with faceWidth 310 is normally ~5000px. 
-  // We'll use a slightly tighter curve for visceral 3D feel.
   const radius =
-    faceCount > 2 ? (faceWidth * 1.15) / (2 * Math.tan(Math.PI / faceCount)) : faceWidth * 0.5;
+    faceCount > 2 ? (faceWidth * 1.0) / (2 * Math.tan(Math.PI / faceCount)) : faceWidth * 0.5;
   
-  // Move it further back to see more of the curve
   const ringDepth = radius;
-  const scenePerspective = isScreenSizeSm ? 1200 : isScreenSizeMd ? 1600 : 2000;
+  // AMPLIFY CAROUSEL EFFECT: perspective set to 800 for maximum 3D depth
+  const scenePerspective = 800;
 
-  // Scale drag factor: we want a natural feeling flip. 
-  // With 100 items, rotation needs to be much faster per pixel.
-  const dragFactor = ROTATION_DRAG_FACTOR * (realProjectCount / 20);
+  // FURTHER SLASH SENSITIVITY: 100 projects / 120 = ~0.83x base drag factor.
+  // This makes the carousel feel significantly 'heavier' and more controlled.
+  const dragFactor = ROTATION_DRAG_FACTOR * (realProjectCount / 120);
 
   const carouselVars = useMemo(
     () =>
