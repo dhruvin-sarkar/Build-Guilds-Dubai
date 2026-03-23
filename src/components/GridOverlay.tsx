@@ -4,7 +4,7 @@ import styles from './GridOverlay.module.css';
 const GRID_SIZE = 50;
 const INTERACTION_RADIUS = 220;
 const BASE_ALPHA = 0.12;
-const ACTIVE_ALPHA = 0.35;
+const ACTIVE_ALPHA = 0.4;
 const EASING = 0.16;
 
 function getCssRgbValue(style: CSSStyleDeclaration, variableName: string, fallback: string) {

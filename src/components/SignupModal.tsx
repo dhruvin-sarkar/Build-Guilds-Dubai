@@ -1,7 +1,15 @@
+import emailjs from '@emailjs/browser';
 import { useEffect, useRef, useState, type ChangeEvent, type FormEvent } from 'react';
 import { SIGNUP_URL } from '../data/constants';
 import { useSignupModal } from '../context/SignupModal';
 import styles from './SignupModal.module.css';
+
+// Fill these in after setting up your EmailJS account + template.
+const EMAILJS_SERVICE_ID = 'YOUR_EMAILJS_SERVICE_ID';
+const EMAILJS_TEMPLATE_ID = 'YOUR_EMAILJS_TEMPLATE_ID';
+const EMAILJS_PUBLIC_KEY = 'YOUR_EMAILJS_PUBLIC_KEY';
+const ORGANIZER_EMAIL_1 = 'YOUR_ORGANIZER_EMAIL_1';
+const ORGANIZER_EMAIL_2 = 'YOUR_ORGANIZER_EMAIL_2';
 
 interface SignupFormState {
   preferredFirstName: string;
@@ -12,6 +20,7 @@ interface SignupFormState {
   dateOfBirth: string;
   pronouns: string;
   howHeard: string;
+  expectations: string;
   comingWithFriend: boolean;
   friendName: string;
 }
@@ -28,6 +37,7 @@ const initialFormState: SignupFormState = {
   dateOfBirth: '',
   pronouns: '',
   howHeard: '',
+  expectations: '',
   comingWithFriend: false,
   friendName: '',
 };
@@ -76,6 +86,8 @@ function SignupModal() {
   const { isOpen, close } = useSignupModal();
   const [formState, setFormState] = useState<SignupFormState>(initialFormState);
   const [errors, setErrors] = useState<SignupErrors>({});
+  const [submitError, setSubmitError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const dialogRef = useRef<HTMLDivElement | null>(null);
   const firstInputRef = useRef<HTMLInputElement | null>(null);
   const previousActiveElementRef = useRef<HTMLElement | null>(null);
@@ -84,6 +96,8 @@ function SignupModal() {
     if (!isOpen) {
       return;
     }
+
+    setSubmitError('');
 
     const previousOverflow = document.body.style.overflow;
     previousActiveElementRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
@@ -106,6 +120,10 @@ function SignupModal() {
     }
 
     const handleKeyDown = (event: KeyboardEvent) => {
+      if (isSubmitting) {
+        return;
+      }
+
       if (event.key === 'Escape') {
         close();
         return;
@@ -145,17 +163,29 @@ function SignupModal() {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [close, isOpen]);
+  }, [close, isOpen, isSubmitting]);
 
   if (!isOpen) {
     return null;
   }
+
+  const isEmailJsConfigured = ![
+    EMAILJS_SERVICE_ID,
+    EMAILJS_TEMPLATE_ID,
+    EMAILJS_PUBLIC_KEY,
+    ORGANIZER_EMAIL_1,
+    ORGANIZER_EMAIL_2,
+  ].some((value) => value.startsWith('YOUR_'));
 
   const updateField = <FieldName extends SignupField>(fieldName: FieldName, value: SignupFormState[FieldName]) => {
     setFormState((currentValues) => ({
       ...currentValues,
       [fieldName]: value,
     }));
+
+    if (submitError) {
+      setSubmitError('');
+    }
 
     if (errors[fieldName]) {
       setErrors((currentErrors) => ({
@@ -171,7 +201,7 @@ function SignupModal() {
     };
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const nextErrors = validateSignup(formState);
@@ -181,12 +211,58 @@ function SignupModal() {
       return;
     }
 
-    window.location.href = SIGNUP_URL;
+    if (!isEmailJsConfigured) {
+      setSubmitError('Email intake is not configured yet. Add the EmailJS keys and organizer emails, then try again.');
+      return;
+    }
+
+    setSubmitError('');
+    setIsSubmitting(true);
+
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          to_email: `${ORGANIZER_EMAIL_1},${ORGANIZER_EMAIL_2}`,
+          organizer_email_1: ORGANIZER_EMAIL_1,
+          organizer_email_2: ORGANIZER_EMAIL_2,
+          preferred_first_name: formState.preferredFirstName,
+          legal_first_name: formState.legalFirstName,
+          legal_last_name: formState.legalLastName,
+          email: formState.email,
+          phone_number: formState.phoneNumber,
+          date_of_birth: formState.dateOfBirth,
+          pronouns: formState.pronouns,
+          how_heard: formState.howHeard,
+          expectations: formState.expectations.trim() || 'Not provided',
+          coming_with_friend: formState.comingWithFriend ? 'Yes' : 'No',
+          friend_name: formState.friendName.trim() || 'Not provided',
+          reply_to: formState.email,
+        },
+        {
+          publicKey: EMAILJS_PUBLIC_KEY,
+        },
+      );
+
+      window.location.assign(SIGNUP_URL);
+    } catch (error) {
+      console.error('EmailJS send failed', error);
+      setSubmitError('We could not send your details to the organizers. Please try again in a moment.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <div className={styles.backdrop}>
-      <button type="button" className={styles.overlay} aria-label="Close sign up form" onClick={close} />
+      <button
+        type="button"
+        className={styles.overlay}
+        aria-label="Close sign up form"
+        onClick={close}
+        disabled={isSubmitting}
+      />
 
       <div
         ref={dialogRef}
@@ -207,7 +283,7 @@ function SignupModal() {
             </p>
           </div>
 
-          <button type="button" className={styles.closeButton} onClick={close}>
+          <button type="button" className={styles.closeButton} onClick={close} disabled={isSubmitting}>
             Close
           </button>
         </div>
@@ -310,6 +386,16 @@ function SignupModal() {
             </label>
 
             <label className={`${styles.field} ${styles.fieldWide}`}>
+              <span className={styles.fieldLabel}>What are you expecting from us?</span>
+              <textarea
+                value={formState.expectations}
+                onChange={handleTextChange('expectations')}
+                className={`${styles.input} ${styles.textarea}`}
+                placeholder="Tell us what you want to build, learn, or see at the event — what would make this day worth showing up for?"
+              />
+            </label>
+
+            <label className={`${styles.field} ${styles.fieldWide}`}>
               <span className={styles.checkboxRow}>
                 <input
                   type="checkbox"
@@ -337,17 +423,20 @@ function SignupModal() {
           </div>
 
           <div className={styles.footer}>
-            <p className={styles.privacyNote}>
-              Your data is never shared with third parties. Local organizers have limited access to submitted
-              information.
-            </p>
+            <div className={styles.footerCopy}>
+              <p className={styles.privacyNote}>
+                Your data is never shared with third parties. Local organizers have limited access to submitted
+                information.
+              </p>
+              {submitError ? <p className={styles.submitError}>{submitError}</p> : null}
+            </div>
 
             <div className={styles.actions}>
-              <button type="button" className={styles.secondaryAction} onClick={close}>
+              <button type="button" className={styles.secondaryAction} onClick={close} disabled={isSubmitting}>
                 Cancel
               </button>
-              <button type="submit" className={styles.primaryAction}>
-                Continue to Blueprint
+              <button type="submit" className={styles.primaryAction} disabled={isSubmitting}>
+                {isSubmitting ? 'Sending to organizers…' : 'Continue to Blueprint'}
               </button>
             </div>
           </div>
