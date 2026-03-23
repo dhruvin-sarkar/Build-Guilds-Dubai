@@ -1,0 +1,191 @@
+.hero {
+  position: relative;
+  padding: 7.5rem 1.5rem 4rem;
+  overflow: clip;
+  scroll-margin-top: 7rem;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 24% 28%, color-mix(in srgb, var(--accent-blue) 14%, transparent), transparent 34%),
+    radial-gradient(circle at 78% 22%, color-mix(in srgb, var(--accent-cyan) 14%, transparent), transparent 32%);
+  pointer-events: none;
+}
+
+.inner {
+  position: relative;
+  width: min(100%, 1280px);
+  margin: 0 auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(24rem, 0.96fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.copy {
+  display: grid;
+  gap: 1.6rem;
+  padding-top: 3rem;
+}
+
+.title {
+  max-width: 8ch;
+  color: var(--text-primary);
+  font-size: clamp(3.4rem, 9vw, 7rem);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.subline {
+  max-width: 34rem;
+  color: var(--text-secondary);
+  font-size: 1.02rem;
+  line-height: 1.9;
+}
+
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+.factChip {
+  min-height: 2.7rem;
+  padding: 0.7rem 1rem;
+  color: var(--text-primary);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  background: color-mix(in srgb, var(--bg-card) 88%, transparent);
+  border: 1px solid var(--border);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--border) 40%, transparent);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+
+.primaryAction,
+.secondaryAction {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.15rem;
+  padding: 0 1.45rem;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.primaryAction {
+  color: var(--bg-primary);
+  background: var(--accent-blue);
+  border: 1px solid var(--accent-blue);
+}
+
+.primaryAction:hover,
+.primaryAction:focus-visible {
+  background: var(--accent-cyan);
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 22px color-mix(in srgb, var(--accent-cyan) 38%, transparent);
+}
+
+.secondaryAction {
+  color: var(--accent-cyan);
+  background: transparent;
+  border: 1px solid var(--accent-cyan);
+}
+
+.secondaryAction:hover,
+.secondaryAction:focus-visible {
+  background: color-mix(in srgb, var(--accent-cyan) 10%, transparent);
+  box-shadow: 0 0 18px color-mix(in srgb, var(--accent-cyan) 28%, transparent);
+}
+
+.visual {
+  position: relative;
+}
+
+.visualFrame {
+  min-height: 100%;
+}
+
+.countdownPanel {
+  grid-column: 1 / -1;
+}
+
+.countdownFrame {
+  background:
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--bg-card) 96%, transparent),
+      color-mix(in srgb, var(--bg-secondary) 92%, transparent)
+    );
+}
+
+.countdownWrap {
+  margin-top: 1.25rem;
+}
+
+@media (max-width: 1080px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .copy {
+    padding-top: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 6.25rem 1rem 3rem;
+    scroll-margin-top: 5.75rem;
+  }
+
+  .title {
+    max-width: 9ch;
+    font-size: clamp(2.8rem, 16vw, 5rem);
+  }
+
+  .subline {
+    font-size: 0.96rem;
+    line-height: 1.8;
+  }
+
+  .facts,
+  .actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .factChip,
+  .primaryAction,
+  .secondaryAction {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .primaryAction,
+  .secondaryAction {
+    transition: none;
+  }
+}
