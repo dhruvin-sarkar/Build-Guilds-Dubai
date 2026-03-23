@@ -48,7 +48,7 @@ function BuildsTeaser() {
 
     const intervalId = window.setInterval(() => {
       paginate(1);
-    }, 4800);
+    }, 4000);
 
     return () => {
       window.clearInterval(intervalId);
