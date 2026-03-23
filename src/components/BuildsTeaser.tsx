@@ -47,10 +47,13 @@ function BuildsTeaser() {
               <button
                 type="button"
                 className={styles.arrowButton}
+                data-direction="previous"
                 onClick={handlePrevious}
                 aria-label="Show previous project"
               >
-                &larr;
+                <span className={styles.arrowGlyph} aria-hidden="true">
+                  &#8592;
+                </span>
               </button>
 
               <article className={styles.detailPanel}>
@@ -89,10 +92,13 @@ function BuildsTeaser() {
               <button
                 type="button"
                 className={styles.arrowButton}
+                data-direction="next"
                 onClick={handleNext}
                 aria-label="Show next project"
               >
-                &rarr;
+                <span className={styles.arrowGlyph} aria-hidden="true">
+                  &#8594;
+                </span>
               </button>
             </div>
           </div>

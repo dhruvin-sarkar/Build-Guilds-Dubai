@@ -79,7 +79,7 @@
 .carouselFrame {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
-  align-items: stretch;
+  align-items: center;
   gap: var(--space-4);
 }
 
@@ -143,19 +143,37 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  align-self: stretch;
-  min-width: 3.5rem;
-  padding: 0 var(--space-3);
-  color: var(--text-primary);
-  font-size: var(--text-lg);
+  align-self: center;
+  width: 2.75rem;
+  min-width: 2.75rem;
+  min-height: 4.75rem;
+  padding: 0;
+  color: var(--text-secondary);
   font-weight: 700;
   line-height: 1;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-strong);
+  background: color-mix(in srgb, var(--bg-secondary) 72%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border-strong) 72%, transparent);
   transition:
     color 0.2s ease,
     background 0.2s ease,
-    border-color 0.2s ease;
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.arrowGlyph {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.arrowButton[data-direction='previous'] .arrowGlyph {
+  transform: translateX(-0.03rem);
+}
+
+.arrowButton[data-direction='next'] .arrowGlyph {
+  transform: translateX(0.03rem);
 }
 
 .detailAction,
@@ -213,6 +231,7 @@
     color: var(--bg-primary);
     background: var(--accent-yellow);
     border-color: var(--accent-yellow);
+    transform: translateY(-1px);
   }
 }
 
@@ -235,7 +254,9 @@
   }
 
   .arrowButton {
-    min-height: 3rem;
+    width: 100%;
+    min-width: 0;
+    min-height: 2.75rem;
   }
 }
 
@@ -260,7 +281,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .link,
-  .previewCard,
+  .arrowButton,
   .detailAction,
   .detailActionSecondary {
     transition: none;
