@@ -9,6 +9,7 @@ import Merch from './components/Merch';
 import Nav from './components/Nav';
 import Organizers from './components/Organizers';
 import Schedule from './components/Schedule';
+import Showcase from './components/Showcase';
 import SignupModal from './components/SignupModal';
 import { SignupModalProvider } from './context/SignupModal';
 
@@ -22,6 +23,7 @@ function App() {
           <main id="top" className="appMain" aria-label="Build Guild Dubai">
             <Hero />
             <About />
+            <Showcase />
             <Schedule />
             <Organizers />
             <Merch />
