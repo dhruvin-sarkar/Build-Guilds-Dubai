@@ -1,12 +1,27 @@
 import { motion } from 'framer-motion';
-import { EVENT_DATE, EVENT_DATE_DISPLAY, EVENT_LOCATION, EVENT_TIME, EVENT_VENUE, SIGNUP_URL } from '../data/constants';
+import { EVENT_DATE, EVENT_DATE_DISPLAY, EVENT_LOCATION, EVENT_TIME, EVENT_VENUE } from '../data/constants';
+import { useSignupModal } from '../context/SignupModal';
 import Card from './ui/Card';
-import CircuitSVG from './ui/CircuitSVG';
 import Countdown from './ui/Countdown';
 import SectionLabel from './ui/SectionLabel';
 import styles from './Hero.module.css';
 
 const heroFacts = [EVENT_DATE_DISPLAY, EVENT_TIME, EVENT_LOCATION, `Venue ${EVENT_VENUE}`];
+
+const labReadouts = [
+  {
+    label: 'Toolchain',
+    value: 'EasyEDA // KiCad // firmware paths',
+  },
+  {
+    label: 'Bench mix',
+    value: 'Beginners, shipped builders, and everyone in between',
+  },
+  {
+    label: 'What to bring',
+    value: 'Laptop optional // projects welcome // curiosity required',
+  },
+];
 
 const containerVariants = {
   hidden: {},
@@ -31,18 +46,7 @@ const itemVariants = {
 };
 
 function Hero() {
-  const scrollToSchedule = () => {
-    const scheduleSection = document.getElementById('schedule');
-
-    if (!scheduleSection) {
-      return;
-    }
-
-    scheduleSection.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start',
-    });
-  };
+  const { open } = useSignupModal();
 
   return (
     <section id="hero" className={styles.hero}>
@@ -50,10 +54,15 @@ function Hero() {
         <motion.div className={styles.grid} initial="hidden" animate="visible" variants={containerVariants}>
           <motion.div className={styles.copy} variants={itemVariants}>
             <SectionLabel label="build guild dubai" />
+            <p className={styles.kicker}>Teen-run // hardware-first // free to attend</p>
             <h1 className={styles.title}>Build Guild Dubai</h1>
             <p className={styles.subline}>
-              Dubai&apos;s hardware community for one full day of boards, components, build time, and meeting the
-              people who are actually shipping things here.
+              A one-day hardware meetup for PCB routing, component bring-up, firmware curiosity, and actually meeting
+              the people building in Dubai instead of just hearing about them online.
+            </p>
+            <p className={styles.support}>
+              We&apos;re designing this like a real bench day: parts on the table, signal paths explained, show-and-tell
+              from teens already shipping, and enough room for complete beginners to start without feeling behind.
             </p>
 
             <div className={styles.facts}>
@@ -65,31 +74,38 @@ function Hero() {
             </div>
 
             <div className={styles.actions}>
-              <a href={SIGNUP_URL} className={styles.primaryAction} target="_blank" rel="noopener noreferrer">
-                Sign Up
-              </a>
-              <button type="button" className={styles.secondaryAction} onClick={scrollToSchedule}>
-                What&apos;s the plan?
+              <button type="button" className={styles.primaryAction} onClick={open}>
+                Start Signup Intake
+              </button>
+              <button type="button" className={styles.secondaryAction} onClick={open}>
+                Reserve Your Bench
               </button>
             </div>
           </motion.div>
 
-          <motion.div className={styles.visual} variants={itemVariants}>
-            <Card highlight className={styles.visualFrame}>
-              <div className={styles.visualHeader}>
-                <SectionLabel label="board render" />
-                <p className={styles.visualMeta}>Reference board treatment // filtered into the site palette</p>
+          <motion.div className={styles.aside} variants={itemVariants}>
+            <Card className={styles.panel}>
+              <div className={styles.panelHeader}>
+                <SectionLabel label="event packet" />
+                <p className={styles.panelMeta}>Bench notes // what this day is calibrated for</p>
               </div>
-              <CircuitSVG animate />
-            </Card>
-          </motion.div>
 
-          <motion.div className={styles.countdownPanel} variants={itemVariants}>
-            <Card className={styles.countdownFrame}>
-              <SectionLabel label="countdown" />
-              <div className={styles.countdownWrap}>
-                <Countdown targetDate={EVENT_DATE} />
+              <div className={styles.readouts}>
+                {labReadouts.map((readout) => (
+                  <div key={readout.label} className={styles.readout}>
+                    <p className={styles.readoutLabel}>{readout.label}</p>
+                    <p className={styles.readoutValue}>{readout.value}</p>
+                  </div>
+                ))}
               </div>
+            </Card>
+
+            <Card className={styles.countdownFrame}>
+              <div className={styles.countdownHeader}>
+                <SectionLabel label="bench timer" />
+                <p className={styles.countdownMeta}>Signal-up to April 18, 2026</p>
+              </div>
+              <Countdown targetDate={EVENT_DATE} className={styles.countdown} />
             </Card>
           </motion.div>
         </motion.div>

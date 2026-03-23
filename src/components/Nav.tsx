@@ -1,14 +1,16 @@
-﻿import { useEffect, useMemo, useState, type MouseEvent } from 'react';
-import { BLUEPRINT_LOGO, SIGNUP_URL } from '../data/constants';
+import { useEffect, useMemo, useState, type MouseEvent } from 'react';
+import { BLUEPRINT_LOGO } from '../data/constants';
+import { useSignupModal } from '../context/SignupModal';
 import styles from './Nav.module.css';
 
 interface NavLink {
-  id: 'about' | 'schedule' | 'organizers' | 'merch' | 'faq';
-  label: 'About' | 'Schedule' | 'Organizers' | 'Merch' | 'FAQ';
+  id: 'about' | 'showcase' | 'schedule' | 'organizers' | 'merch' | 'faq';
+  label: 'About' | 'Builds' | 'Schedule' | 'Organizers' | 'Merch' | 'FAQ';
 }
 
 const navLinks: NavLink[] = [
   { id: 'about', label: 'About' },
+  { id: 'showcase', label: 'Builds' },
   { id: 'schedule', label: 'Schedule' },
   { id: 'organizers', label: 'Organizers' },
   { id: 'merch', label: 'Merch' },
@@ -16,6 +18,7 @@ const navLinks: NavLink[] = [
 ];
 
 function Nav() {
+  const { open } = useSignupModal();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [logoFailed, setLogoFailed] = useState(false);
@@ -55,36 +58,57 @@ function Nav() {
       .map((link) => document.getElementById(link.id))
       .filter((section): section is HTMLElement => section !== null);
 
-    if (!sections.length || !('IntersectionObserver' in window)) {
+    if (!sections.length) {
       return;
     }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleEntries = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((leftEntry, rightEntry) => rightEntry.intersectionRatio - leftEntry.intersectionRatio);
+    const getMidpoint = () => window.innerHeight * 0.5;
 
-        if (!visibleEntries.length) {
-          return;
-        }
+    const updateActiveSection = () => {
+      const viewportMidpoint = getMidpoint();
+      const candidates = sections
+        .map((section) => {
+          const bounds = section.getBoundingClientRect();
+          const sectionMidpoint = bounds.top + bounds.height / 2;
 
-        const nextSection = visibleEntries[0]?.target.id as NavLink['id'] | undefined;
+          return {
+            id: section.id as NavLink['id'],
+            coversMidpoint: bounds.top <= viewportMidpoint && bounds.bottom >= viewportMidpoint,
+            distanceFromMidpoint: Math.abs(sectionMidpoint - viewportMidpoint),
+            visible: bounds.bottom > 0 && bounds.top < window.innerHeight,
+          };
+        })
+        .filter((candidate) => candidate.visible)
+        .sort((leftCandidate, rightCandidate) => {
+          if (leftCandidate.coversMidpoint !== rightCandidate.coversMidpoint) {
+            return leftCandidate.coversMidpoint ? -1 : 1;
+          }
 
-        if (nextSection) {
-          setActiveSection(nextSection);
-        }
-      },
-      {
-        rootMargin: '-22% 0px -58% 0px',
-        threshold: [0.2, 0.35, 0.5, 0.65],
-      },
-    );
+          return leftCandidate.distanceFromMidpoint - rightCandidate.distanceFromMidpoint;
+        });
+
+      const nextSection = candidates[0]?.id;
+
+      if (nextSection) {
+        setActiveSection(nextSection);
+      }
+    };
+
+    const observer = new IntersectionObserver(updateActiveSection, {
+      rootMargin: '-40% 0px -40% 0px',
+      threshold: [0, 0.1, 0.25, 0.5, 0.75, 1],
+    });
 
     sections.forEach((section) => observer.observe(section));
+    updateActiveSection();
+
+    window.addEventListener('scroll', updateActiveSection, { passive: true });
+    window.addEventListener('resize', updateActiveSection);
 
     return () => {
       observer.disconnect();
+      window.removeEventListener('scroll', updateActiveSection);
+      window.removeEventListener('resize', updateActiveSection);
     };
   }, []);
 
@@ -134,6 +158,11 @@ function Nav() {
     });
   }
 
+  function handleOpenSignup() {
+    setMobileOpen(false);
+    open();
+  }
+
   return (
     <>
       <header className={navClassName}>
@@ -146,17 +175,16 @@ function Nav() {
                 className={styles.logo}
                 onError={() => setLogoFailed(true)}
               />
-            ) : null}
-            <span className={`${styles.brandText} ${!logoFailed ? styles.brandTextHidden : ''}`}>
-              Blueprint &times; Dubai
-            </span>
+            ) : (
+              <span className={styles.brandFallback}>Blueprint × Dubai</span>
+            )}
           </a>
 
           <nav className={styles.desktopNav} aria-label="Primary">
             <ul className={styles.list}>{linkItems}</ul>
-            <a href={SIGNUP_URL} className={styles.cta} target="_blank" rel="noopener noreferrer">
+            <button type="button" className={styles.cta} onClick={handleOpenSignup}>
               Sign Up
-            </a>
+            </button>
           </nav>
 
           <button
@@ -184,15 +212,9 @@ function Nav() {
         <nav className={styles.mobileNav} aria-label="Mobile primary">
           <p className={styles.drawerLabel}>[ SYS://NAVIGATION ]</p>
           <ul className={styles.mobileList}>{linkItems}</ul>
-          <a
-            href={SIGNUP_URL}
-            className={`${styles.cta} ${styles.mobileCta}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => setMobileOpen(false)}
-          >
+          <button type="button" className={`${styles.cta} ${styles.mobileCta}`} onClick={handleOpenSignup}>
             Sign Up
-          </a>
+          </button>
         </nav>
       </aside>
     </>
