@@ -1,0 +1,246 @@
+.shell {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 760 / 540;
+  padding: 1rem;
+}
+
+.svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.boardFrame {
+  fill: transparent;
+  stroke: var(--border);
+  stroke-width: 1.5;
+}
+
+.boardGuide,
+.boardGuideVertical {
+  fill: none;
+  stroke: var(--border);
+  stroke-width: 1;
+  stroke-dasharray: 8 12;
+  opacity: 0.55;
+}
+
+.traceBase,
+.traceActive {
+  fill: none;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+  stroke-width: 4;
+}
+
+.traceBase {
+  stroke: var(--trace);
+}
+
+.traceActive {
+  stroke: var(--trace-active);
+  stroke-dasharray: var(--trace-length);
+  stroke-dashoffset: var(--trace-length);
+  filter: drop-shadow(0 0 0 transparent);
+}
+
+.shellVisible .traceActive {
+  animation: drawTrace var(--trace-duration) cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: var(--trace-delay);
+}
+
+.componentLayer {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.shellVisible .componentLayer {
+  animation: revealComponent 420ms ease-out forwards;
+  animation-delay: 520ms;
+}
+
+.icBody {
+  fill: var(--bg-card);
+  stroke: var(--accent-blue);
+  stroke-width: 2;
+}
+
+.icCore {
+  fill: var(--bg-secondary);
+  stroke: var(--border);
+  stroke-width: 1;
+}
+
+.icPin,
+.capacitorLead,
+.capacitorPlate,
+.resistor {
+  fill: none;
+  stroke: var(--accent-cyan);
+  stroke-width: 3;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+}
+
+.componentLabel,
+.componentMeta,
+.componentTag,
+.boardMarkText {
+  fill: var(--text-secondary);
+  font-family: var(--font);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+.componentLabel {
+  font-size: 1.1rem;
+  font-weight: 700;
+  fill: var(--text-primary);
+}
+
+.componentMeta {
+  font-size: 0.6rem;
+  font-weight: 500;
+}
+
+.componentTag {
+  font-size: 0.56rem;
+  font-weight: 600;
+}
+
+.boardMarkText {
+  font-size: 0.52rem;
+  font-weight: 500;
+  fill: var(--text-muted);
+}
+
+.pad,
+.junction {
+  stroke-width: 2;
+}
+
+.pad {
+  fill: var(--bg-primary);
+  stroke: var(--accent-cyan);
+}
+
+.junction {
+  fill: var(--accent-blue);
+  stroke: var(--bg-primary);
+}
+
+.signalDot {
+  fill: var(--accent-cyan);
+  stroke: var(--bg-primary);
+  stroke-width: 2;
+  opacity: 0;
+  offset-distance: 0%;
+  offset-rotate: 0deg;
+  filter: drop-shadow(0 0 6px var(--trace-active));
+}
+
+.shellVisible .signalDot {
+  animation:
+    revealDot 1ms linear forwards,
+    travelSignal var(--travel-duration) linear infinite,
+    pulseSignal 1.6s ease-in-out infinite;
+  animation-delay: var(--travel-delay), var(--travel-delay), var(--travel-delay);
+}
+
+@keyframes drawTrace {
+  0% {
+    stroke-dashoffset: var(--trace-length);
+    filter: drop-shadow(0 0 0 transparent);
+  }
+
+  70% {
+    filter:
+      drop-shadow(0 0 8px var(--trace-active))
+      drop-shadow(0 0 20px var(--trace-active));
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+    filter:
+      drop-shadow(0 0 5px var(--trace-active))
+      drop-shadow(0 0 12px var(--trace-active));
+  }
+}
+
+@keyframes revealComponent {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes revealDot {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes travelSignal {
+  from {
+    offset-distance: 0%;
+  }
+
+  to {
+    offset-distance: 100%;
+  }
+}
+
+@keyframes pulseSignal {
+  0%,
+  100% {
+    transform: scale(0.92);
+    filter: drop-shadow(0 0 5px var(--trace-active));
+  }
+
+  50% {
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 12px var(--trace-active));
+  }
+}
+
+@media (max-width: 720px) {
+  .shell {
+    padding: 0.5rem;
+  }
+
+  .traceBase,
+  .traceActive {
+    stroke-width: 3;
+  }
+
+  .icPin,
+  .capacitorLead,
+  .capacitorPlate,
+  .resistor {
+    stroke-width: 2.4;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shellVisible .traceActive,
+  .shellVisible .componentLayer,
+  .shellVisible .signalDot {
+    animation: none;
+  }
+
+  .traceActive {
+    stroke-dashoffset: 0;
+  }
+
+  .componentLayer,
+  .signalDot {
+    opacity: 1;
+    transform: none;
+  }
+}
