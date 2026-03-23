@@ -6,30 +6,25 @@ import Countdown from './ui/Countdown';
 import SectionLabel from './ui/SectionLabel';
 import styles from './Hero.module.css';
 
-const heroFacts = [
-  EVENT_DATE_DISPLAY,
-  EVENT_TIME,
-  EVENT_LOCATION,
-  `Venue ${EVENT_VENUE}`,
-];
+const heroFacts = [EVENT_DATE_DISPLAY, EVENT_TIME, EVENT_LOCATION, `Venue ${EVENT_VENUE}`];
 
 const containerVariants = {
   hidden: {},
   visible: {
     transition: {
-      delayChildren: 0.2,
-      staggerChildren: 0.1,
+      delayChildren: 0.16,
+      staggerChildren: 0.08,
     },
   },
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 18 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.45,
+      duration: 0.42,
       ease: 'easeOut',
     },
   },
@@ -52,18 +47,15 @@ function Hero() {
   return (
     <section id="hero" className={styles.hero}>
       <div className={styles.inner}>
-        <motion.div
-          className={styles.grid}
-          initial="hidden"
-          animate="visible"
-          variants={containerVariants}
-        >
+        <motion.div className={styles.grid} initial="hidden" animate="visible" variants={containerVariants}>
           <motion.div className={styles.copy} variants={itemVariants}>
             <SectionLabel label="build guild dubai" />
             <h1 className={styles.title}>Build Guild Dubai</h1>
             <p className={styles.subline}>
-              Dubai&apos;s hardware community. One day. Circuits, components, and a whole lot of building.
+              Dubai&apos;s hardware community for one full day of boards, components, build time, and meeting the
+              people who are actually shipping things here.
             </p>
+
             <div className={styles.facts}>
               {heroFacts.map((fact) => (
                 <span key={fact} className={styles.factChip}>
@@ -71,6 +63,7 @@ function Hero() {
                 </span>
               ))}
             </div>
+
             <div className={styles.actions}>
               <a href={SIGNUP_URL} className={styles.primaryAction} target="_blank" rel="noopener noreferrer">
                 Sign Up
@@ -83,7 +76,10 @@ function Hero() {
 
           <motion.div className={styles.visual} variants={itemVariants}>
             <Card highlight className={styles.visualFrame}>
-              <SectionLabel label="live pcb" />
+              <div className={styles.visualHeader}>
+                <SectionLabel label="board render" />
+                <p className={styles.visualMeta}>Reference board treatment // filtered into the site palette</p>
+              </div>
               <CircuitSVG animate />
             </Card>
           </motion.div>

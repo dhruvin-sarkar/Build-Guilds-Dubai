@@ -4,7 +4,7 @@
   left: 0;
   z-index: 100;
   width: 100%;
-  background: color-mix(in srgb, var(--bg-primary) 84%, transparent);
+  background: color-mix(in srgb, var(--bg-primary) 92%, transparent);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   transition:
@@ -14,8 +14,8 @@
 }
 
 .navScrolled {
-  border-bottom: 1px solid var(--border);
-  box-shadow: 0 12px 30px color-mix(in srgb, var(--bg-primary) 55%, transparent);
+  border-bottom: 1px solid var(--border-strong);
+  box-shadow: 0 10px 24px rgba(7, 10, 15, 0.18);
 }
 
 .navOpen {
@@ -27,7 +27,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 1.5rem;
-  width: min(100% - 2rem, 1280px);
+  width: min(100% - 2rem, var(--container));
   min-height: 5rem;
   margin: 0 auto;
 }
@@ -43,16 +43,16 @@
 .logo {
   display: block;
   width: auto;
-  height: 2.35rem;
+  height: 2.85rem;
   object-fit: contain;
-  filter: saturate(1.05) brightness(0.98);
+  filter: saturate(0.82) brightness(0.96);
 }
 
 .brandText {
   color: var(--text-primary);
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   font-weight: 700;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   white-space: nowrap;
 }
@@ -71,7 +71,7 @@
 .mobileList {
   display: flex;
   align-items: center;
-  gap: 1.25rem;
+  gap: 1.2rem;
   list-style: none;
 }
 
@@ -82,9 +82,9 @@
 .link {
   position: relative;
   color: var(--text-secondary);
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   font-weight: 600;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   transition: color 0.2s ease;
 }
@@ -103,13 +103,9 @@
 }
 
 .link:hover,
-.link:focus-visible {
-  color: var(--text-primary);
-}
-
+.link:focus-visible,
 .linkActive {
   color: var(--text-primary);
-  text-shadow: 0 0 14px color-mix(in srgb, var(--trace-active) 22%, transparent);
 }
 
 .link:hover::after,
@@ -124,14 +120,13 @@
   justify-content: center;
   min-height: 2.9rem;
   padding: 0 1.2rem;
-  color: var(--bg-primary);
+  color: var(--text-primary);
   font-size: 0.76rem;
   font-weight: 700;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   background: var(--accent-blue);
   border: 1px solid var(--accent-blue);
-  box-shadow: 0 0 0 1px transparent;
   transition:
     background 0.2s ease,
     box-shadow 0.2s ease,
@@ -141,11 +136,10 @@
 
 .cta:hover,
 .cta:focus-visible {
-  background: var(--accent-cyan);
-  border-color: var(--accent-cyan);
-  box-shadow:
-    0 0 20px var(--trace-active),
-    0 0 0 1px var(--accent-cyan);
+  color: var(--bg-primary);
+  background: var(--text-primary);
+  border-color: var(--text-primary);
+  box-shadow: 0 0 0 1px var(--border-glow);
 }
 
 .hamburger {
@@ -156,8 +150,8 @@
   gap: 0.34rem;
   width: 2.85rem;
   height: 2.85rem;
-  background: transparent;
-  border: 1px solid var(--border);
+  background: var(--bg-card);
+  border: 1px solid var(--border-strong);
   color: var(--text-primary);
 }
 
@@ -190,8 +184,8 @@
   width: min(24rem, 82vw);
   height: 100vh;
   padding: 6.5rem 1.25rem 1.25rem;
-  background: color-mix(in srgb, var(--bg-secondary) 95%, transparent);
-  border-left: 1px solid var(--accent-cyan);
+  background: color-mix(in srgb, var(--bg-secondary) 96%, transparent);
+  border-left: 1px solid var(--border-strong);
   transform: translateX(100%);
   transition: transform 0.22s ease;
 }
@@ -206,7 +200,7 @@
 }
 
 .drawerLabel {
-  color: var(--text-muted);
+  color: var(--text-secondary);
   font-size: 0.72rem;
   font-weight: 500;
   letter-spacing: 0.18em;
@@ -229,7 +223,7 @@
 
 @media (max-width: 768px) {
   .inner {
-    width: min(100% - 1.25rem, 1280px);
+    width: min(100% - 1.25rem, var(--container));
     min-height: 4.5rem;
   }
 
@@ -248,7 +242,7 @@
   }
 
   .logo {
-    max-width: 8.5rem;
+    max-width: 10rem;
     height: auto;
   }
 }

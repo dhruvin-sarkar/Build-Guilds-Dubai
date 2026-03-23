@@ -2,245 +2,239 @@
   position: relative;
   width: 100%;
   aspect-ratio: 760 / 540;
-  padding: 1rem;
 }
 
-.svg {
+.viewport {
+  position: relative;
   width: 100%;
   height: 100%;
-  overflow: visible;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--bg-secondary);
 }
 
-.boardFrame {
-  fill: transparent;
-  stroke: var(--border);
-  stroke-width: 1.5;
+.boardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 78% center;
+  opacity: 0.88;
+  filter: grayscale(0.18) saturate(0.52) hue-rotate(146deg) brightness(0.7) contrast(1.08);
+  transform: scale(1.08);
+  transition:
+    transform 0.8s ease,
+    opacity 0.5s ease,
+    filter 0.5s ease;
 }
 
-.boardGuide,
-.boardGuideVertical {
-  fill: none;
-  stroke: var(--border);
-  stroke-width: 1;
-  stroke-dasharray: 8 12;
-  opacity: 0.55;
+.shellVisible .boardImage {
+  opacity: 0.96;
+  transform: scale(1.03);
 }
 
-.traceBase,
-.traceActive {
-  fill: none;
-  stroke-linecap: square;
-  stroke-linejoin: miter;
-  stroke-width: 4;
+.overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
 }
 
-.traceBase {
-  stroke: var(--trace);
+.overlay::before {
+  content: '';
+  position: absolute;
+  inset: 1rem;
+  border: 1px solid color-mix(in srgb, var(--border-strong) 86%, transparent);
+  opacity: 0.8;
 }
 
-.traceActive {
-  stroke: var(--trace-active);
-  stroke-dasharray: var(--trace-length);
-  stroke-dashoffset: var(--trace-length);
-  filter: drop-shadow(0 0 0 transparent);
-}
-
-.shellVisible .traceActive {
-  animation: drawTrace var(--trace-duration) cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  animation-delay: var(--trace-delay);
-}
-
-.componentLayer {
+.trace {
+  position: absolute;
+  height: 1px;
+  background: var(--accent-cyan);
   opacity: 0;
-  transform: translateY(8px);
+  transform: scaleX(0);
+  transform-origin: left;
 }
 
-.shellVisible .componentLayer {
-  animation: revealComponent 420ms ease-out forwards;
-  animation-delay: 520ms;
+.tracePrimary {
+  top: 18%;
+  left: 6%;
+  width: 44%;
 }
 
-.icBody {
-  fill: var(--bg-card);
-  stroke: var(--accent-blue);
-  stroke-width: 2;
+.traceSecondary {
+  right: 8%;
+  bottom: 18%;
+  width: 26%;
 }
 
-.icCore {
-  fill: var(--bg-secondary);
-  stroke: var(--border);
-  stroke-width: 1;
+.traceVertical {
+  top: 18%;
+  right: 24%;
+  width: 1px;
+  height: 18%;
+  transform: scaleY(0);
+  transform-origin: top;
 }
 
-.icPin,
-.capacitorLead,
-.capacitorPlate,
-.resistor {
-  fill: none;
-  stroke: var(--accent-cyan);
-  stroke-width: 3;
-  stroke-linecap: square;
-  stroke-linejoin: miter;
+.dot {
+  position: absolute;
+  width: 0.62rem;
+  height: 0.62rem;
+  background: var(--accent-blue);
+  border: 1px solid var(--bg-primary);
+  opacity: 0;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent-blue) 55%, transparent);
 }
 
-.componentLabel,
-.componentMeta,
-.componentTag,
-.boardMarkText {
-  fill: var(--text-secondary);
+.dotPrimary {
+  top: calc(18% - 0.3rem);
+  left: calc(49% - 0.3rem);
+}
+
+.dotSecondary {
+  bottom: calc(18% - 0.3rem);
+  right: calc(8% + 26% - 0.3rem);
+}
+
+.scanLine {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -24%;
+  width: 24%;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--trace-active) 28%, transparent), transparent);
+  opacity: 0;
+}
+
+.badge,
+.badgeSecondary {
+  position: absolute;
+  left: 1.25rem;
+  padding: 0.45rem 0.6rem;
+  color: var(--text-primary);
   font-family: var(--font);
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-}
-
-.componentLabel {
-  font-size: 1.1rem;
-  font-weight: 700;
-  fill: var(--text-primary);
-}
-
-.componentMeta {
-  font-size: 0.6rem;
-  font-weight: 500;
-}
-
-.componentTag {
-  font-size: 0.56rem;
+  font-size: 0.68rem;
   font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  background: color-mix(in srgb, var(--bg-primary) 72%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border-strong) 82%, transparent);
 }
 
-.boardMarkText {
-  font-size: 0.52rem;
-  font-weight: 500;
-  fill: var(--text-muted);
+.badge {
+  top: 1.25rem;
 }
 
-.pad,
-.junction {
-  stroke-width: 2;
+.badgeSecondary {
+  bottom: 1.25rem;
 }
 
-.pad {
-  fill: var(--bg-primary);
-  stroke: var(--accent-cyan);
-}
-
-.junction {
-  fill: var(--accent-blue);
-  stroke: var(--bg-primary);
-}
-
-.signalDot {
-  fill: var(--accent-cyan);
-  stroke: var(--bg-primary);
-  stroke-width: 2;
-  opacity: 0;
-  offset-distance: 0%;
-  offset-rotate: 0deg;
-  filter: drop-shadow(0 0 6px var(--trace-active));
-}
-
-.shellVisible .signalDot {
+.shellVisible .tracePrimary,
+.shellVisible .traceSecondary {
   animation:
-    revealDot 1ms linear forwards,
-    travelSignal var(--travel-duration) linear infinite,
-    pulseSignal 1.6s ease-in-out infinite;
-  animation-delay: var(--travel-delay), var(--travel-delay), var(--travel-delay);
+    revealTrace 0.6s ease-out forwards,
+    pulseTrace 3.6s ease-in-out infinite 0.8s;
 }
 
-@keyframes drawTrace {
-  0% {
-    stroke-dashoffset: var(--trace-length);
-    filter: drop-shadow(0 0 0 transparent);
-  }
-
-  70% {
-    filter:
-      drop-shadow(0 0 8px var(--trace-active))
-      drop-shadow(0 0 20px var(--trace-active));
-  }
-
-  100% {
-    stroke-dashoffset: 0;
-    filter:
-      drop-shadow(0 0 5px var(--trace-active))
-      drop-shadow(0 0 12px var(--trace-active));
-  }
+.shellVisible .traceSecondary {
+  animation-delay: 0.2s, 1s;
 }
 
-@keyframes revealComponent {
+.shellVisible .traceVertical {
+  animation: revealTraceVertical 0.5s ease-out forwards 0.4s;
+}
+
+.shellVisible .dotPrimary,
+.shellVisible .dotSecondary {
+  animation: pulseDot 3.2s ease-in-out infinite 0.65s;
+}
+
+.shellVisible .dotSecondary {
+  animation-delay: 1s;
+}
+
+.shellVisible .scanLine {
+  animation: scanBoard 1.8s cubic-bezier(0.22, 1, 0.36, 1) forwards 0.25s;
+}
+
+@keyframes revealTrace {
   0% {
     opacity: 0;
-    transform: translateY(8px);
+    transform: scaleX(0);
   }
 
   100% {
-    opacity: 1;
-    transform: translateY(0);
+    opacity: 0.88;
+    transform: scaleX(1);
   }
 }
 
-@keyframes revealDot {
-  to {
-    opacity: 1;
+@keyframes revealTraceVertical {
+  0% {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+
+  100% {
+    opacity: 0.7;
+    transform: scaleY(1);
   }
 }
 
-@keyframes travelSignal {
-  from {
-    offset-distance: 0%;
-  }
-
-  to {
-    offset-distance: 100%;
-  }
-}
-
-@keyframes pulseSignal {
+@keyframes pulseTrace {
   0%,
   100% {
-    transform: scale(0.92);
-    filter: drop-shadow(0 0 5px var(--trace-active));
+    opacity: 0.46;
   }
 
   50% {
-    transform: scale(1.15);
-    filter: drop-shadow(0 0 12px var(--trace-active));
+    opacity: 0.9;
+  }
+}
+
+@keyframes pulseDot {
+  0%,
+  100% {
+    opacity: 0.72;
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent-blue) 55%, transparent);
+  }
+
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent-blue) 72%, transparent), 0 0 10px var(--trace-active);
+  }
+}
+
+@keyframes scanBoard {
+  0% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+
+  12% {
+    opacity: 0.65;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(520%);
   }
 }
 
 @media (max-width: 720px) {
-  .shell {
-    padding: 0.5rem;
-  }
-
-  .traceBase,
-  .traceActive {
-    stroke-width: 3;
-  }
-
-  .icPin,
-  .capacitorLead,
-  .capacitorPlate,
-  .resistor {
-    stroke-width: 2.4;
+  .badge,
+  .badgeSecondary {
+    left: 0.85rem;
+    font-size: 0.62rem;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .shellVisible .traceActive,
-  .shellVisible .componentLayer,
-  .shellVisible .signalDot {
+  .boardImage,
+  .trace,
+  .dot,
+  .scanLine {
+    transition: none;
     animation: none;
-  }
-
-  .traceActive {
-    stroke-dashoffset: 0;
-  }
-
-  .componentLayer,
-  .signalDot {
-    opacity: 1;
-    transform: none;
   }
 }

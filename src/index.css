@@ -1,22 +1,33 @@
 :root {
   color-scheme: dark;
-  --bg-primary: #08080f;
-  --bg-secondary: #0c0c18;
-  --bg-card: #0f0f1e;
-  --bg-card-hover: #13132a;
-  --accent-blue: #3b82f6;
-  --accent-cyan: #22d3ee;
-  --accent-amber: #f59e0b;
-  --accent-green: #22c55e;
-  --text-primary: #e8eeff;
-  --text-secondary: #7986a8;
-  --text-muted: #3d4a66;
-  --border: #1a2035;
-  --border-glow: rgba(59, 130, 246, 0.3);
-  --trace: rgba(34, 211, 238, 0.15);
-  --trace-active: rgba(34, 211, 238, 0.8);
-  --grid: rgba(59, 130, 246, 0.04);
+  --bg-primary: #11161d;
+  --bg-secondary: #161d26;
+  --bg-card: #1b232d;
+  --bg-card-hover: #202a35;
+  --accent-blue: #7287a3;
+  --accent-cyan: #7f99a6;
+  --accent-amber: #aa8b62;
+  --accent-green: #809786;
+  --text-primary: #edf1f6;
+  --text-secondary: #aab4c1;
+  --text-muted: #7e8896;
+  --text-soft: #5f6975;
+  --border: #2f3946;
+  --border-strong: #404a57;
+  --border-glow: rgba(114, 135, 163, 0.18);
+  --trace: rgba(127, 153, 166, 0.12);
+  --trace-active: rgba(127, 153, 166, 0.34);
+  --grid: rgba(114, 135, 163, 0.08);
+  --shadow-soft: 0 18px 36px rgba(8, 12, 18, 0.22);
   --font: 'JetBrains Mono', monospace;
+  --container: 1180px;
+  --section-space: 4.5rem;
+  --section-space-mobile: 3rem;
+  --step-label: 0.76rem;
+  --step-body: 0.98rem;
+  --step-body-sm: 0.9rem;
+  --step-title: clamp(2rem, 4.3vw, 3.35rem);
+  --step-hero: clamp(3.2rem, 8vw, 6rem);
 }
 
 *,
@@ -44,20 +55,10 @@ body {
   background-size: 40px 40px;
   color: var(--text-primary);
   font-family: var(--font);
-  line-height: 1.6;
+  line-height: 1.7;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background:
-    radial-gradient(circle at top right, rgba(34, 211, 238, 0.08), transparent 28%),
-    radial-gradient(circle at bottom left, rgba(59, 130, 246, 0.08), transparent 32%);
-  pointer-events: none;
 }
 
 a {
@@ -73,10 +74,19 @@ select {
   color: inherit;
 }
 
+button {
+  cursor: pointer;
+}
+
 img,
 svg {
   display: block;
   max-width: 100%;
+}
+
+:focus-visible {
+  outline: 1px solid var(--accent-blue);
+  outline-offset: 2px;
 }
 
 #root {
@@ -90,4 +100,10 @@ svg {
 
 .section-placeholder {
   min-height: 1px;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --section-space: var(--section-space-mobile);
+  }
 }
