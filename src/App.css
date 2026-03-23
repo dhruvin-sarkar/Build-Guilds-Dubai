@@ -1,5 +1,12 @@
 .appShell {
+  position: relative;
   min-height: 100vh;
+  background: var(--bg-primary);
+}
+
+.appContent {
+  position: relative;
+  z-index: 1;
 }
 
 .appMain {

@@ -27,7 +27,7 @@ export const externalLinks: ExternalLinks = {
   slackChannel: '#build-guild-dubai',
   blueprintUrl: 'https://blueprint.hackclub.com',
   hackClubUrl: 'https://hackclub.com',
-  blueprintLogo: 'https://buildguilddelhi.netlify.app/homepage_logo-3585630b.webp',
+  blueprintLogo: '/blueprint-logo.webp',
 };
 
 export const SIGNUP_URL = externalLinks.signupUrl;

@@ -1,16 +1,16 @@
 .root {
   display: flex;
   align-items: center;
-  gap: 0.9rem;
+  gap: var(--space-4);
   width: 100%;
 }
 
 .text {
   flex: 0 0 auto;
-  color: var(--text-primary);
+  color: var(--text-secondary);
   font-size: var(--step-label);
-  font-weight: 600;
-  letter-spacing: 0.16em;
+  font-weight: 700;
+  letter-spacing: 0.18em;
   line-height: 1;
   text-transform: uppercase;
   white-space: nowrap;
@@ -31,18 +31,18 @@
   right: 0;
   width: 0.5rem;
   height: 0.5rem;
-  border: 1px solid var(--accent-blue);
+  border: 1px solid var(--text-secondary);
   background: var(--bg-primary);
   transform: translateY(-50%);
 }
 
 @media (max-width: 640px) {
   .root {
-    gap: 0.75rem;
+    gap: var(--space-3);
   }
 
   .text {
-    font-size: 0.68rem;
+    font-size: 0.69rem;
     letter-spacing: 0.14em;
   }
 }
