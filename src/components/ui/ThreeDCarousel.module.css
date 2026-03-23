@@ -193,14 +193,14 @@
 .overlay {
   position: fixed;
   inset: 0;
-  z-index: 200;
+  z-index: 10000;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
-  padding: 0 var(--space-6) var(--space-12);
-  background: rgba(8, 28, 53, 0.88);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
+  padding: var(--space-6);
+  background: rgba(8, 8, 15, 0.92);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
   pointer-events: auto;
 }
 
@@ -209,13 +209,11 @@
   grid-template-columns: minmax(0, 1.2fr) minmax(20rem, 0.8fr);
   gap: 0;
   width: min(100%, 72rem);
-  max-height: calc(100vh - var(--nav-height) - var(--space-16));
+  max-height: 80vh;
   background: var(--bg-card);
   border: 1px solid var(--border-strong);
   box-shadow: 0 32px 64px -12px rgba(0, 0, 0, 0.8);
   overflow: hidden;
-  margin-bottom: var(--space-8);
-  /* Ensure gap from bottom of screen */
 }
 
 .overlayMedia {

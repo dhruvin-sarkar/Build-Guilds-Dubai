@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type PointerEvent as ReactPointerEvent } from 'react';
+import { createPortal } from 'react-dom';
 import type { BlueprintProject } from '../../data/projects';
 import styles from './ThreeDCarousel.module.css';
 
@@ -374,7 +375,7 @@ function ThreeDCarousel({ projects }: ThreeDCarouselProps) {
       </div>
 
       <AnimatePresence>
-        {activeProject ? (
+        {activeProject && createPortal(
           <motion.div
             className={styles.overlay}
             initial={{ opacity: 0 }}
@@ -428,8 +429,9 @@ function ThreeDCarousel({ projects }: ThreeDCarouselProps) {
                 <p className={styles.actionNote}>* All project files, source code, and images are hosted on the Blueprint platform.</p>
               </div>
             </motion.div>
-          </motion.div>
-        ) : null}
+          </motion.div>,
+          document.body
+        )}
       </AnimatePresence>
     </div>
   );

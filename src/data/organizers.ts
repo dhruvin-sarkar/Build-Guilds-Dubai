@@ -20,7 +20,7 @@ export const organizers: Organizer[] = [
     profileUrl: 'https://hackclub.enterprise.slack.com/team/U0914NPNKM2',
     profileLabel: 'Slack profile',
     photoUrl: '/organizers/dhruv.jpg',
-    bio: 'Game dev, hardware enthusiast, pulled an all-nighter debugging Unity WebGL for Ember game jam.',
+    bio: 'Game dev, hardware enthusiast, Web Dev (I do basically everything).',
   },
   {
     name: 'Aly',
@@ -30,6 +30,6 @@ export const organizers: Organizer[] = [
     profileUrl: 'https://hackclub.enterprise.slack.com/team/U08AFJFPRJ7',
     profileLabel: 'Slack profile',
     photoUrl: '/organizers/aly.jpg',
-    bio: 'Organized Campfire Dubai. Deep in the HC community. Designed the campfire merch.',
+    bio: 'horizons singapore org // campfire dubai poc // club leader @dubai Overall goat.',
   },
 ];
