@@ -18,6 +18,7 @@ function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [logoFailed, setLogoFailed] = useState(false);
+  const [activeSection, setActiveSection] = useState<NavLink['id']>('about');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -48,6 +49,44 @@ function Nav() {
     };
   }, [mobileOpen]);
 
+  useEffect(() => {
+    const sections = navLinks
+      .map((link) => document.getElementById(link.id))
+      .filter((section): section is HTMLElement => section !== null);
+
+    if (!sections.length || !('IntersectionObserver' in window)) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleEntries = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((leftEntry, rightEntry) => rightEntry.intersectionRatio - leftEntry.intersectionRatio);
+
+        if (!visibleEntries.length) {
+          return;
+        }
+
+        const nextSection = visibleEntries[0]?.target.id as NavLink['id'] | undefined;
+
+        if (nextSection) {
+          setActiveSection(nextSection);
+        }
+      },
+      {
+        rootMargin: '-22% 0px -58% 0px',
+        threshold: [0.2, 0.35, 0.5, 0.65],
+      },
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   const navClassName = [styles.nav, scrolled ? styles.navScrolled : '', mobileOpen ? styles.navOpen : '']
     .filter(Boolean)
     .join(' ');
@@ -56,12 +95,17 @@ function Nav() {
     () =>
       navLinks.map((link) => (
         <li key={link.id} className={styles.listItem}>
-          <a href={`#${link.id}`} className={styles.link} onClick={(event) => handleAnchorClick(event, link.id)}>
+          <a
+            href={`#${link.id}`}
+            className={`${styles.link} ${activeSection === link.id ? styles.linkActive : ''}`}
+            aria-current={activeSection === link.id ? 'page' : undefined}
+            onClick={(event) => handleAnchorClick(event, link.id)}
+          >
             {link.label}
           </a>
         </li>
       )),
-    [],
+    [activeSection],
   );
 
   function handleAnchorClick(event: MouseEvent<HTMLAnchorElement>, targetId: string) {

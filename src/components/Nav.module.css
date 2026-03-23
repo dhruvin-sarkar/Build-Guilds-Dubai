@@ -107,8 +107,14 @@
   color: var(--text-primary);
 }
 
+.linkActive {
+  color: var(--text-primary);
+  text-shadow: 0 0 14px color-mix(in srgb, var(--trace-active) 22%, transparent);
+}
+
 .link:hover::after,
-.link:focus-visible::after {
+.link:focus-visible::after,
+.linkActive::after {
   transform: scaleX(1);
 }
 
