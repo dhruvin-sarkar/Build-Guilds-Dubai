@@ -1,0 +1,107 @@
+.section {
+  position: relative;
+  padding: 1rem 1.5rem var(--section-space);
+  scroll-margin-top: 7rem;
+}
+
+.inner {
+  width: min(100%, var(--container));
+  margin: 0 auto;
+  display: grid;
+  gap: 1.6rem;
+}
+
+.header {
+  display: grid;
+  gap: 0.9rem;
+  max-width: 42rem;
+}
+
+.title {
+  color: var(--text-primary);
+  font-size: var(--step-title);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  line-height: 1.04;
+  text-transform: uppercase;
+}
+
+.lead {
+  color: var(--text-secondary);
+  font-size: var(--step-body);
+  line-height: 1.82;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  min-height: 100%;
+  display: grid;
+  gap: 1rem;
+}
+
+.media {
+  display: grid;
+  align-content: space-between;
+  min-height: 14rem;
+  padding: 1rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+}
+
+.mediaLabel,
+.mediaPlaceholder {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.mediaLabel {
+  color: var(--text-secondary);
+}
+
+.mediaPlaceholder {
+  color: var(--text-muted);
+}
+
+.copy {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.cardTitle {
+  color: var(--text-primary);
+  font-size: 1.02rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  line-height: 1.45;
+  text-transform: uppercase;
+}
+
+.cardCaption {
+  color: var(--text-secondary);
+  font-size: var(--step-body-sm);
+  line-height: 1.82;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 1rem 1rem var(--section-space-mobile);
+    scroll-margin-top: 5.75rem;
+  }
+
+  .media {
+    min-height: 12rem;
+  }
+}

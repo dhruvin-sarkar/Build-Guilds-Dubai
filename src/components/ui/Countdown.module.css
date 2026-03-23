@@ -55,7 +55,7 @@
 
 .label {
   margin-top: 0.6rem;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.18em;
@@ -77,13 +77,13 @@
   100% {
     box-shadow:
       0 0 0 1px var(--border-glow),
-      0 0 10px var(--trace);
+      0 0 8px var(--trace);
   }
 
   50% {
     box-shadow:
       0 0 0 1px var(--accent-cyan),
-      0 0 18px var(--trace-active);
+      0 0 12px var(--trace-active);
   }
 }
 

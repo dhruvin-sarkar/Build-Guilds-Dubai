@@ -1,11 +1,11 @@
 .section {
   position: relative;
-  padding: 2rem 1.5rem 4rem;
+  padding: 1rem 1.5rem var(--section-space);
   scroll-margin-top: 7rem;
 }
 
 .inner {
-  width: min(100%, 1280px);
+  width: min(100%, var(--container));
   margin: 0 auto;
 }
 
@@ -13,10 +13,9 @@
   position: relative;
   overflow: hidden;
   display: grid;
-  gap: 1.5rem;
+  gap: 1.35rem;
   padding: 1.75rem 1.5rem;
-  background:
-    linear-gradient(180deg, color-mix(in srgb, var(--bg-card) 96%, transparent), color-mix(in srgb, var(--bg-secondary) 92%, transparent));
+  background: var(--bg-card);
   border: 1px solid var(--border);
 }
 
@@ -29,8 +28,8 @@
 .traceHorizontal,
 .traceVertical {
   position: absolute;
-  background: linear-gradient(90deg, var(--trace-active), transparent);
-  opacity: 0.28;
+  background: var(--border-strong);
+  opacity: 1;
 }
 
 .traceHorizontal {
@@ -45,7 +44,6 @@
   top: 2rem;
   width: 1px;
   height: 6rem;
-  background: linear-gradient(180deg, var(--trace-active), transparent);
 }
 
 .traceNode {
@@ -54,8 +52,7 @@
   top: 7.7rem;
   width: 0.7rem;
   height: 0.7rem;
-  background: var(--accent-cyan);
-  box-shadow: 0 0 14px color-mix(in srgb, var(--accent-cyan) 36%, transparent);
+  background: var(--text-primary);
 }
 
 .copy {
@@ -66,20 +63,27 @@
 
 .title {
   color: var(--text-primary);
-  font-size: clamp(2rem, 5vw, 4rem);
+  font-size: var(--step-title);
   font-weight: 800;
-  letter-spacing: 0.06em;
-  line-height: 1;
+  letter-spacing: 0.04em;
+  line-height: 1.04;
   text-transform: uppercase;
 }
 
 .meta {
   color: var(--text-secondary);
-  font-size: 0.96rem;
+  font-size: 0.82rem;
   font-weight: 600;
-  letter-spacing: 0.12em;
-  line-height: 1.9;
+  letter-spacing: 0.14em;
+  line-height: 1.75;
   text-transform: uppercase;
+}
+
+.support {
+  max-width: 38rem;
+  color: var(--text-secondary);
+  font-size: var(--step-body-sm);
+  line-height: 1.82;
 }
 
 .actions {
@@ -102,8 +106,7 @@
   transition:
     background 0.2s ease,
     border-color 0.2s ease,
-    color 0.2s ease,
-    box-shadow 0.2s ease;
+    color 0.2s ease;
 }
 
 .primaryAction {
@@ -114,26 +117,26 @@
 
 .primaryAction:hover,
 .primaryAction:focus-visible {
-  background: var(--accent-cyan);
-  border-color: var(--accent-cyan);
-  box-shadow: 0 0 22px color-mix(in srgb, var(--accent-cyan) 34%, transparent);
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  border-color: var(--text-primary);
 }
 
 .secondaryAction {
-  color: var(--accent-cyan);
+  color: var(--text-primary);
   background: transparent;
-  border: 1px solid color-mix(in srgb, var(--accent-cyan) 58%, transparent);
+  border: 1px solid var(--border-strong);
 }
 
 .secondaryAction:hover,
 .secondaryAction:focus-visible {
-  color: var(--text-primary);
-  background: color-mix(in srgb, var(--accent-cyan) 10%, transparent);
+  background: var(--bg-card-hover);
+  border-color: var(--text-primary);
 }
 
 @media (max-width: 768px) {
   .section {
-    padding: 1.5rem 1rem 3rem;
+    padding: 1rem 1rem var(--section-space-mobile);
     scroll-margin-top: 5.75rem;
   }
 

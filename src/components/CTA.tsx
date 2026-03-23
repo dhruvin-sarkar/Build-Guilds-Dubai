@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+﻿import { motion } from 'framer-motion';
 import { EVENT_DATE_DISPLAY, EVENT_LOCATION, HC_URL, SIGNUP_URL, SLACK_CHANNEL } from '../data/constants';
 import SectionLabel from './ui/SectionLabel';
 import styles from './CTA.module.css';
@@ -46,17 +46,19 @@ function CTA() {
           <motion.div className={styles.copy} variants={itemVariants}>
             <SectionLabel label="rsvp" />
             <h2 className={styles.title}>Ready to show up?</h2>
-            <p className={styles.meta}>
-              {EVENT_DATE_DISPLAY} · {EVENT_LOCATION} · Free
+            <p className={styles.meta}>{EVENT_DATE_DISPLAY} // {EVENT_LOCATION} // Free</p>
+            <p className={styles.support}>
+              If you are even a little hardware-curious, this is the room to be in. Sign up now and we&apos;ll keep
+              you posted as venue details lock in.
             </p>
           </motion.div>
 
           <motion.div className={styles.actions} variants={itemVariants}>
             <a href={SIGNUP_URL} className={styles.primaryAction} target="_blank" rel="noopener noreferrer">
-              Sign Up — It&apos;s Free
+              Sign Up // It&apos;s Free
             </a>
             <a href={slackUrl} className={styles.secondaryAction} target="_blank" rel="noopener noreferrer">
-              &gt; /slack {SLACK_CHANNEL}
+              Join Slack // {SLACK_CHANNEL}
             </a>
           </motion.div>
         </motion.div>

@@ -1,11 +1,11 @@
 .section {
   position: relative;
-  padding: 2rem 1.5rem 4rem;
+  padding: 1rem 1.5rem var(--section-space);
   scroll-margin-top: 7rem;
 }
 
 .inner {
-  width: min(100%, 1280px);
+  width: min(100%, var(--container));
   margin: 0 auto;
   display: grid;
   gap: 1.6rem;
@@ -19,10 +19,10 @@
 
 .title {
   color: var(--text-primary);
-  font-size: clamp(2rem, 5vw, 3.7rem);
+  font-size: var(--step-title);
   font-weight: 800;
-  letter-spacing: 0.06em;
-  line-height: 1;
+  letter-spacing: 0.04em;
+  line-height: 1.04;
   text-transform: uppercase;
 }
 
@@ -32,19 +32,17 @@
 }
 
 .item {
-  background: color-mix(in srgb, var(--bg-card) 88%, transparent);
+  background: var(--bg-card);
   border: 1px solid var(--border);
   border-left: 2px solid var(--border);
   transition:
     border-color 0.2s ease,
-    background 0.2s ease,
-    box-shadow 0.2s ease;
+    background 0.2s ease;
 }
 
 .itemOpen {
-  background: color-mix(in srgb, var(--accent-cyan) 8%, var(--bg-card));
+  background: var(--bg-card-hover);
   border-left-color: var(--accent-cyan);
-  box-shadow: 0 0 18px color-mix(in srgb, var(--trace) 85%, transparent);
 }
 
 .trigger {
@@ -62,19 +60,19 @@
 
 .question {
   color: var(--text-primary);
-  font-size: 1rem;
+  font-size: 0.96rem;
   font-weight: 700;
-  letter-spacing: 0.04em;
-  line-height: 1.6;
+  letter-spacing: 0.03em;
+  line-height: 1.55;
   text-transform: uppercase;
 }
 
 .icon {
   flex: 0 0 auto;
-  color: var(--accent-cyan);
-  font-size: 0.84rem;
+  color: var(--text-primary);
+  font-size: 0.76rem;
   font-weight: 700;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
   line-height: 1.6;
   text-transform: uppercase;
 }
@@ -86,13 +84,13 @@
 .answer {
   padding: 0 1.15rem 1.15rem;
   color: var(--text-secondary);
-  font-size: 0.96rem;
-  line-height: 1.9;
+  font-size: 0.94rem;
+  line-height: 1.82;
 }
 
 @media (max-width: 768px) {
   .section {
-    padding: 1.5rem 1rem 3rem;
+    padding: 1rem 1rem var(--section-space-mobile);
     scroll-margin-top: 5.75rem;
   }
 
@@ -101,7 +99,7 @@
   }
 
   .question {
-    font-size: 0.94rem;
+    font-size: 0.9rem;
   }
 
   .icon {
@@ -110,7 +108,7 @@
 
   .answer {
     padding: 0 0.95rem 1rem;
-    font-size: 0.92rem;
+    font-size: 0.9rem;
   }
 }
 

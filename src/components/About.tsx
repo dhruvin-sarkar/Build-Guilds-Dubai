@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+﻿import { motion } from 'framer-motion';
 import SectionLabel from './ui/SectionLabel';
 import styles from './About.module.css';
 
@@ -40,12 +40,12 @@ const containerVariants = {
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.45,
+      duration: 0.42,
       ease: 'easeOut',
     },
   },
@@ -65,23 +65,23 @@ function About() {
           <motion.div className={styles.statColumn} variants={itemVariants}>
             <SectionLabel label="overview" />
             <div className={styles.statFrame}>
-              <p className={styles.statEyebrow}>GLOBAL BUILD GUILDS WEEK</p>
+              <p className={styles.statEyebrow}>Global Build Guilds Week</p>
               <p className={styles.statValue}>100+</p>
               <p className={styles.statCaption}>cities building in the same week</p>
             </div>
           </motion.div>
 
           <motion.div className={styles.copyColumn} variants={itemVariants}>
-            <p className={styles.kicker}>1 week // teen-led // hardware-first // Dubai is showing up</p>
-            <h2 className={styles.title}>This is what Build Guild looks like when the local scene actually means it.</h2>
+            <p className={styles.kicker}>Teen-run // hardware-first // free to attend</p>
+            <h2 className={styles.title}>What Build Guild looks like when the local scene actually means it.</h2>
             <p className={styles.lead}>
-              Build Guild Dubai is a one-day hardware meetup inside Hack Club Blueprint&apos;s global week of
-              teen-run events. It is for people who are circuit-curious, people who already ship things, and everyone
-              in between.
+              Build Guild Dubai is a one-day hardware meetup inside Hack Club Blueprint&apos;s global week of teen-run
+              events. It&apos;s for people who are circuit-curious, people who already ship things, and everyone in
+              between.
             </p>
             <p className={styles.lead}>
-              No venue cosplay. No paywall. No “maybe someday” energy. Just a free day to learn hardware, design a PCB,
-              meet other builders, and figure out what you want to make next.
+              No venue cosplay. No paywall. No &quot;maybe someday&quot; energy. Just a free day to learn hardware, design a
+              PCB, meet other builders, and figure out what you want to make next.
             </p>
           </motion.div>
         </motion.div>
@@ -114,7 +114,7 @@ function About() {
         >
           <span className={styles.footerPrompt}>&gt; SYS_STATUS</span>
           <p className={styles.footerText}>
-            Free to attend. Beginner welcome. Ages 13–18. Hack Club funded. Blueprint-connected. Built for the actual
+            Free to attend. Beginner welcome. Ages 13-18. Hack Club funded. Blueprint-connected. Built for the actual
             Dubai teen maker community.
           </p>
         </motion.div>

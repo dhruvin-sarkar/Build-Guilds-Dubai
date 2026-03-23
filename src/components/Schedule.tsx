@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
+﻿import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { scheduleItems } from '../data/schedule';
 import Card from './ui/Card';
@@ -15,7 +15,7 @@ const containerVariants = {
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
@@ -51,8 +51,7 @@ function Schedule() {
             What we&apos;re actually doing all day.
           </motion.h2>
           <motion.p className={styles.lead} variants={itemVariants}>
-            This is the core of the event: fast context, build time, PCB design, demos from other teens, and real next
-            steps once the day is over.
+            Fast context, build time, PCB design, demos from other teens, and real next steps once the day is over.
           </motion.p>
         </motion.div>
 
@@ -80,7 +79,7 @@ function Schedule() {
                   <Card className={styles.card} highlight={item.highlight}>
                     <div className={styles.cardHeader}>
                       <h3 className={styles.cardTitle}>{item.title}</h3>
-                      {item.highlight ? <span className={styles.flag}>KEY</span> : null}
+                      {item.highlight ? <span className={styles.flag}>Key</span> : null}
                     </div>
                     <p className={styles.cardBody}>{item.description}</p>
                   </Card>
@@ -90,7 +89,7 @@ function Schedule() {
           </motion.div>
         </div>
 
-        <p className={styles.note}>Schedule subject to change — exact timings confirmed closer to the event.</p>
+        <p className={styles.note}>Schedule subject to change; exact timings confirmed closer to the event.</p>
       </div>
     </section>
   );

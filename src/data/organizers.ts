@@ -5,7 +5,9 @@ export interface Organizer {
   role: OrganizerRole;
   initials: string;
   avatarColor: string;
-  slackHandle: string;
+  profileUrl: string;
+  profileLabel: string;
+  photoUrl?: string;
   bio: string;
 }
 
@@ -14,16 +16,20 @@ export const organizers: Organizer[] = [
     name: 'Dhruv',
     role: 'Lead Organizer',
     initials: 'D',
-    avatarColor: '#1e3a8a',
-    slackHandle: '#',
+    avatarColor: 'var(--organizer-dhruv)',
+    profileUrl: 'https://hackclub.enterprise.slack.com/team/U0914NPNKM2',
+    profileLabel: 'Slack profile',
+    photoUrl: '/organizers/dhruv.jpg',
     bio: 'Game dev, hardware enthusiast, pulled an all-nighter debugging Unity WebGL for Ember game jam.',
   },
   {
     name: 'Aly',
     role: 'Organizer',
     initials: 'A',
-    avatarColor: '#064e3b',
-    slackHandle: '#',
+    avatarColor: 'var(--organizer-aly)',
+    profileUrl: 'https://hackclub.enterprise.slack.com/team/U08AFJFPRJ7',
+    profileLabel: 'Slack profile',
+    photoUrl: '/organizers/aly.jpg',
     bio: 'Organized Campfire Dubai. Deep in the HC community. Designed the campfire merch.',
   },
 ];

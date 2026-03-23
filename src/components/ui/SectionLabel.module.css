@@ -7,10 +7,10 @@
 
 .text {
   flex: 0 0 auto;
-  color: var(--text-secondary);
+  color: var(--text-primary);
   font-size: var(--step-label);
   font-weight: 600;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
   line-height: 1;
   text-transform: uppercase;
   white-space: nowrap;

@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+﻿import { motion } from 'framer-motion';
 import type { CSSProperties } from 'react';
 import { organizers } from '../data/organizers';
 import Card from './ui/Card';
@@ -9,13 +9,13 @@ const containerVariants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.1,
+      staggerChildren: 0.08,
     },
   },
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
@@ -45,7 +45,7 @@ function Organizers() {
             <SectionLabel label="team" />
           </motion.div>
           <motion.h2 className={styles.title} variants={itemVariants}>
-            Built by people who actually care about this city&apos;s hardware scene.
+            Organized by people building this for the actual Dubai community.
           </motion.h2>
         </motion.div>
 
@@ -57,28 +57,40 @@ function Organizers() {
           variants={containerVariants}
         >
           {organizers.map((organizer) => (
-            <motion.div key={organizer.name} variants={itemVariants}>
+            <motion.a
+              key={organizer.name}
+              href={organizer.profileUrl}
+              className={styles.linkCard}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Open ${organizer.name}'s profile`}
+              variants={itemVariants}
+            >
               <Card className={styles.card}>
                 <div className={styles.avatarRow}>
-                  <div
-                    className={styles.avatar}
-                    style={getAvatarStyle(organizer.avatarColor)}
-                    aria-hidden="true"
-                  >
-                    <span className={styles.avatarInitial}>{organizer.initials}</span>
-                  </div>
+                  {organizer.photoUrl ? (
+                    <img
+                      src={organizer.photoUrl}
+                      alt={organizer.name}
+                      className={styles.avatarImage}
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div className={styles.avatar} style={getAvatarStyle(organizer.avatarColor)} aria-hidden="true">
+                      <span className={styles.avatarInitial}>{organizer.initials}</span>
+                    </div>
+                  )}
+
                   <div className={styles.identity}>
                     <h3 className={styles.name}>{organizer.name}</h3>
                     <p className={styles.role}>{organizer.role}</p>
+                    <p className={styles.profileLink}>&gt; /profile {organizer.profileLabel}</p>
                   </div>
                 </div>
 
                 <p className={styles.bio}>{organizer.bio}</p>
-                <a href={organizer.slackHandle} className={styles.slackLink}>
-                  &gt; /slack {organizer.slackHandle}
-                </a>
               </Card>
-            </motion.div>
+            </motion.a>
           ))}
         </motion.div>
       </div>

@@ -1,9 +1,9 @@
-import { type MouseEvent } from 'react';
+﻿import { type MouseEvent } from 'react';
 import { BLUEPRINT_URL, EVENT_DATE_DISPLAY, EVENT_LOCATION, HC_URL, SLACK_CHANNEL } from '../data/constants';
 import styles from './Footer.module.css';
 
 interface FooterLink {
-  id: 'about' | 'schedule' | 'organizers' | 'faq' | 'rsvp';
+  id: 'about' | 'schedule' | 'organizers' | 'merch' | 'faq' | 'rsvp';
   label: string;
 }
 
@@ -16,6 +16,7 @@ const footerLinks: FooterLink[] = [
   { id: 'about', label: 'About' },
   { id: 'schedule', label: 'Schedule' },
   { id: 'organizers', label: 'Organizers' },
+  { id: 'merch', label: 'Merch' },
   { id: 'faq', label: 'FAQ' },
   { id: 'rsvp', label: 'RSVP' },
 ];
@@ -51,6 +52,9 @@ function Footer() {
         <div className={styles.summary}>
           <p className={styles.label}>[ SYS://FOOTER ]</p>
           <p className={styles.title}>Build Guild Dubai // A Hack Club Blueprint Event</p>
+          <p className={styles.summaryText}>
+            Built for teens in Dubai who want a stronger local hardware scene and a real place to start shipping.
+          </p>
         </div>
 
         <nav className={styles.nav} aria-label="Footer navigation">
@@ -82,7 +86,7 @@ function Footer() {
       </div>
 
       <div className={styles.metaRow}>
-        <p className={styles.meta}>{EVENT_DATE_DISPLAY} · {EVENT_LOCATION}</p>
+        <p className={styles.meta}>{EVENT_DATE_DISPLAY} // {EVENT_LOCATION}</p>
       </div>
     </footer>
   );

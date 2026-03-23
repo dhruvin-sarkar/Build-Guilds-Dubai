@@ -1,16 +1,17 @@
-import { useEffect, useMemo, useState, type MouseEvent } from 'react';
+﻿import { useEffect, useMemo, useState, type MouseEvent } from 'react';
 import { BLUEPRINT_LOGO, SIGNUP_URL } from '../data/constants';
 import styles from './Nav.module.css';
 
 interface NavLink {
-  id: 'about' | 'schedule' | 'organizers' | 'faq';
-  label: 'About' | 'Schedule' | 'Organizers' | 'FAQ';
+  id: 'about' | 'schedule' | 'organizers' | 'merch' | 'faq';
+  label: 'About' | 'Schedule' | 'Organizers' | 'Merch' | 'FAQ';
 }
 
 const navLinks: NavLink[] = [
   { id: 'about', label: 'About' },
   { id: 'schedule', label: 'Schedule' },
   { id: 'organizers', label: 'Organizers' },
+  { id: 'merch', label: 'Merch' },
   { id: 'faq', label: 'FAQ' },
 ];
 
@@ -147,18 +148,13 @@ function Nav() {
               />
             ) : null}
             <span className={`${styles.brandText} ${!logoFailed ? styles.brandTextHidden : ''}`}>
-              Blueprint × Dubai
+              Blueprint &times; Dubai
             </span>
           </a>
 
           <nav className={styles.desktopNav} aria-label="Primary">
             <ul className={styles.list}>{linkItems}</ul>
-            <a
-              href={SIGNUP_URL}
-              className={styles.cta}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href={SIGNUP_URL} className={styles.cta} target="_blank" rel="noopener noreferrer">
               Sign Up
             </a>
           </nav>

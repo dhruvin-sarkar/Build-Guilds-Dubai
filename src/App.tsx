@@ -4,6 +4,7 @@ import CTA from './components/CTA';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import Hero from './components/Hero';
+import Merch from './components/Merch';
 import Nav from './components/Nav';
 import Organizers from './components/Organizers';
 import Schedule from './components/Schedule';
@@ -17,6 +18,7 @@ function App() {
         <About />
         <Schedule />
         <Organizers />
+        <Merch />
         <FAQ />
         <CTA />
       </main>
