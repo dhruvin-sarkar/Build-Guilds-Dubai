@@ -1,0 +1,213 @@
+.section {
+  position: relative;
+  padding: 2rem 1.5rem 4rem;
+  scroll-margin-top: 7rem;
+}
+
+.inner {
+  width: min(100%, 1280px);
+  margin: 0 auto;
+  display: grid;
+  gap: 2rem;
+}
+
+.header {
+  display: grid;
+  grid-template-columns: minmax(14rem, 0.7fr) minmax(0, 1.3fr);
+  gap: 1.5rem;
+  align-items: end;
+}
+
+.statColumn {
+  display: grid;
+  gap: 1.2rem;
+}
+
+.statFrame {
+  position: relative;
+  padding: 1.5rem 1.25rem 1.25rem;
+  border-left: 2px solid var(--accent-cyan);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--bg-card) 92%, transparent), transparent),
+    linear-gradient(90deg, color-mix(in srgb, var(--trace) 80%, transparent), transparent 70%);
+}
+
+.statFrame::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4rem;
+  height: 1px;
+  background: var(--accent-cyan);
+}
+
+.statEyebrow {
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.statValue {
+  margin-top: 0.75rem;
+  color: var(--text-primary);
+  font-size: clamp(4rem, 12vw, 7.5rem);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 0.86;
+  text-transform: uppercase;
+}
+
+.statCaption {
+  margin-top: 0.75rem;
+  max-width: 12rem;
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  line-height: 1.7;
+  text-transform: uppercase;
+}
+
+.copyColumn {
+  display: grid;
+  gap: 1rem;
+}
+
+.kicker {
+  color: var(--accent-cyan);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  line-height: 1.8;
+  text-transform: uppercase;
+}
+
+.title {
+  max-width: 13ch;
+  color: var(--text-primary);
+  font-size: clamp(2rem, 5vw, 3.9rem);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  line-height: 0.98;
+  text-transform: uppercase;
+}
+
+.lead {
+  max-width: 44rem;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.9;
+}
+
+.stripList {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.strip {
+  display: grid;
+  grid-template-columns: auto minmax(12rem, 16rem) minmax(0, 1fr);
+  gap: 1.25rem;
+  align-items: start;
+  padding: 1.2rem 1.1rem;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 65%, transparent);
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--bg-card) 78%, transparent), transparent 65%);
+}
+
+.stripIndex {
+  min-width: 2.75rem;
+  color: var(--accent-cyan);
+  font-size: 0.84rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.stripCommand {
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  line-height: 1.8;
+  text-transform: uppercase;
+}
+
+.stripBody {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.stripTitle {
+  color: var(--text-primary);
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.stripText {
+  max-width: 48rem;
+  color: var(--text-secondary);
+  font-size: 0.96rem;
+  line-height: 1.85;
+}
+
+.footerReadout {
+  display: grid;
+  gap: 0.8rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+}
+
+.footerPrompt {
+  color: var(--accent-cyan);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.footerText {
+  max-width: 54rem;
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  line-height: 1.85;
+}
+
+@media (max-width: 960px) {
+  .header {
+    grid-template-columns: 1fr;
+  }
+
+  .strip {
+    grid-template-columns: 1fr;
+    gap: 0.7rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 1.5rem 1rem 3rem;
+    scroll-margin-top: 5.75rem;
+  }
+
+  .inner {
+    gap: 1.5rem;
+  }
+
+  .title {
+    max-width: 100%;
+  }
+
+  .lead,
+  .stripText,
+  .footerText {
+    font-size: 0.94rem;
+    line-height: 1.8;
+  }
+}
