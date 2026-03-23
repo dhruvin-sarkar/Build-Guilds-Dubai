@@ -24,8 +24,8 @@ interface PointerState {
 
 const IS_SERVER = typeof window === 'undefined';
 const LOOP_MULTIPLIER = 1; // 60 projects is plenty for a full ring
-const ROTATION_DRAG_FACTOR = 0.015;
-const RELEASE_ROTATION_FACTOR = 110;
+const ROTATION_DRAG_FACTOR = 0.0008;
+const RELEASE_ROTATION_FACTOR = 10;
 const MAX_RELEASE_ROTATION = 34;
 const ROTATION_TRANSITION_MS = 560;
 
@@ -210,9 +210,17 @@ function ThreeDCarousel({ projects }: ThreeDCarouselProps) {
   }, [activeProject]);
 
   const handlePointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
+    // If clicking a button inside, don't start a drag
+    if ((event.target as HTMLElement).closest('button')) {
+      return;
+    }
+
     if (!isCarouselActive || faceCount === 0) {
       return;
     }
+
+    // Ignore right clicks
+    if (event.button === 2) return;
 
     pointerStateRef.current = {
       pointerId: event.pointerId,
@@ -246,7 +254,7 @@ function ThreeDCarousel({ projects }: ThreeDCarouselProps) {
       distance: pointerState.distance + Math.abs(deltaX),
     };
 
-    setRotation((currentRotation) => normalizeRotation(currentRotation + deltaX * dragFactor, cycleSpan));
+    setRotation((currentRotation) => currentRotation + deltaX * dragFactor);
   };
 
   const finishPointerDrag = useCallback(
@@ -291,7 +299,8 @@ function ThreeDCarousel({ projects }: ThreeDCarouselProps) {
   };
 
   const handleSelect = useCallback((project: BlueprintProject) => {
-    if (pointerStateRef.current.distance > 20) {
+    // Increased threshold to 30px to be more forgiving for mobile taps/drags
+    if (pointerStateRef.current.distance > 30) {
       return;
     }
 
@@ -323,8 +332,8 @@ function ThreeDCarousel({ projects }: ThreeDCarouselProps) {
         onPointerCancel={handlePointerCancel}
       >
         <div className={`${styles.scene} ${isDragging ? styles.sceneDragging : ''}`}>
-          <div
-            className={`${styles.ring} ${!isCarouselActive ? styles.ringInactive : ''}`}
+          <div 
+            className={`${styles.ring} ${isCarouselActive ? '' : styles.ringInactive}`}
             style={{
               transform: `translateZ(-${ringDepth}px) rotateY(${rotation}deg)`,
               transitionDuration: isTransitionEnabled ? `${ROTATION_TRANSITION_MS}ms` : '0ms',
@@ -338,7 +347,11 @@ function ThreeDCarousel({ projects }: ThreeDCarouselProps) {
                   transform: `rotateY(${index * stepAngle}deg) translateZ(${radius}px)`,
                 }}
               >
-                <button type="button" className={styles.faceButton} onClick={() => handleSelect(project)}>
+                <button 
+                  type="button" 
+                  className={styles.faceButton} 
+                  onClick={() => handleSelect(project)}
+                >
                   <article className={styles.faceCard}>
                     <div className={styles.faceImageWrap}>
                       <img src={project.imageUrl} alt={project.name} className={styles.faceImage} />
@@ -383,36 +396,36 @@ function ThreeDCarousel({ projects }: ThreeDCarouselProps) {
 
               <div className={styles.overlayCopy}>
                 <div className={styles.overlayHeader}>
-                  <p className={styles.overlayCreator}>Creator // {activeProject.creator}</p>
-                  <button type="button" className={styles.closeButton} onClick={handleClose}>
+                  <div>
+                    <p className={styles.overlayCreator}>Creator // {activeProject.creator}</p>
+                    <h3 className={styles.overlayTitle}>{activeProject.name}</h3>
+                  </div>
+                  <button type="button" className={styles.closeButton} onClick={handleClose} aria-label="Close project detail">
                     [ CLOSE_X ]
                   </button>
                 </div>
                 
-                <h3 className={styles.overlayTitle}>{activeProject.name}</h3>
                 <p className={styles.overlaySummary}>{activeProject.summary}</p>
 
                 <div className={styles.overlayActions}>
-                  {activeProject.githubUrl && activeProject.githubUrl !== activeProject.blueprintUrl && (
-                    <a 
-                      href={activeProject.githubUrl} 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className={styles.actionSecondary}
-                    >
-                      [ VIEW_SOURCE_GITHUB ]
-                    </a>
-                  )}
+                  <a 
+                    href={activeProject.githubUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className={styles.actionSecondary}
+                  >
+                    VIEW_GITHUB
+                  </a>
                   <a 
                     href={activeProject.blueprintUrl} 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     className={styles.actionPrimary}
                   >
-                    [ VIEW_ON_BLUEPRINT ]
+                    VIEW_ON_BLUEPRINT
                   </a>
-                  <p className={styles.actionNote}>* All project files, source code, and images are hosted on the Blueprint platform.</p>
                 </div>
+                <p className={styles.actionNote}>* All project files, source code, and images are hosted on the Blueprint platform.</p>
               </div>
             </motion.div>
           </motion.div>
