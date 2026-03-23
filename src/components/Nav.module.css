@@ -76,38 +76,32 @@
   transition: color 0.2s ease;
 }
 
-.link::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -0.7rem;
-  width: 100%;
-  height: 1px;
-  background: var(--accent-blue);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition:
-    transform 0.2s ease,
-    background 0.2s ease;
-}
-
 .link:hover,
 .link:focus-visible {
   color: var(--text-primary);
 }
 
+.link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--accent-blue);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
 .link:hover::after,
 .link:focus-visible::after {
   transform: scaleX(1);
+  transform-origin: left;
 }
 
 .linkActive {
   color: var(--accent-yellow);
-}
-
-.linkActive::after {
-  background: var(--accent-yellow);
-  transform: scaleX(1);
 }
 
 .cta {

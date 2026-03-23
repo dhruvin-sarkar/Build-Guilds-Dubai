@@ -1,4 +1,4 @@
-import { blueprintProjects } from '../data/projects';
+import { generatedProjects as blueprintProjects } from '../data/projects.generated';
 import ThreeDCarousel from './ui/ThreeDCarousel';
 import SectionLabel from './ui/SectionLabel';
 import styles from './Showcase.module.css';

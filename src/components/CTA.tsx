@@ -53,7 +53,7 @@ function CTA() {
 
           <motion.div className={styles.actions} variants={itemVariants}>
             <button type="button" className={styles.primaryAction} onClick={open}>
-              Start Signup Intake
+              Reserve Your Bench Now
             </button>
             <a href={slackUrl} className={styles.secondaryAction} target="_blank" rel="noopener noreferrer">
               Join Slack // {SLACK_CHANNEL}

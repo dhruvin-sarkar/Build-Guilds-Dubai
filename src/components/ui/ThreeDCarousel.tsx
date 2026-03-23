@@ -23,8 +23,8 @@ interface PointerState {
 }
 
 const IS_SERVER = typeof window === 'undefined';
-const LOOP_MULTIPLIER = 3;
-const ROTATION_DRAG_FACTOR = 0.18;
+const LOOP_MULTIPLIER = 1; // 60 projects is plenty for a full ring
+const ROTATION_DRAG_FACTOR = 0.015;
 const RELEASE_ROTATION_FACTOR = 110;
 const MAX_RELEASE_ROTATION = 34;
 const ROTATION_TRANSITION_MS = 560;
@@ -115,15 +115,15 @@ function ThreeDCarousel({ projects }: ThreeDCarouselProps) {
 
   const faceCount = duplicatedProjects.length;
   const realProjectCount = projects.length;
-  const faceWidth = isScreenSizeSm ? 236 : isScreenSizeMd ? 304 : 388;
-  const faceHeight = isScreenSizeSm ? 356 : isScreenSizeMd ? 432 : 548;
+  const faceWidth = isScreenSizeSm ? 210 : isScreenSizeMd ? 260 : 310;
+  const faceHeight = isScreenSizeSm ? 300 : isScreenSizeMd ? 360 : 420;
   const stepAngle = faceCount > 0 ? 360 / faceCount : 0;
   const cycleSpan = realProjectCount > 0 ? stepAngle * realProjectCount : 0;
   const startingRotation = cycleSpan > 0 ? -cycleSpan : 0;
   const radius =
-    faceCount > 2 ? (faceWidth * 0.92) / (2 * Math.tan(Math.PI / faceCount)) : faceWidth * 0.5;
+    faceCount > 2 ? (faceWidth * 1.05) / (2 * Math.tan(Math.PI / faceCount)) : faceWidth * 0.5;
   const ringDepth = radius * 0.88;
-  const scenePerspective = isScreenSizeSm ? 1350 : isScreenSizeMd ? 1800 : 2400;
+  const scenePerspective = isScreenSizeSm ? 800 : isScreenSizeMd ? 1000 : 1200;
 
   const carouselVars = useMemo(
     () =>
@@ -280,7 +280,7 @@ function ThreeDCarousel({ projects }: ThreeDCarouselProps) {
   };
 
   const handleSelect = useCallback((project: BlueprintProject) => {
-    if (pointerStateRef.current.distance > 8) {
+    if (pointerStateRef.current.distance > 20) {
       return;
     }
 
@@ -336,6 +336,10 @@ function ThreeDCarousel({ projects }: ThreeDCarouselProps) {
                       <p className={styles.faceCreator}>{project.creator}</p>
                       <h3 className={styles.faceTitle}>{project.name}</h3>
                       <p className={styles.faceSummary}>{getFaceSummary(project.summary)}</p>
+                      
+                      <div className={styles.faceFooter}>
+                        <span className={styles.readMore}>[ READ_MORE ]</span>
+                      </div>
                     </div>
                   </article>
                 </button>
@@ -367,22 +371,36 @@ function ThreeDCarousel({ projects }: ThreeDCarouselProps) {
               </div>
 
               <div className={styles.overlayCopy}>
-                <p className={styles.overlayCreator}>Creator // {activeProject.creator}</p>
+                <div className={styles.overlayHeader}>
+                  <p className={styles.overlayCreator}>Creator // {activeProject.creator}</p>
+                  <button type="button" className={styles.closeButton} onClick={handleClose}>
+                    [ CLOSE_X ]
+                  </button>
+                </div>
+                
                 <h3 className={styles.overlayTitle}>{activeProject.name}</h3>
                 <p className={styles.overlaySummary}>{activeProject.summary}</p>
 
                 <div className={styles.overlayActions}>
-                  <a href={activeProject.githubUrl} target="_blank" rel="noopener noreferrer" className={styles.action}>
-                    View GitHub
-                  </a>
-                  <a
-                    href={activeProject.blueprintUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.actionSecondary}
+                  {activeProject.githubUrl && activeProject.githubUrl !== activeProject.blueprintUrl && (
+                    <a 
+                      href={activeProject.githubUrl} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className={styles.actionSecondary}
+                    >
+                      [ VIEW_SOURCE_GITHUB ]
+                    </a>
+                  )}
+                  <a 
+                    href={activeProject.blueprintUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className={styles.actionPrimary}
                   >
-                    Open Blueprint Page
+                    [ VIEW_ON_BLUEPRINT ]
                   </a>
+                  <p className={styles.actionNote}>* All project files, source code, and images are hosted on the Blueprint platform.</p>
                 </div>
               </div>
             </motion.div>

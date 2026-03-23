@@ -1,7 +1,7 @@
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { blueprintProjects } from '../data/projects';
+import { generatedProjects as blueprintProjects } from '../data/projects.generated';
 import SectionLabel from './ui/SectionLabel';
 import styles from './BuildsTeaser.module.css';
 

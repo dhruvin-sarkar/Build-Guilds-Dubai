@@ -75,10 +75,7 @@ function Hero() {
 
             <div className={styles.actions}>
               <button type="button" className={styles.primaryAction} onClick={open}>
-                Start Signup Intake
-              </button>
-              <button type="button" className={styles.secondaryAction} onClick={open}>
-                Reserve Your Bench
+                Reserve Your Bench Now
               </button>
             </div>
           </motion.div>
