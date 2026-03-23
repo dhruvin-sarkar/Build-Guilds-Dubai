@@ -11,7 +11,7 @@
   position: absolute;
   inset: 0;
   border: 0;
-  background: rgba(10, 14, 24, 0.78);
+  background: rgba(8, 28, 53, 0.78);
 }
 
 .dialog {
@@ -91,8 +91,8 @@
 .closeButton:focus-visible,
 .secondaryAction:hover,
 .secondaryAction:focus-visible {
-  color: var(--accent-yellow);
-  border-color: var(--accent-yellow);
+  color: var(--text-primary);
+  border-color: var(--accent-blue);
   background: var(--bg-card-hover);
 }
 
@@ -160,7 +160,7 @@
 }
 
 .error {
-  color: var(--accent-yellow);
+  color: var(--accent-danger);
   font-size: var(--text-xs);
   line-height: 1.5;
 }
@@ -188,15 +188,16 @@
 }
 
 .primaryAction {
-  color: var(--bg-primary);
-  background: var(--accent-yellow);
-  border-color: var(--accent-yellow);
+  color: var(--text-primary);
+  background: var(--bg-panel-strong);
+  border-color: var(--accent-blue);
 }
 
 .primaryAction:hover,
 .primaryAction:focus-visible {
-  color: var(--accent-yellow);
-  background: transparent;
+  color: var(--bg-secondary);
+  background: var(--accent-blue);
+  border-color: var(--accent-blue);
 }
 
 @media (max-width: 768px) {

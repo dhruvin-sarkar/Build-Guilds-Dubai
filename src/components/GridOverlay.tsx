@@ -1,11 +1,11 @@
 import { useEffect, useRef } from 'react';
 import styles from './GridOverlay.module.css';
 
-const GRID_SIZE = 48;
-const INTERACTION_RADIUS = 160;
-const BASE_ALPHA = 0.2;
-const ACTIVE_ALPHA = 0.44;
-const EASING = 0.14;
+const GRID_SIZE = 50;
+const INTERACTION_RADIUS = 220;
+const BASE_ALPHA = 0.12;
+const ACTIVE_ALPHA = 0.34;
+const EASING = 0.16;
 
 function getCssRgbValue(style: CSSStyleDeclaration, variableName: string, fallback: string) {
   const value = style.getPropertyValue(variableName).trim();

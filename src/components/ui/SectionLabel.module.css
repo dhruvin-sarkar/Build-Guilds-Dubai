@@ -7,7 +7,7 @@
 
 .text {
   flex: 0 0 auto;
-  color: var(--text-secondary);
+  color: var(--text-primary);
   font-size: var(--step-label);
   font-weight: 700;
   letter-spacing: 0.18em;
@@ -31,7 +31,7 @@
   right: 0;
   width: 0.5rem;
   height: 0.5rem;
-  border: 1px solid var(--text-secondary);
+  border: 1px solid var(--text-primary);
   background: var(--bg-primary);
   transform: translateY(-50%);
 }

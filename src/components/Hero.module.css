@@ -10,7 +10,7 @@
 
 .grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.08fr) minmax(20rem, 0.92fr);
+  grid-template-columns: minmax(0, 1.1fr) minmax(21rem, 0.9fr);
   gap: var(--space-10);
   align-items: start;
 }
@@ -105,15 +105,16 @@
 }
 
 .primaryAction {
-  color: var(--bg-primary);
-  background: var(--accent-yellow);
-  border-color: var(--accent-yellow);
+  color: var(--text-primary);
+  background: var(--bg-panel-strong);
+  border-color: var(--accent-blue);
 }
 
 .primaryAction:hover,
 .primaryAction:focus-visible {
-  color: var(--accent-yellow);
-  background: transparent;
+  color: var(--bg-secondary);
+  background: var(--accent-blue);
+  border-color: var(--accent-blue);
 }
 
 .secondaryAction {
@@ -123,9 +124,9 @@
 
 .secondaryAction:hover,
 .secondaryAction:focus-visible {
-  color: var(--accent-yellow);
+  color: var(--text-primary);
   background: var(--bg-card-hover);
-  border-color: var(--accent-yellow);
+  border-color: var(--accent-blue);
 }
 
 .aside {
@@ -143,12 +144,19 @@
 }
 
 .panelMeta,
-.countdownMeta,
 .readoutLabel {
   color: var(--text-secondary);
   font-size: var(--text-xs);
   font-weight: 700;
   letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.countdownMeta {
+  color: var(--text-primary);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
 }
 

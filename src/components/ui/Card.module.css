@@ -13,12 +13,12 @@
 
 .card:hover {
   background: var(--bg-card-hover);
-  border-color: var(--accent-yellow);
-  border-left-color: var(--accent-yellow);
+  border-color: var(--accent-blue);
+  border-left-color: var(--accent-blue);
 }
 
 .cardHighlight {
-  border-left-color: var(--accent-yellow);
+  border-left-color: var(--accent-blue);
 }
 
 @media (prefers-reduced-motion: reduce) {

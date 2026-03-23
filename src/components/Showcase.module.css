@@ -1,5 +1,5 @@
 .section {
-  padding: 0 var(--page-padding) var(--section-space);
+  padding: calc(var(--nav-height) + var(--space-8)) var(--page-padding) var(--section-space);
 }
 
 .inner {
@@ -102,9 +102,9 @@
 .control:focus-visible,
 .secondaryAction:hover,
 .secondaryAction:focus-visible {
-  color: var(--accent-yellow);
+  color: var(--text-primary);
   background: var(--bg-card-hover);
-  border-color: var(--accent-yellow);
+  border-color: var(--accent-blue);
 }
 
 .carouselViewport {
@@ -190,15 +190,16 @@
 }
 
 .primaryAction {
-  color: var(--bg-primary);
-  background: var(--accent-yellow);
-  border-color: var(--accent-yellow);
+  color: var(--text-primary);
+  background: var(--bg-panel-strong);
+  border-color: var(--accent-blue);
 }
 
 .primaryAction:hover,
 .primaryAction:focus-visible {
-  color: var(--accent-yellow);
-  background: transparent;
+  color: var(--bg-secondary);
+  background: var(--accent-blue);
+  border-color: var(--accent-blue);
 }
 
 .galleryHeader {
@@ -308,7 +309,7 @@
 
 @media (max-width: 768px) {
   .section {
-    padding: 0 var(--page-padding) var(--section-space-mobile);
+    padding: calc(var(--nav-height) + var(--space-6)) var(--page-padding) var(--section-space-mobile);
   }
 
   .carousel {

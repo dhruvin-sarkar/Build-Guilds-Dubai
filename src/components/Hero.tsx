@@ -10,16 +10,16 @@ const heroFacts = [EVENT_DATE_DISPLAY, EVENT_TIME, EVENT_LOCATION, `Venue ${EVEN
 
 const labReadouts = [
   {
-    label: 'Toolchain',
-    value: 'EasyEDA // KiCad // firmware paths',
-  },
-  {
     label: 'Bench mix',
-    value: 'Beginners, shipped builders, and everyone in between',
+    value: 'Beginners, return builders, and people already carrying half-routed ideas.',
   },
   {
-    label: 'What to bring',
-    value: 'Laptop optional // projects welcome // curiosity required',
+    label: 'Bring list',
+    value: 'Laptop optional // hardware demos welcome // questions encouraged.',
+  },
+  {
+    label: 'After today',
+    value: 'Blueprint, Hackpad, and next-step project routes before you head home.',
   },
 ];
 
@@ -87,7 +87,7 @@ function Hero() {
             <Card className={styles.panel}>
               <div className={styles.panelHeader}>
                 <SectionLabel label="event packet" />
-                <p className={styles.panelMeta}>Bench notes // what this day is calibrated for</p>
+                <p className={styles.panelMeta}>Bench brief // how the room is wired for the day</p>
               </div>
 
               <div className={styles.readouts}>
@@ -103,7 +103,7 @@ function Hero() {
             <Card className={styles.countdownFrame}>
               <div className={styles.countdownHeader}>
                 <SectionLabel label="bench timer" />
-                <p className={styles.countdownMeta}>Signal-up to April 18, 2026</p>
+                <p className={styles.countdownMeta}>SIGNAL-UP TO APRIL 18, 2026</p>
               </div>
               <Countdown targetDate={EVENT_DATE} className={styles.countdown} />
             </Card>

@@ -48,7 +48,7 @@
 
 .itemOpen {
   background: var(--bg-card-hover);
-  border-left-color: var(--accent-yellow);
+  border-left-color: var(--accent-blue);
 }
 
 .trigger {
@@ -83,7 +83,7 @@
 }
 
 .itemOpen .icon {
-  color: var(--accent-yellow);
+  color: var(--accent-blue);
 }
 
 .answerWrap {
