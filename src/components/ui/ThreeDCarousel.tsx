@@ -113,17 +113,30 @@ function ThreeDCarousel({ projects }: ThreeDCarouselProps) {
     [projects],
   );
 
-  const faceCount = duplicatedProjects.length;
   const realProjectCount = projects.length;
+  // Render all projects, but let's keep the radius manageable
+  const faceCount = realProjectCount;
   const faceWidth = isScreenSizeSm ? 210 : isScreenSizeMd ? 260 : 310;
   const faceHeight = isScreenSizeSm ? 300 : isScreenSizeMd ? 360 : 420;
-  const stepAngle = faceCount > 0 ? 360 / faceCount : 0;
-  const cycleSpan = realProjectCount > 0 ? stepAngle * realProjectCount : 0;
-  const startingRotation = cycleSpan > 0 ? -cycleSpan : 0;
+  
+  const stepAngle = realProjectCount > 0 ? 360 / realProjectCount : 0;
+  // Cast to number to avoid literal type inference lint errors in normalizeRotation
+  const cycleSpan = 360 as number; 
+  const startingRotation = 0;
+  
+  // For large counts, we allow a bit more overlap but keep the radius within a "sweet spot"
+  // Radius for 100 projects with faceWidth 310 is normally ~5000px. 
+  // We'll use a slightly tighter curve for visceral 3D feel.
   const radius =
-    faceCount > 2 ? (faceWidth * 1.05) / (2 * Math.tan(Math.PI / faceCount)) : faceWidth * 0.5;
-  const ringDepth = radius * 0.88;
-  const scenePerspective = isScreenSizeSm ? 800 : isScreenSizeMd ? 1000 : 1200;
+    faceCount > 2 ? (faceWidth * 1.15) / (2 * Math.tan(Math.PI / faceCount)) : faceWidth * 0.5;
+  
+  // Move it further back to see more of the curve
+  const ringDepth = radius;
+  const scenePerspective = isScreenSizeSm ? 1200 : isScreenSizeMd ? 1600 : 2000;
+
+  // Scale drag factor: we want a natural feeling flip. 
+  // With 100 items, rotation needs to be much faster per pixel.
+  const dragFactor = ROTATION_DRAG_FACTOR * (realProjectCount / 20);
 
   const carouselVars = useMemo(
     () =>
@@ -235,7 +248,7 @@ function ThreeDCarousel({ projects }: ThreeDCarouselProps) {
       distance: pointerState.distance + Math.abs(deltaX),
     };
 
-    setRotation((currentRotation) => normalizeRotation(currentRotation + deltaX * ROTATION_DRAG_FACTOR, cycleSpan));
+    setRotation((currentRotation) => normalizeRotation(currentRotation + deltaX * dragFactor, cycleSpan));
   };
 
   const finishPointerDrag = useCallback(

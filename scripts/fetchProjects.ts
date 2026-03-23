@@ -49,9 +49,9 @@ async function fetchProjectDetails(id: string): Promise<{ creator: string; githu
     const ogImage = root.querySelector('meta[property="og:image"]');
     const fallbackImage = ogImage ? ogImage.getAttribute('content') || '' : '';
 
-    // 4. Description (Full) - Search for prose or the first significant paragraph
-    const prose = root.querySelector('div.prose');
-    let description = '';
+    // 4. Description (Full) - Prioritize meta description, then prose p, then first non-boilerplate p
+    const metaDesc = root.querySelector('meta[name="description"]') || root.querySelector('meta[property="og:description"]');
+    let description = metaDesc ? metaDesc.getAttribute('content') || '' : '';
     
     const isBoilerplate = (txt: string) => {
       const lower = txt.toLowerCase();
@@ -59,21 +59,27 @@ async function fetchProjectDetails(id: string): Promise<{ creator: string; githu
              lower.includes('heads up') || 
              lower.includes('quality standards') || 
              lower.includes('access to more features') ||
-             lower.includes('submit your own');
+             lower.includes('normal mode') ||
+             lower.includes('unlock the rest') ||
+             lower.includes('submit your own') ||
+             lower.includes('expert mode');
     };
 
-    if (prose) {
-      const ps = prose.querySelectorAll('p');
-      for (const p of ps) {
-        const text = p.text.trim();
-        if (text.length > 40 && !isBoilerplate(text)) {
-          description = text;
-          break;
+    if (!description || isBoilerplate(description)) {
+      const prose = root.querySelector('div.prose');
+      if (prose) {
+        const ps = prose.querySelectorAll('p');
+        for (const p of ps) {
+          const text = p.text.trim();
+          if (text.length > 40 && !isBoilerplate(text)) {
+            description = text;
+            break;
+          }
         }
       }
     }
     
-    // Fallback if no prose p found or if it's guard text
+    // Final fallback
     if (!description || isBoilerplate(description)) {
       const allPs = root.querySelectorAll('p');
       for (const p of allPs) {
