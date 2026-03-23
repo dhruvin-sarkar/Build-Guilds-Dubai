@@ -1,49 +1,24 @@
-.navPreview {
+.appMain {
   min-height: 100vh;
-  padding: 7.5rem 1.5rem 4rem;
 }
 
-.navPreview__container {
+.appMain__container {
   width: min(100%, 1280px);
   margin: 0 auto;
+  padding: 0 1.5rem 4rem;
 }
 
-.navPreview__intro {
-  display: grid;
-  gap: 1.4rem;
-  min-height: calc(100vh - 10rem);
-  align-content: center;
-  padding-bottom: 3rem;
-}
-
-.navPreview__title {
-  max-width: 11ch;
-  color: var(--text-primary);
-  font-size: clamp(2.8rem, 8vw, 5.8rem);
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  line-height: 0.92;
-  text-transform: uppercase;
-}
-
-.navPreview__lede {
-  max-width: 42rem;
-  color: var(--text-secondary);
-  font-size: 1rem;
-  line-height: 1.85;
-}
-
-.navPreview__section {
-  min-height: 100vh;
-  padding: 2rem 0 3rem;
+.sectionStub {
+  min-height: 16rem;
+  padding: 2rem 0 0;
   scroll-margin-top: 7rem;
 }
 
-.navPreview__section--alt {
+.sectionStub--alt {
   position: relative;
 }
 
-.navPreview__section--alt::before {
+.sectionStub--alt::before {
   content: '';
   position: absolute;
   inset: 0 0 auto;
@@ -51,83 +26,36 @@
   background: linear-gradient(90deg, transparent, var(--border), transparent);
 }
 
-.navPreview__sectionInner {
+.sectionStub__inner {
   display: grid;
-  gap: 1.5rem;
-  align-content: start;
+  gap: 1.4rem;
 }
 
-.navPreview__sectionGrid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(22rem, 0.92fr);
-  gap: 1.5rem;
-  align-items: start;
-}
-
-.navPreview__copy {
-  display: grid;
-  gap: 1.1rem;
-  max-width: 44rem;
-}
-
-.navPreview__sectionTitle {
+.sectionStub__title {
   color: var(--text-primary);
-  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-size: clamp(1.4rem, 3vw, 2rem);
   font-weight: 700;
-  letter-spacing: 0.06em;
-  line-height: 1.04;
+  letter-spacing: 0.08em;
+  line-height: 1.08;
   text-transform: uppercase;
 }
 
-.navPreview__sectionBody {
+.sectionStub__body {
+  margin-top: 0.9rem;
+  max-width: 44rem;
   color: var(--text-secondary);
-  font-size: 1rem;
-  line-height: 1.9;
-}
-
-.navPreview__callouts {
-  display: grid;
-  gap: 1rem;
-}
-
-.navPreview__calloutIndex {
-  color: var(--accent-cyan);
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-}
-
-.navPreview__calloutText {
-  margin-top: 0.75rem;
-  color: var(--text-primary);
-  font-size: 1.02rem;
-  font-weight: 600;
-  letter-spacing: 0.03em;
-  line-height: 1.6;
-  text-transform: uppercase;
-}
-
-@media (max-width: 960px) {
-  .navPreview__sectionGrid {
-    grid-template-columns: 1fr;
-  }
+  font-size: 0.96rem;
+  line-height: 1.85;
 }
 
 @media (max-width: 768px) {
-  .navPreview {
-    padding-top: 6rem;
-    padding-inline: 1rem;
+  .appMain__container {
+    padding: 0 1rem 3rem;
   }
 
-  .navPreview__intro {
-    min-height: auto;
-    padding-bottom: 2rem;
-  }
-
-  .navPreview__section {
-    min-height: auto;
-    padding: 1.25rem 0 2.5rem;
+  .sectionStub {
+    min-height: 13rem;
+    padding-top: 1.5rem;
     scroll-margin-top: 5.75rem;
   }
 }
