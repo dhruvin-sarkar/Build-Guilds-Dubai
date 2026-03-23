@@ -1,12 +1,17 @@
 .section {
   position: relative;
+  display: grid;
+  align-items: center;
+  min-height: 100vh;
   padding: calc(var(--nav-height) + var(--space-8)) var(--page-padding) var(--section-space);
 }
 
 .inner {
   position: relative;
-  width: min(100%, var(--container));
+  width: min(100%, 92rem);
   margin: 0 auto;
+  display: grid;
+  gap: var(--space-8);
 }
 
 .header,
@@ -16,12 +21,12 @@
 
 .header {
   gap: var(--space-6);
-  margin-bottom: var(--space-8);
 }
 
 .headerCopy {
+  position: relative;
   gap: var(--space-4);
-  max-width: 56rem;
+  max-width: 64rem;
 }
 
 .kicker {
@@ -33,7 +38,7 @@
 }
 
 .title {
-  max-width: 15ch;
+  max-width: 18ch;
   color: var(--text-primary);
   font-size: var(--text-3xl);
   font-weight: 800;
@@ -42,7 +47,7 @@
 }
 
 .lead {
-  max-width: 46rem;
+  max-width: 52rem;
   color: var(--text-muted);
   font-size: var(--text-md);
   line-height: 1.85;

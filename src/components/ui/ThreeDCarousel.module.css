@@ -1,10 +1,14 @@
 .root {
   position: relative;
   display: grid;
-  gap: var(--space-5);
+  gap: var(--space-6);
+  align-content: start;
+  width: 100%;
+  min-height: 80vh;
 }
 
 .toolbar {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -23,18 +27,23 @@
 
 .viewport {
   position: relative;
-  height: clamp(30rem, 60vw, 42rem);
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 80vh;
+  min-height: 42rem;
   overflow: hidden;
   background: linear-gradient(to bottom, rgba(8, 28, 53, 0) 0%, rgba(8, 28, 53, 0.18) 100%);
   border: 1px solid var(--border);
 }
 
 .scene {
+  position: relative;
   display: grid;
   place-items: center;
   width: 100%;
   height: 100%;
-  perspective: 1200px;
+  perspective: var(--carousel-perspective);
   transform-style: preserve-3d;
   touch-action: pan-y;
 }
@@ -45,10 +54,14 @@
 
 .ring {
   position: relative;
-  height: var(--carousel-face-height);
+  width: 0;
+  height: 0;
   cursor: grab;
   transform-style: preserve-3d;
+  transform-origin: center center;
   will-change: transform;
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .ring:active {
@@ -64,14 +77,25 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  display: block;
   width: var(--carousel-face-width);
-  padding: var(--space-2);
+  height: var(--carousel-face-height);
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  margin-left: calc(var(--carousel-face-width) / -2);
+  margin-top: calc(var(--carousel-face-height) / -2);
+}
+
+.faceButton {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: var(--space-3);
   background: transparent;
   border: 0;
 }
 
 .faceCard {
+  position: relative;
   display: grid;
   grid-template-rows: auto minmax(0, 1fr);
   height: 100%;
@@ -81,20 +105,21 @@
 }
 
 .faceImageWrap {
+  position: relative;
   border-bottom: 1px solid var(--border);
 }
 
 .faceImage {
   width: 100%;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 1 / 0.92;
   object-fit: cover;
 }
 
 .faceCopy {
   display: grid;
-  gap: var(--space-2);
-  min-height: 10.25rem;
-  padding: var(--space-4);
+  gap: var(--space-3);
+  min-height: 13rem;
+  padding: var(--space-5);
   text-align: left;
 }
 
@@ -109,8 +134,8 @@
 
 .faceSummary {
   color: var(--text-muted);
-  font-size: var(--text-sm);
-  line-height: 1.7;
+  font-size: var(--text-base);
+  line-height: 1.78;
 }
 
 .overlay {
@@ -219,7 +244,11 @@
   }
 
   .viewport {
-    height: 32rem;
+    min-height: 34rem;
+  }
+
+  .faceCopy {
+    min-height: 11.5rem;
   }
 
   .faceTitle {
