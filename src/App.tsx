@@ -1,17 +1,13 @@
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import About from './components/About';
-import CTA from './components/CTA';
-import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import GridOverlay from './components/GridOverlay';
-import Hero from './components/Hero';
-import Merch from './components/Merch';
 import Nav from './components/Nav';
-import Organizers from './components/Organizers';
-import Schedule from './components/Schedule';
-import Showcase from './components/Showcase';
+import RouteScrollManager from './components/RouteScrollManager';
 import SignupModal from './components/SignupModal';
 import { SignupModalProvider } from './context/SignupModal';
+import BuildsPage from './pages/BuildsPage';
+import HomePage from './pages/HomePage';
 
 function App() {
   return (
@@ -20,16 +16,11 @@ function App() {
         <GridOverlay />
         <div className="appContent">
           <Nav />
-          <main id="top" className="appMain" aria-label="Build Guild Dubai">
-            <Hero />
-            <About />
-            <Showcase />
-            <Schedule />
-            <Organizers />
-            <Merch />
-            <FAQ />
-            <CTA />
-          </main>
+          <RouteScrollManager />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/builds" element={<BuildsPage />} />
+          </Routes>
           <Footer />
         </div>
         <SignupModal />

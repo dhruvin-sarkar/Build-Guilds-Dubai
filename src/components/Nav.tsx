@@ -1,29 +1,33 @@
 import { useEffect, useMemo, useState, type MouseEvent } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { BLUEPRINT_LOGO } from '../data/constants';
 import { useSignupModal } from '../context/SignupModal';
 import styles from './Nav.module.css';
 
 interface NavLink {
-  id: 'about' | 'showcase' | 'schedule' | 'organizers' | 'merch' | 'faq' | 'rsvp';
+  id: 'about' | 'builds' | 'schedule' | 'organizers' | 'merch' | 'faq' | 'rsvp';
   label: 'About' | 'Builds' | 'Schedule' | 'Organizers' | 'Merch' | 'FAQ' | 'RSVP';
+  kind: 'section' | 'route';
 }
 
 const navLinks: NavLink[] = [
-  { id: 'about', label: 'About' },
-  { id: 'showcase', label: 'Builds' },
-  { id: 'schedule', label: 'Schedule' },
-  { id: 'organizers', label: 'Organizers' },
-  { id: 'merch', label: 'Merch' },
-  { id: 'faq', label: 'FAQ' },
-  { id: 'rsvp', label: 'RSVP' },
+  { id: 'about', label: 'About', kind: 'section' },
+  { id: 'builds', label: 'Builds', kind: 'route' },
+  { id: 'schedule', label: 'Schedule', kind: 'section' },
+  { id: 'organizers', label: 'Organizers', kind: 'section' },
+  { id: 'merch', label: 'Merch', kind: 'section' },
+  { id: 'faq', label: 'FAQ', kind: 'section' },
+  { id: 'rsvp', label: 'RSVP', kind: 'section' },
 ];
 
 function Nav() {
   const { open } = useSignupModal();
+  const location = useLocation();
+  const navigate = useNavigate();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [logoFailed, setLogoFailed] = useState(false);
-  const [activeSection, setActiveSection] = useState<NavLink['id']>('about');
+  const [activeSection, setActiveSection] = useState<NavLink['id']>(location.pathname === '/builds' ? 'builds' : 'about');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -55,7 +59,21 @@ function Nav() {
   }, [mobileOpen]);
 
   useEffect(() => {
+    if (location.pathname === '/builds') {
+      setActiveSection('builds');
+      return;
+    }
+
+    setActiveSection('about');
+  }, [location.pathname]);
+
+  useEffect(() => {
+    if (location.pathname !== '/') {
+      return;
+    }
+
     const sections = navLinks
+      .filter((link) => link.kind === 'section')
       .map((link) => document.getElementById(link.id))
       .filter((section): section is HTMLElement => section !== null);
 
@@ -73,7 +91,7 @@ function Nav() {
           const sectionMidpoint = bounds.top + bounds.height / 2;
 
           return {
-            id: section.id as NavLink['id'],
+            id: section.id as Exclude<NavLink['id'], 'builds'>,
             coversMidpoint: bounds.top <= viewportMidpoint && bounds.bottom >= viewportMidpoint,
             distanceFromMidpoint: Math.abs(sectionMidpoint - viewportMidpoint),
             visible: bounds.bottom > 0 && bounds.top < window.innerHeight,
@@ -111,7 +129,7 @@ function Nav() {
       window.removeEventListener('scroll', updateActiveSection);
       window.removeEventListener('resize', updateActiveSection);
     };
-  }, []);
+  }, [location.pathname]);
 
   const navClassName = [styles.nav, scrolled ? styles.navScrolled : '', mobileOpen ? styles.navOpen : '']
     .filter(Boolean)
@@ -122,23 +140,36 @@ function Nav() {
       navLinks.map((link) => (
         <li key={link.id} className={styles.listItem}>
           <a
-            href={`#${link.id}`}
+            href={link.kind === 'route' ? '/builds' : `#${link.id}`}
             className={`${styles.link} ${activeSection === link.id ? styles.linkActive : ''}`}
             aria-current={activeSection === link.id ? 'page' : undefined}
-            onClick={(event) => handleAnchorClick(event, link.id)}
+            onClick={(event) => handleNavClick(event, link)}
           >
             {link.label}
           </a>
         </li>
       )),
-    [activeSection],
+    [activeSection, location.pathname],
   );
 
-  function handleAnchorClick(event: MouseEvent<HTMLAnchorElement>, targetId: string) {
+  function handleNavClick(event: MouseEvent<HTMLAnchorElement>, link: NavLink) {
     event.preventDefault();
     setMobileOpen(false);
 
-    const targetElement = document.getElementById(targetId);
+    if (link.kind === 'route') {
+      navigate('/builds');
+      return;
+    }
+
+    if (location.pathname !== '/') {
+      navigate({
+        pathname: '/',
+        hash: `#${link.id}`,
+      });
+      return;
+    }
+
+    const targetElement = document.getElementById(link.id);
 
     if (!targetElement) {
       return;
@@ -153,6 +184,12 @@ function Nav() {
   function handleHomeClick(event: MouseEvent<HTMLAnchorElement>) {
     event.preventDefault();
     setMobileOpen(false);
+
+    if (location.pathname !== '/') {
+      navigate('/');
+      return;
+    }
+
     window.scrollTo({
       top: 0,
       behavior: 'smooth',

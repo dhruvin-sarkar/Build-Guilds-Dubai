@@ -70,9 +70,9 @@ function Showcase() {
   };
 
   const handleWheel = (event: WheelEvent<HTMLDivElement>) => {
-    const dominantDelta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
+    const horizontalDelta = Math.abs(event.deltaX) > 12 ? event.deltaX : event.shiftKey ? event.deltaY : 0;
 
-    if (Math.abs(dominantDelta) < 16) {
+    if (!horizontalDelta || Math.abs(horizontalDelta) < 16) {
       return;
     }
 
@@ -83,7 +83,8 @@ function Showcase() {
     }
 
     wheelLockRef.current = now;
-    dominantDelta > 0 ? goToNext() : goToPrevious();
+    event.preventDefault();
+    horizontalDelta > 0 ? goToNext() : goToPrevious();
   };
 
   const handleTouchStart = (event: TouchEvent<HTMLDivElement>) => {

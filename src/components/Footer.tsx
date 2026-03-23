@@ -1,10 +1,12 @@
 import { type MouseEvent } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { BLUEPRINT_URL, EVENT_DATE_DISPLAY, EVENT_LOCATION, HC_URL, SLACK_CHANNEL } from '../data/constants';
 import styles from './Footer.module.css';
 
 interface FooterLink {
-  id: 'about' | 'showcase' | 'schedule' | 'organizers' | 'merch' | 'faq' | 'rsvp';
+  id: 'about' | 'builds' | 'schedule' | 'organizers' | 'merch' | 'faq' | 'rsvp';
   label: string;
+  kind: 'section' | 'route';
 }
 
 interface ExternalLink {
@@ -13,13 +15,13 @@ interface ExternalLink {
 }
 
 const footerLinks: FooterLink[] = [
-  { id: 'about', label: 'About' },
-  { id: 'showcase', label: 'Builds' },
-  { id: 'schedule', label: 'Schedule' },
-  { id: 'organizers', label: 'Organizers' },
-  { id: 'merch', label: 'Merch' },
-  { id: 'faq', label: 'FAQ' },
-  { id: 'rsvp', label: 'RSVP' },
+  { id: 'about', label: 'About', kind: 'section' },
+  { id: 'builds', label: 'Builds', kind: 'route' },
+  { id: 'schedule', label: 'Schedule', kind: 'section' },
+  { id: 'organizers', label: 'Organizers', kind: 'section' },
+  { id: 'merch', label: 'Merch', kind: 'section' },
+  { id: 'faq', label: 'FAQ', kind: 'section' },
+  { id: 'rsvp', label: 'RSVP', kind: 'section' },
 ];
 
 const slackUrl = `${HC_URL}/slack/`;
@@ -32,10 +34,26 @@ const externalLinks: ExternalLink[] = [
 ];
 
 function Footer() {
-  function handleAnchorClick(event: MouseEvent<HTMLAnchorElement>, targetId: FooterLink['id']) {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  function handleLinkClick(event: MouseEvent<HTMLAnchorElement>, link: FooterLink) {
     event.preventDefault();
 
-    const targetElement = document.getElementById(targetId);
+    if (link.kind === 'route') {
+      navigate('/builds');
+      return;
+    }
+
+    if (location.pathname !== '/') {
+      navigate({
+        pathname: '/',
+        hash: `#${link.id}`,
+      });
+      return;
+    }
+
+    const targetElement = document.getElementById(link.id);
 
     if (!targetElement) {
       return;
@@ -54,7 +72,7 @@ function Footer() {
           <p className={styles.label}>[ SYS://FOOTER ]</p>
           <p className={styles.title}>Build Guild Dubai // Blueprint hardware week, routed through Dubai</p>
           <p className={styles.summaryText}>
-            Built for teens who want more than spectator energy — more schematics, more board brings-up, more real
+            Built for teens who want more than spectator energy — more schematics, more board bring-up, more real
             local builders to learn from.
           </p>
         </div>
@@ -63,9 +81,9 @@ function Footer() {
           {footerLinks.map((link) => (
             <a
               key={link.id}
-              href={`#${link.id}`}
+              href={link.kind === 'route' ? '/builds' : `#${link.id}`}
               className={styles.navLink}
-              onClick={(event) => handleAnchorClick(event, link.id)}
+              onClick={(event) => handleLinkClick(event, link)}
             >
               {link.label}
             </a>
