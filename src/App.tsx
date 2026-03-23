@@ -2,23 +2,18 @@ import './App.css';
 import About from './components/About';
 import Hero from './components/Hero';
 import Nav from './components/Nav';
+import Schedule from './components/Schedule';
 import Card from './components/ui/Card';
 import SectionLabel from './components/ui/SectionLabel';
 
 interface SectionStub {
-  id: 'schedule' | 'organizers' | 'faq' | 'rsvp';
+  id: 'organizers' | 'faq' | 'rsvp';
   label: string;
   title: string;
   body: string;
 }
 
 const sectionStubs: SectionStub[] = [
-  {
-    id: 'schedule',
-    label: 'phase 6 queued',
-    title: 'Schedule anchor is live',
-    body: 'Hero and nav can already target the schedule section. The actual timeline build comes in the following phase.',
-  },
   {
     id: 'organizers',
     label: 'phase 7 queued',
@@ -46,6 +41,7 @@ function App() {
       <main id="top" className="appMain" aria-label="Build Guild Dubai">
         <Hero />
         <About />
+        <Schedule />
         <div className="appMain__container">
           {sectionStubs.map((section, index) => (
             <section
@@ -55,7 +51,7 @@ function App() {
             >
               <div className="sectionStub__inner">
                 <SectionLabel label={section.label} />
-                <Card highlight={section.id === 'schedule'}>
+                <Card>
                   <h2 className="sectionStub__title">{section.title}</h2>
                   <p className="sectionStub__body">{section.body}</p>
                 </Card>
