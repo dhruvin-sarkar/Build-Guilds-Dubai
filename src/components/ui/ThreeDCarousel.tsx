@@ -25,10 +25,12 @@ interface PointerState {
 
 const IS_SERVER = typeof window === 'undefined';
 const LOOP_MULTIPLIER = 1; // 60 projects is plenty for a full ring
-const ROTATION_DRAG_FACTOR = 0.0008;
-const RELEASE_ROTATION_FACTOR = 10;
-const MAX_RELEASE_ROTATION = 34;
-const ROTATION_TRANSITION_MS = 560;
+const ROTATION_DRAG_FACTOR_DESKTOP = 0.01;
+const ROTATION_DRAG_FACTOR_TABLET = 0.25;
+const ROTATION_DRAG_FACTOR_MOBILE = 0.03;
+const RELEASE_ROTATION_FACTOR = 3.4;
+const MAX_RELEASE_ROTATION = 12;
+const ROTATION_TRANSITION_MS = 320;
 
 export function useMediaQuery(
   query: string,
@@ -109,33 +111,51 @@ function ThreeDCarousel({ projects }: ThreeDCarouselProps) {
     distance: 0,
   });
 
+  const resetPointerState = useCallback(() => {
+    pointerStateRef.current = {
+      pointerId: null,
+      lastX: 0,
+      lastTime: 0,
+      velocity: 0,
+      distance: 0,
+    };
+  }, []);
+
+  const handleFacePointerDown = useCallback((event: ReactPointerEvent<HTMLButtonElement>) => {
+    resetPointerState();
+    setIsDragging(false);
+    event.stopPropagation();
+  }, [resetPointerState]);
+
+  const handleFacePointerUp = useCallback((event: ReactPointerEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+  }, []);
+
   const duplicatedProjects = useMemo(
     () => Array.from({ length: LOOP_MULTIPLIER }, () => projects).flat(),
     [projects],
   );
 
   const realProjectCount = projects.length;
-  // Render all projects, but let's keep the radius manageable
   const faceCount = realProjectCount;
-  // Card sizes confirmed as perfect by user
   const faceWidth = isScreenSizeSm ? 260 : isScreenSizeMd ? 320 : 380;
   const faceHeight = isScreenSizeSm ? 360 : isScreenSizeMd ? 440 : 520;
   
   const stepAngle = realProjectCount > 0 ? 360 / realProjectCount : 0;
-  // Cast to number to avoid literal type inference lint errors in normalizeRotation
   const cycleSpan = 360 as number; 
   const startingRotation = 0;
   
   const radius =
-    faceCount > 2 ? (faceWidth * 1.0) / (2 * Math.tan(Math.PI / faceCount)) : faceWidth * 0.5;
+    faceCount > 2 ? (faceWidth * 1.1) / (2 * Math.tan(Math.PI / faceCount)) : faceWidth * 0.54;
   
   const ringDepth = radius;
-  // AMPLIFY CAROUSEL EFFECT: perspective set to 800 for maximum 3D depth
-  const scenePerspective = 800;
+  const scenePerspective = isScreenSizeSm ? 360 : isScreenSizeMd ? 420 : 480;
 
-  // FURTHER SLASH SENSITIVITY: 100 projects / 120 = ~0.83x base drag factor.
-  // This makes the carousel feel significantly 'heavier' and more controlled.
-  const dragFactor = ROTATION_DRAG_FACTOR * (realProjectCount / 120);
+  const dragFactor = isScreenSizeSm
+    ? ROTATION_DRAG_FACTOR_MOBILE
+    : isScreenSizeMd
+      ? ROTATION_DRAG_FACTOR_TABLET
+      : ROTATION_DRAG_FACTOR_DESKTOP;
 
   const carouselVars = useMemo(
     () =>
@@ -173,13 +193,7 @@ function ThreeDCarousel({ projects }: ThreeDCarouselProps) {
   useEffect(() => {
     setIsTransitionEnabled(false);
     setRotation(startingRotation);
-    pointerStateRef.current = {
-      pointerId: null,
-      lastX: 0,
-      lastTime: 0,
-      velocity: 0,
-      distance: 0,
-    };
+    resetPointerState();
     setIsDragging(false);
 
     const frameId = window.requestAnimationFrame(() => {
@@ -189,7 +203,7 @@ function ThreeDCarousel({ projects }: ThreeDCarouselProps) {
     return () => {
       window.cancelAnimationFrame(frameId);
     };
-  }, [startingRotation]);
+  }, [resetPointerState, startingRotation]);
 
   useEffect(() => {
     if (!activeProject) {
@@ -213,6 +227,8 @@ function ThreeDCarousel({ projects }: ThreeDCarouselProps) {
   const handlePointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
     // If clicking a button inside, don't start a drag
     if ((event.target as HTMLElement).closest('button')) {
+      resetPointerState();
+      setIsDragging(false);
       return;
     }
 
@@ -279,20 +295,19 @@ function ThreeDCarousel({ projects }: ThreeDCarouselProps) {
       setRotation(targetRotation);
       queueSilentReset(targetRotation);
 
-      pointerStateRef.current = {
-        pointerId: null,
-        lastX: 0,
-        lastTime: 0,
-        velocity: 0,
-        distance: pointerState.distance,
-      };
+      window.setTimeout(() => {
+        resetPointerState();
+      }, 0);
     },
-    [cycleSpan, queueSilentReset, rotation],
+    [cycleSpan, queueSilentReset, resetPointerState, rotation],
   );
 
   const handlePointerUp = (event: ReactPointerEvent<HTMLDivElement>) => {
     finishPointerDrag(event.pointerId);
-    event.currentTarget.releasePointerCapture(event.pointerId);
+
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
   };
 
   const handlePointerCancel = (event: ReactPointerEvent<HTMLDivElement>) => {
@@ -300,19 +315,86 @@ function ThreeDCarousel({ projects }: ThreeDCarouselProps) {
   };
 
   const handleSelect = useCallback((project: BlueprintProject) => {
-    // Increased threshold to 30px to be more forgiving for mobile taps/drags
-    if (pointerStateRef.current.distance > 30) {
+    if (pointerStateRef.current.distance > 6) {
       return;
     }
 
+    resetPointerState();
     setActiveProject(project);
     setIsCarouselActive(false);
-  }, []);
+  }, [resetPointerState]);
 
   const handleClose = useCallback(() => {
+    resetPointerState();
+    setIsDragging(false);
     setActiveProject(null);
     setIsCarouselActive(true);
-  }, []);
+  }, [resetPointerState]);
+
+  const overlayPortal =
+    typeof document !== 'undefined'
+      ? createPortal(
+          <AnimatePresence>
+            {activeProject ? (
+              <motion.div
+                className={styles.overlay}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={handleClose}
+              >
+                <motion.div
+                  className={styles.overlayPanel}
+                  initial={{ opacity: 0, y: 24 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 24 }}
+                  transition={{ duration: 0.24, ease: 'easeOut' }}
+                  onClick={(event) => event.stopPropagation()}
+                >
+                  <div className={styles.overlayMedia}>
+                    <img src={activeProject.imageUrl} alt={activeProject.name} className={styles.overlayImage} />
+                  </div>
+
+                  <div className={styles.overlayCopy}>
+                    <div className={styles.overlayHeader}>
+                      <div>
+                        <p className={styles.overlayCreator}>Creator // {activeProject.creator}</p>
+                        <h3 className={styles.overlayTitle}>{activeProject.name}</h3>
+                      </div>
+                      <button type="button" className={styles.closeButton} onClick={handleClose} aria-label="Close project detail">
+                        [ CLOSE_X ]
+                      </button>
+                    </div>
+
+                    <p className={styles.overlaySummary}>{activeProject.summary}</p>
+
+                    <div className={styles.overlayActions}>
+                      <a
+                        href={activeProject.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.actionSecondary}
+                      >
+                        VIEW_GITHUB
+                      </a>
+                      <a
+                        href={activeProject.blueprintUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.actionPrimary}
+                      >
+                        VIEW_ON_BLUEPRINT
+                      </a>
+                    </div>
+                    <p className={styles.actionNote}>* All project files, source code, and images are hosted on the Blueprint platform.</p>
+                  </div>
+                </motion.div>
+              </motion.div>
+            ) : null}
+          </AnimatePresence>,
+          document.body,
+        )
+      : null;
 
   if (!projects.length) {
     return null;
@@ -351,7 +433,12 @@ function ThreeDCarousel({ projects }: ThreeDCarouselProps) {
                 <button 
                   type="button" 
                   className={styles.faceButton} 
-                  onClick={() => handleSelect(project)}
+                  onPointerDown={handleFacePointerDown}
+                  onPointerUp={handleFacePointerUp}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    handleSelect(project);
+                  }}
                 >
                   <article className={styles.faceCard}>
                     <div className={styles.faceImageWrap}>
@@ -374,65 +461,7 @@ function ThreeDCarousel({ projects }: ThreeDCarouselProps) {
         </div>
       </div>
 
-      <AnimatePresence>
-        {activeProject && createPortal(
-          <motion.div
-            className={styles.overlay}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={handleClose}
-          >
-            <motion.div
-              className={styles.overlayPanel}
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 24 }}
-              transition={{ duration: 0.24, ease: 'easeOut' }}
-              onClick={(event) => event.stopPropagation()}
-            >
-              <div className={styles.overlayMedia}>
-                <img src={activeProject.imageUrl} alt={activeProject.name} className={styles.overlayImage} />
-              </div>
-
-              <div className={styles.overlayCopy}>
-                <div className={styles.overlayHeader}>
-                  <div>
-                    <p className={styles.overlayCreator}>Creator // {activeProject.creator}</p>
-                    <h3 className={styles.overlayTitle}>{activeProject.name}</h3>
-                  </div>
-                  <button type="button" className={styles.closeButton} onClick={handleClose} aria-label="Close project detail">
-                    [ CLOSE_X ]
-                  </button>
-                </div>
-                
-                <p className={styles.overlaySummary}>{activeProject.summary}</p>
-
-                <div className={styles.overlayActions}>
-                  <a 
-                    href={activeProject.githubUrl} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className={styles.actionSecondary}
-                  >
-                    VIEW_GITHUB
-                  </a>
-                  <a 
-                    href={activeProject.blueprintUrl} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className={styles.actionPrimary}
-                  >
-                    VIEW_ON_BLUEPRINT
-                  </a>
-                </div>
-                <p className={styles.actionNote}>* All project files, source code, and images are hosted on the Blueprint platform.</p>
-              </div>
-            </motion.div>
-          </motion.div>,
-          document.body
-        )}
-      </AnimatePresence>
+      {overlayPortal}
     </div>
   );
 }
