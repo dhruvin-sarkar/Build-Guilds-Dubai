@@ -147,8 +147,8 @@ function ThreeDCarousel({ projects }: ThreeDCarouselProps) {
 
   const realProjectCount = projects.length;
   const faceCount = loopProjects.length;
-  const faceWidth = isScreenSizeSm ? 280 : isScreenSizeMd ? 300 : 320;
-  const faceHeight = isScreenSizeSm ? 380 : isScreenSizeMd ? 408 : 436;
+  const faceWidth = isScreenSizeSm ? 228 : isScreenSizeMd ? 292 : 352;
+  const faceHeight = isScreenSizeSm ? 320 : isScreenSizeMd ? 404 : 484;
   const radius = isScreenSizeSm ? 320 : isScreenSizeMd ? 460 : 600;
   const ringDepth = radius;
   const stepAngle = faceCount > 0 ? 360 / faceCount : 0;
