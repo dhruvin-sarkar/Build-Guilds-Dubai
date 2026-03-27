@@ -82,6 +82,7 @@
   height: var(--carousel-face-height);
   margin-left: calc(var(--carousel-face-width) / -2);
   margin-top: calc(var(--carousel-face-height) / -2);
+  overflow: hidden;
   transform-style: preserve-3d;
   backface-visibility: hidden;
 }
@@ -101,6 +102,7 @@
   grid-template-rows: auto minmax(0, 1fr);
   height: 100%;
   overflow: hidden;
+  backface-visibility: hidden;
   background: var(--bg-card);
   border: 1px solid var(--border);
   transition: border-color 0.18s ease;
