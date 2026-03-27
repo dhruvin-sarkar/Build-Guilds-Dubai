@@ -63,3 +63,15 @@
     max-width: 100%;
   }
 }
+
+.kicker {
+  font-family: var(--font-mono);
+}
+
+.title {
+  font-family: var(--font-display);
+}
+
+.lead {
+  font-family: var(--font-body);
+}

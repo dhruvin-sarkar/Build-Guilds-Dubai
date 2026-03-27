@@ -68,7 +68,7 @@
   bottom: -0.2rem;
   width: 100%;
   height: 1px;
-  background: var(--accent-blue);
+  background: var(--accent-yellow);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.2s ease;
@@ -78,7 +78,7 @@
 .navLink:focus-visible,
 .externalLink:hover,
 .externalLink:focus-visible {
-  color: var(--text-primary);
+  color: var(--accent-yellow);
 }
 
 .navLink:hover::after,
@@ -128,4 +128,19 @@
   .externalLink::after {
     transition: none;
   }
+}
+
+.label,
+.navLink,
+.externalLink,
+.meta {
+  font-family: var(--font-mono);
+}
+
+.title {
+  font-family: var(--font-display);
+}
+
+.summaryText {
+  font-family: var(--font-body);
 }

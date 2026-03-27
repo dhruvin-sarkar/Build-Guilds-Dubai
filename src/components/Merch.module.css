@@ -103,3 +103,18 @@
     min-height: 12rem;
   }
 }
+
+.mediaLabel,
+.mediaPlaceholder {
+  font-family: var(--font-mono);
+}
+
+.title,
+.cardTitle {
+  font-family: var(--font-display);
+}
+
+.lead,
+.cardCaption {
+  font-family: var(--font-body);
+}

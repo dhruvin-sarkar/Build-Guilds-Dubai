@@ -46,3 +46,7 @@
     letter-spacing: 0.14em;
   }
 }
+
+.text {
+  font-family: var(--font-mono);
+}

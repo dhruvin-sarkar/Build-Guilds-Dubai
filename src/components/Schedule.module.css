@@ -168,3 +168,19 @@
     display: grid;
   }
 }
+
+.time,
+.flag,
+.note {
+  font-family: var(--font-mono);
+}
+
+.title,
+.cardTitle {
+  font-family: var(--font-display);
+}
+
+.lead,
+.cardBody {
+  font-family: var(--font-body);
+}

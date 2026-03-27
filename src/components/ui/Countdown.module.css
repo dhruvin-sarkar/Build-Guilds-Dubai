@@ -94,3 +94,9 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
+.value,
+.label,
+.separator {
+  font-family: var(--font-mono);
+}

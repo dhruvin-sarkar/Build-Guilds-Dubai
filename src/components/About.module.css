@@ -168,3 +168,24 @@
     max-width: 100%;
   }
 }
+
+.statEyebrow,
+.kicker,
+.stripIndex,
+.stripCommand,
+.footerPrompt {
+  font-family: var(--font-mono);
+}
+
+.statValue,
+.title,
+.stripTitle {
+  font-family: var(--font-display);
+}
+
+.statCaption,
+.lead,
+.stripText,
+.footerText {
+  font-family: var(--font-body);
+}

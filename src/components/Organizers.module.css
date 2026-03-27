@@ -107,7 +107,7 @@
 }
 
 .profileLink {
-  color: var(--accent-blue-strong);
+  color: var(--accent-yellow);
 }
 
 .bio {
@@ -131,4 +131,20 @@
   .avatarImage {
     width: 5.75rem;
   }
+}
+
+.role,
+.profileLink {
+  font-family: var(--font-mono);
+}
+
+.title,
+.name,
+.avatarInitial {
+  font-family: var(--font-display);
+}
+
+.lead,
+.bio {
+  font-family: var(--font-body);
 }

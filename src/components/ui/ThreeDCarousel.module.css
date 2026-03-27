@@ -111,7 +111,7 @@
 
 .faceButton:hover .faceCard,
 .faceButton:focus-visible .faceCard {
-  border-color: var(--accent-blue);
+  border-color: var(--accent-yellow);
   transform: translateY(-4px);
 }
 
@@ -391,4 +391,25 @@
   .actionSecondary {
     transition: none;
   }
+}
+
+.toolbarLabel,
+.faceCreator,
+.overlayCreator,
+.readMore,
+.actionNote {
+  font-family: var(--font-mono);
+}
+
+.faceTitle,
+.overlayTitle,
+.actionPrimary,
+.actionSecondary,
+.closeButton {
+  font-family: var(--font-display);
+}
+
+.faceSummary,
+.overlaySummary {
+  font-family: var(--font-body);
 }

@@ -48,7 +48,7 @@
 
 .itemOpen {
   background: var(--bg-card-hover);
-  border-left-color: var(--accent-blue);
+  border-left-color: var(--accent-yellow);
 }
 
 .trigger {
@@ -83,7 +83,7 @@
 }
 
 .itemOpen .icon {
-  color: var(--accent-blue);
+  color: var(--accent-yellow);
 }
 
 .answerWrap {
@@ -115,4 +115,18 @@
   .item {
     transition: none;
   }
+}
+
+.icon {
+  font-family: var(--font-mono);
+}
+
+.title,
+.question {
+  font-family: var(--font-display);
+}
+
+.lead,
+.answer {
+  font-family: var(--font-body);
 }
