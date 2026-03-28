@@ -82,7 +82,7 @@ function Schedule() {
         </div>
 
         <p className={styles.note}>
-          Final timing may shift slightly, but the 11:00 AM bench start and 7:30 PM wrap are the working plan.
+          Final timing may shift slightly, but the 11:00 AM bench start and 5:00 PM wrap are the working plan.
         </p>
       </div>
     </section>
