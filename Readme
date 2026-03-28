@@ -4,7 +4,7 @@ few tasks
 10.Adding stickers and art throught the empty space 
 11.Event name/logo should be the centered first thing u see similar to other HC events
 13. short para , city, Sign Up button, date, venue that's all that should be visible before scrolling in reference 
-14.Move the event package OUT of the hero put it in FAQ as "What should I bring?" or something similar maybe keep the whole text block expandable idk 
+
 15.Even though its mentioned make sure "100% free" and "for teens aged 13–18 only" is prominent and like super visibile 
 16.Remove RSVP from the nav bar
 17.In about section Cut down text significantly too much content, too overwhelming
@@ -12,6 +12,3 @@ few tasks
 19.Schedule takes too much space looks cluttered ig so remove descriptions and make the acc title more clear
 20.Repurpose art display section's layout for "See What We've Built" by moving the whole thing down and restructuring to appear in cards
 21.Card 1 is the text for watve built and the see more button as normal and then the next is an expanded card the size of 2 cards cycing through projects as the current implementation 
-22.JetBrains Mono can stay for labels, headings, decorative elements just not body its too hard to read when spread across the whole site use HCs and blueprints font R&C Basic Full and phantom sans
-test if that looks good if not experiment with other fonts 
-23.Bump text fade in effect by like 15 percent but test it out cuz it might be too much

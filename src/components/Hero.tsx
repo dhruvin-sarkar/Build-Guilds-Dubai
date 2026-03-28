@@ -1,27 +1,11 @@
 import { motion } from 'framer-motion';
 import { EVENT_DATE, EVENT_DATE_DISPLAY, EVENT_LOCATION, EVENT_TIME, EVENT_VENUE } from '../data/constants';
 import { useSignupModal } from '../context/SignupModal';
-import Card from './ui/Card';
 import Countdown from './ui/Countdown';
 import SectionLabel from './ui/SectionLabel';
 import styles from './Hero.module.css';
 
 const heroFacts = [EVENT_DATE_DISPLAY, EVENT_TIME, EVENT_LOCATION, `Venue ${EVENT_VENUE}`];
-
-const eventPacketItems = [
-  {
-    label: 'Bench mix',
-    value: 'Beginners, return builders, and people already carrying half-routed boards or half-flashed ideas.',
-  },
-  {
-    label: 'Bring list',
-    value: 'Laptop optional // dev boards and hardware demos welcome // questions about parts, traces, or firmware encouraged.',
-  },
-  {
-    label: 'After today',
-    value: 'Blueprint, Hackpad, and next-step project routes once the bench supply clicks off.',
-  },
-];
 
 const containerVariants = {
   hidden: {},
@@ -34,12 +18,12 @@ const containerVariants = {
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 18 },
+  hidden: { opacity: 0, y: 21 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.42,
+      duration: 0.48,
       ease: 'easeOut',
     },
   },
@@ -80,24 +64,6 @@ function Hero() {
               </button>
             </div>
           </motion.div>
-
-          <motion.div className={styles.packetColumn} variants={itemVariants}>
-            <Card className={styles.panel}>
-              <div className={styles.panelHeader}>
-                <SectionLabel label="event packet" />
-                <p className={styles.panelMeta}>Bench brief // how the room is wired for the day</p>
-              </div>
-
-              <div className={styles.readouts}>
-                {eventPacketItems.map((item) => (
-                  <div key={item.label} className={styles.readout}>
-                    <p className={styles.readoutLabel}>{item.label}</p>
-                    <p className={styles.readoutValue}>{item.value}</p>
-                  </div>
-                ))}
-              </div>
-            </Card>
-          </motion.div>
         </motion.div>
 
         <motion.div
@@ -107,13 +73,13 @@ function Hero() {
           variants={containerVariants}
         >
           <motion.div variants={itemVariants}>
-            <Card className={styles.countdownFrame}>
+            <div className={styles.countdownFrame}>
               <div className={styles.countdownHeader}>
                 <SectionLabel label="bench timer" />
                 <p className={styles.countdownMeta}>SIGNAL-UP TO APRIL 18, 2026</p>
               </div>
               <Countdown targetDate={EVENT_DATE} className={styles.countdown} />
-            </Card>
+            </div>
           </motion.div>
         </motion.div>
       </div>
