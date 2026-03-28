@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion';
-import { BLUEPRINT_LOGO, EVENT_DATE, EVENT_DATE_DISPLAY, EVENT_TIME, EVENT_VENUE, SIGNUP_URL } from '../data/constants';
+import { BLUEPRINT_LOGO, EVENT_DATE, EVENT_DATE_DISPLAY, EVENT_VENUE, SIGNUP_URL } from '../data/constants';
 import Countdown from './ui/Countdown';
 import styles from './Hero.module.css';
 
-const heroFacts = [EVENT_DATE_DISPLAY, EVENT_TIME, `Venue ${EVENT_VENUE}`];
+const heroFacts = [EVENT_DATE_DISPLAY, 'Ages 13 - 18', `Venue ${EVENT_VENUE}`];
 
 const containerVariants = {
   hidden: {},
