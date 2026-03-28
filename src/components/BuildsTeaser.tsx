@@ -6,6 +6,27 @@ import SectionLabel from './ui/SectionLabel';
 import styles from './BuildsTeaser.module.css';
 
 const swipeThreshold = 88;
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.08,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 23 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.48,
+      ease: 'easeOut',
+    },
+  },
+};
+
 const carouselVariants = {
   enter: (direction: number) => ({
     opacity: 0,
@@ -62,24 +83,29 @@ function BuildsTeaser() {
   return (
     <section className={styles.section} aria-labelledby="builds-teaser-title">
       <div className={styles.inner}>
-        <article className={styles.panel}>
-          <div className={styles.copy}>
+        <motion.div
+          className={styles.grid}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-100px' }}
+          variants={containerVariants}
+        >
+          <motion.article className={styles.copyCard} variants={itemVariants}>
             <SectionLabel label="build archive" />
             <p className={styles.kicker}>Blueprint projects worth studying before Dubai</p>
             <h2 id="builds-teaser-title" className={styles.title}>
               See what we&apos;ve built.
             </h2>
             <p className={styles.body}>
-              We moved the full Blueprint project archive onto its own page so the main site stays fast and focused.
-              When you&apos;re ready to browse real boards, shipped keyboards, dev boards, firmware-heavy experiments,
-              and dense PCB work, head to the dedicated builds view.
+              Browse a rotating slice of Blueprint projects before the event - boards, keyboards, firmware-heavy
+              experiments, and the kind of work that makes the room feel real the moment you walk in.
             </p>
             <Link to="/builds" className={styles.link}>
               See What We&apos;ve Built &rarr;
             </Link>
-          </div>
+          </motion.article>
 
-          <div className={styles.previewArea}>
+          <motion.article className={styles.previewCard} variants={itemVariants}>
             <div className={styles.carouselFrame}>
               <div
                 className={styles.carouselViewport}
@@ -163,8 +189,8 @@ function BuildsTeaser() {
                 </AnimatePresence>
               </div>
             </div>
-          </div>
-        </article>
+          </motion.article>
+        </motion.div>
       </div>
     </section>
   );

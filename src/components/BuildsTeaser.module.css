@@ -7,24 +7,37 @@
   margin: 0 auto;
 }
 
-.panel {
+.grid {
   display: grid;
-  grid-template-columns: minmax(0, 0.88fr) minmax(18rem, 1.12fr);
-  gap: var(--space-8);
-  padding: var(--space-7);
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-left: 2px solid var(--border-strong);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-4);
 }
 
-.copy,
-.previewArea {
+.copyCard,
+.previewCard,
+.carouselFrame,
+.copy {
   display: grid;
 }
 
 .copy {
   align-content: start;
   gap: var(--space-4);
+}
+
+.copyCard,
+.previewCard {
+  min-height: 100%;
+  padding: var(--space-5);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 2px solid var(--border-strong);
+}
+
+.previewCard {
+  grid-column: span 2;
+  padding: 0;
+  overflow: hidden;
 }
 
 .kicker,
@@ -72,16 +85,14 @@
     background 0.2s ease;
 }
 
-.previewArea {
-  align-content: center;
-}
-
 .carouselFrame {
   position: relative;
+  min-height: 100%;
 }
 
 .carouselViewport {
   position: relative;
+  min-height: 100%;
   overflow: hidden;
   cursor: grab;
   touch-action: pan-y;
@@ -92,8 +103,9 @@
 }
 
 .detailPanel {
+  height: 100%;
   background: var(--bg-secondary);
-  border: 1px solid var(--border-strong);
+  border: 0;
 }
 
 .carouselSlide {
@@ -102,7 +114,8 @@
 
 .detailInner {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.92fr);
+  grid-template-columns: minmax(0, 1.08fr) minmax(20rem, 0.92fr);
+  min-height: 100%;
 }
 
 .detailMedia {
@@ -216,8 +229,12 @@
 }
 
 @media (max-width: 980px) {
-  .panel {
+  .grid {
     grid-template-columns: 1fr;
+  }
+
+  .previewCard {
+    grid-column: span 1;
   }
 
   .detailInner {
@@ -235,9 +252,13 @@
     padding: 0 var(--page-padding) var(--section-space-mobile);
   }
 
-  .panel {
-    gap: var(--space-6);
+  .copyCard,
+  .previewCard {
     padding: var(--space-5);
+  }
+
+  .previewCard {
+    padding: 0;
   }
 
   .detailCopy {
