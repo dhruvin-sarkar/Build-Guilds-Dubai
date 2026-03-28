@@ -1,6 +1,5 @@
 import { generatedProjects as blueprintProjects } from '../data/projects.generated';
 import ThreeDCarousel from './ui/ThreeDCarousel';
-import SectionLabel from './ui/SectionLabel';
 import styles from './Showcase.module.css';
 
 function Showcase() {
@@ -8,7 +7,6 @@ function Showcase() {
     <section id="showcase" className={styles.section}>
       <div className={styles.inner}>
         <div className={styles.header}>
-          <SectionLabel label="build archive" />
           <div className={styles.headerCopy}>
             <p className={styles.kicker}>Blueprint projects worth studying before Dubai</p>
             <h2 className={styles.title}>Real boards. Real enclosures. Real projects people our age already ship.</h2>

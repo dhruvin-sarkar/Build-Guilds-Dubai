@@ -2,7 +2,6 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { generatedProjects as blueprintProjects } from '../data/projects.generated';
-import SectionLabel from './ui/SectionLabel';
 import styles from './BuildsTeaser.module.css';
 
 const swipeThreshold = 88;
@@ -91,17 +90,16 @@ function BuildsTeaser() {
           variants={containerVariants}
         >
           <motion.article className={styles.copyCard} variants={itemVariants}>
-            <SectionLabel label="build archive" />
             <p className={styles.kicker}>Blueprint projects worth studying before Dubai</p>
             <h2 id="builds-teaser-title" className={styles.title}>
-              See what we&apos;ve built.
+              SEE WHAT OTHERS HAVE BUILT.
             </h2>
             <p className={styles.body}>
-              Browse a rotating slice of Blueprint projects before the event - boards, keyboards, firmware-heavy
-              experiments, and the kind of work that makes the room feel real the moment you walk in.
+              Here&apos;s some of the amazing hardware projects real Hack Clubbers have built. Maybe you&apos;ll be able
+              to make stuff like this too after attending Build Guild Dubai!
             </p>
             <Link to="/builds" className={styles.link}>
-              See What We&apos;ve Built &rarr;
+              EXPLORE FULL GALLERY
             </Link>
           </motion.article>
 

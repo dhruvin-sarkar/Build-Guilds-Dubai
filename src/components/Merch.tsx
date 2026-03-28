@@ -1,6 +1,5 @@
 ﻿import { motion } from 'framer-motion';
 import Card from './ui/Card';
-import SectionLabel from './ui/SectionLabel';
 import styles from './Merch.module.css';
 
 interface MerchItem {
@@ -63,9 +62,6 @@ function Merch() {
           viewport={{ once: true, margin: '-100px' }}
           variants={containerVariants}
         >
-          <motion.div variants={itemVariants}>
-            <SectionLabel label="merch" />
-          </motion.div>
           <motion.h2 className={styles.title} variants={itemVariants}>
             Designed for Build Guild Dubai.
           </motion.h2>

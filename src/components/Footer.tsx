@@ -4,7 +4,7 @@ import { BLUEPRINT_URL, EVENT_DATE_DISPLAY, EVENT_LOCATION, HC_URL, SLACK_CHANNE
 import styles from './Footer.module.css';
 
 interface FooterLink {
-  id: 'about' | 'builds' | 'schedule' | 'organizers' | 'merch' | 'faq' | 'rsvp';
+  id: 'about' | 'builds' | 'schedule' | 'organizers' | 'faq' | 'rsvp';
   label: string;
   kind: 'section' | 'route';
 }
@@ -19,7 +19,6 @@ const footerLinks: FooterLink[] = [
   { id: 'builds', label: 'Builds', kind: 'route' },
   { id: 'schedule', label: 'Schedule', kind: 'section' },
   { id: 'organizers', label: 'Organizers', kind: 'section' },
-  { id: 'merch', label: 'Merch', kind: 'section' },
   { id: 'faq', label: 'FAQ', kind: 'section' },
   { id: 'rsvp', label: 'RSVP', kind: 'section' },
 ];
@@ -69,12 +68,8 @@ function Footer() {
     <footer className={styles.footer}>
       <div className={styles.inner}>
         <div className={styles.summary}>
-          <p className={styles.label}>[ SYS://FOOTER ]</p>
-          <p className={styles.title}>Build Guild Dubai // Blueprint hardware week, routed through Dubai</p>
-          <p className={styles.summaryText}>
-            Built for teens who want more than spectator energy — more schematics, more board bring-up, more debug
-            notes, and more real local builders to learn from.
-          </p>
+          <p className={styles.title}>Made with {'\u2764\uFE0E'} by @Dhruv</p>
+          <p className={styles.summaryText}>Brought to you 100% for teens, by teens. Made possible thanks to Hack Club.</p>
         </div>
 
         <nav className={styles.nav} aria-label="Footer navigation">

@@ -2,7 +2,6 @@
 import type { CSSProperties } from 'react';
 import { organizers } from '../data/organizers';
 import Card from './ui/Card';
-import SectionLabel from './ui/SectionLabel';
 import styles from './Organizers.module.css';
 
 const containerVariants = {
@@ -41,9 +40,6 @@ function Organizers() {
           viewport={{ once: true, margin: '-100px' }}
           variants={containerVariants}
         >
-          <motion.div variants={itemVariants}>
-            <SectionLabel label="team" />
-          </motion.div>
           <motion.h2 className={styles.title} variants={itemVariants}>
             Organized by people building this for the actual Dubai community.
           </motion.h2>

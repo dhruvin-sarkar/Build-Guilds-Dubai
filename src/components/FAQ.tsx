@@ -2,7 +2,6 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 import { eventPacketIntro, eventPacketItems } from '../data/eventPacket';
 import { faqItems } from '../data/faq';
-import SectionLabel from './ui/SectionLabel';
 import styles from './FAQ.module.css';
 
 const containerVariants = {
@@ -40,15 +39,11 @@ function FAQ() {
           viewport={{ once: true, margin: '-100px' }}
           variants={containerVariants}
         >
-          <motion.div variants={itemVariants}>
-            <SectionLabel label="faq" />
-          </motion.div>
           <motion.h2 className={styles.title} variants={itemVariants}>
-            The practical questions, answered.
+            YOUR QUESTIONS, ANSWERED.
           </motion.h2>
           <motion.p className={styles.lead} variants={itemVariants}>
-            Travel light, ask the obvious questions, and treat this like the pre-flight check before a long bench day -
-            here&apos;s the rest of the packet.
+            Still curious? Reach out to dubai@blueprint.hackclub.com!
           </motion.p>
         </motion.div>
 
@@ -80,7 +75,6 @@ function FAQ() {
               >
                 <div className={styles.packetContent}>
                   <div className={styles.packetHeader}>
-                    <SectionLabel label="event packet" />
                     <p className={styles.packetMeta}>Bench brief // how the room is wired for the day</p>
                   </div>
                   <p className={styles.packetIntro}>{eventPacketIntro}</p>

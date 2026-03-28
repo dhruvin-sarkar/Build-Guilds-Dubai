@@ -5,19 +5,17 @@ import { useSignupModal } from '../context/SignupModal';
 import styles from './Nav.module.css';
 
 interface NavLink {
-  id: 'about' | 'builds' | 'schedule' | 'organizers' | 'merch' | 'faq' | 'rsvp';
-  label: 'About' | 'Builds' | 'Schedule' | 'Organizers' | 'Merch' | 'FAQ' | 'RSVP';
+  id: 'about' | 'builds' | 'schedule' | 'organizers' | 'faq';
+  label: 'About' | 'Builds' | 'Schedule' | 'Organizers' | 'FAQ';
   kind: 'section' | 'route';
 }
 
 const navLinks: NavLink[] = [
   { id: 'about', label: 'About', kind: 'section' },
-  { id: 'builds', label: 'Builds', kind: 'route' },
   { id: 'schedule', label: 'Schedule', kind: 'section' },
   { id: 'organizers', label: 'Organizers', kind: 'section' },
-  { id: 'merch', label: 'Merch', kind: 'section' },
   { id: 'faq', label: 'FAQ', kind: 'section' },
-  { id: 'rsvp', label: 'RSVP', kind: 'section' },
+  { id: 'builds', label: 'Builds', kind: 'route' },
 ];
 
 function Nav() {
@@ -248,7 +246,6 @@ function Nav() {
 
       <aside className={`${styles.drawer} ${mobileOpen ? styles.drawerOpen : ''}`} aria-hidden={!mobileOpen}>
         <nav className={styles.mobileNav} aria-label="Mobile primary">
-          <p className={styles.drawerLabel}>[ SYS://NAVIGATION ]</p>
           <ul className={styles.mobileList}>{linkItems}</ul>
           <button type="button" className={`${styles.cta} ${styles.mobileCta}`} onClick={handleOpenSignup}>
             Sign Up

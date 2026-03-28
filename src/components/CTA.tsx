@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import { EVENT_DATE_DISPLAY, EVENT_LOCATION, HC_URL, SLACK_CHANNEL } from '../data/constants';
 import { useSignupModal } from '../context/SignupModal';
-import SectionLabel from './ui/SectionLabel';
 import styles from './CTA.module.css';
 
 const containerVariants = {
@@ -40,8 +39,7 @@ function CTA() {
           variants={containerVariants}
         >
           <motion.div className={styles.copy} variants={itemVariants}>
-            <SectionLabel label="rsvp" />
-            <h2 className={styles.title}>Ready to route yourself into the room?</h2>
+            <h2 className={styles.title}>Ready to join the Guild?</h2>
             <p className={styles.meta}>
               {EVENT_DATE_DISPLAY} // {EVENT_LOCATION} // Free
             </p>

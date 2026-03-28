@@ -273,7 +273,6 @@ function SignupModal() {
       >
         <div className={styles.header}>
           <div className={styles.headerCopy}>
-            <p className={styles.eyebrow}>[ SYS://SIGNUP_INTAKE ]</p>
             <h2 id="signup-modal-title" className={styles.title}>
               Lock your spot, then we’ll hand off to Blueprint.
             </h2>

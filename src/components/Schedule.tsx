@@ -2,7 +2,6 @@
 import { useRef } from 'react';
 import { scheduleItems } from '../data/schedule';
 import Card from './ui/Card';
-import SectionLabel from './ui/SectionLabel';
 import styles from './Schedule.module.css';
 
 const containerVariants = {
@@ -44,15 +43,11 @@ function Schedule() {
           viewport={{ once: true, margin: '-100px' }}
           variants={containerVariants}
         >
-          <motion.div variants={itemVariants}>
-            <SectionLabel label="schedule" />
-          </motion.div>
           <motion.h2 className={styles.title} variants={itemVariants}>
-            The build-day run sheet.
+            WHAT&apos;S THE PLAN
           </motion.h2>
           <motion.p className={styles.lead} variants={itemVariants}>
-            Short version: check in, learn the parts, build, take lunch, demo what people have shipped, route a board,
-            then finish with open bench time.
+            Here&apos;s a rough flow for the day. Final schedule to be announced.
           </motion.p>
         </motion.div>
 

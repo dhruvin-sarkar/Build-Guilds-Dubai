@@ -1,11 +1,9 @@
 import { motion } from 'framer-motion';
-import { BLUEPRINT_LOGO, EVENT_DATE, EVENT_DATE_DISPLAY, EVENT_LOCATION, EVENT_TIME, EVENT_VENUE } from '../data/constants';
+import { BLUEPRINT_LOGO, EVENT_DATE, EVENT_DATE_DISPLAY, EVENT_TIME, EVENT_VENUE } from '../data/constants';
 import { useSignupModal } from '../context/SignupModal';
 import Countdown from './ui/Countdown';
-import SectionLabel from './ui/SectionLabel';
 import styles from './Hero.module.css';
 
-const heroSignals = ['100% Free', 'Ages 13-18', EVENT_LOCATION];
 const heroFacts = [EVENT_DATE_DISPLAY, EVENT_TIME, `Venue ${EVENT_VENUE}`];
 
 const containerVariants = {
@@ -50,14 +48,6 @@ function Hero() {
             </p>
           </motion.div>
 
-          <motion.div className={styles.signalRow} variants={itemVariants}>
-            {heroSignals.map((signal) => (
-              <span key={signal} className={styles.signalChip}>
-                {signal}
-              </span>
-            ))}
-          </motion.div>
-
           <motion.div className={styles.metaBlock} variants={itemVariants}>
             <div className={styles.facts}>
               {heroFacts.map((fact) => (
@@ -84,7 +74,6 @@ function Hero() {
           <motion.div variants={itemVariants}>
             <div className={styles.countdownFrame}>
               <div className={styles.countdownHeader}>
-                <SectionLabel label="bench timer" className={styles.countdownLabel} />
                 <p className={styles.countdownMeta}>SIGNAL-UP TO APRIL 18, 2026</p>
               </div>
               <Countdown targetDate={EVENT_DATE} className={styles.countdown} />

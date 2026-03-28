@@ -6,39 +6,38 @@ export interface ScheduleItem {
 
 export const scheduleItems: ScheduleItem[] = [
   {
-    time: '11:00 AM – 11:30 AM',
-    title: 'Check-In + Bench Setup',
+    time: '11:00 AM \u2013 11:30 AM',
+    title: 'Check-in + Bench Setup',
   },
   {
-    time: '11:30 AM – 12:00 PM',
-    title: 'Hardware Primer',
-    highlight: false,
-  },
-  {
-    time: '12:00 PM – 1:30 PM',
-    title: 'Parts Crash Course + Guided Build',
+    time: '11:30 AM \u2013 1:00 PM',
+    title: 'Electronics Crash Course + Guided Build',
     highlight: true,
   },
   {
-    time: '1:30 PM – 2:00 PM',
-    title: 'Lunch Break',
+    time: '1:00 PM \u2013 1:30 PM',
+    title: 'Lunch',
   },
   {
-    time: '2:00 PM – 2:30 PM',
-    title: 'Show + Tell',
+    time: '1:30 PM \u2013 2:30 PM',
+    title: 'Tinkering Session',
+  },
+  {
+    time: '2:30 PM \u2013 3:00 PM',
+    title: 'Show & Tell',
     highlight: true,
   },
   {
-    time: '2:30 PM – 5:30 PM',
-    title: 'PCB Workshop',
+    time: '3:00 PM \u2013 4:30 PM',
+    title: 'Printed Circuit Board Workshop',
     highlight: true,
   },
   {
-    time: '5:30 PM – 6:00 PM',
-    title: 'Blueprint + Hackpad Next Steps',
+    time: '4:30 PM \u2013 5:00 PM',
+    title: 'Intro to Hack Club + Next Steps',
   },
   {
-    time: '6:00 PM – 7:30 PM',
-    title: 'Open Bench + Wrap',
+    time: '5:00 PM',
+    title: 'Send Off',
   },
 ];

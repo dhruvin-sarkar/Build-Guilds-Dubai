@@ -104,11 +104,11 @@
 }
 
 .role {
-  color: var(--text-secondary);
+  color: var(--accent-yellow);
 }
 
 .profileLink {
-  color: var(--accent-yellow);
+  color: var(--text-secondary);
 }
 
 .bio {
