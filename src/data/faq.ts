@@ -23,9 +23,9 @@ export const faqItems: FAQItem[] = [
     answer: "Any teenager aged 13-18 in or near Dubai. You don't need to be a Hack Club member.",
   },
   {
-    question: 'What should I bring?',
+    question: 'What should I bring? How should I show up?',
     answer:
-      'A laptop if you have one (not required but helpful). Any hardware projects, breadboards, dev boards, or PCBs you want to show off during Show & Tell. Curiosity.',
+      "Show up ready to learn. The room will have a mix of total beginners, returning builders, and teens already carrying half-finished boards or fresh ideas. Bring a laptop if you have one, plus any breadboards, dev boards, PCBs, or projects you'd want to show during Show & Tell. Dress comfortably, come curious, and we'll point you toward Blueprint, Hackpad, and other next steps before the day ends.",
   },
   {
     question: 'Where is the venue?',
@@ -33,7 +33,7 @@ export const faqItems: FAQItem[] = [
   },
   {
     question: 'Will there be food?',
-    answer: 'Yes. Lunch is included as part of the event.',
+    answer: 'YES! Free food as asw js make sure thats not the only reason youre coming!',
   },
   {
     question: 'What is Hack Club Blueprint?',

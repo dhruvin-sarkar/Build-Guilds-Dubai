@@ -44,8 +44,8 @@ function CTA() {
               {EVENT_DATE_DISPLAY} // {EVENT_LOCATION} // Free
             </p>
           <p className={styles.support}>
-            If you want a real day of parts, traces, PCB workshop time, and people who can help you get from idea to
-            first board spin, first firmware flash, or first working prototype, this is your sign to register.
+            If you want a real day of parts, PCB workshop time, and people who can help you get from idea to
+            first board , first firmware flash, or first working prototype, this is your sign to register.
           </p>
           </motion.div>
 
