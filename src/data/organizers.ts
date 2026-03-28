@@ -18,9 +18,9 @@ export const organizers: Organizer[] = [
     initials: 'D',
     avatarColor: 'var(--organizer-dhruv)',
     profileUrl: 'https://hackclub.enterprise.slack.com/team/U0914NPNKM2',
-    profileLabel: 'Slack profile',
+    profileLabel: 'Slack',
     photoUrl: '/organizers/dhruv.jpg',
-    bio: 'Game dev, hardware enthusiast, and generalist who bounces between UI, PCB ideas, and whatever part of the build stack needs debugging.',
+    bio: 'Game dev, hardware enthusiast, Programmer I do a lot of things.',
   },
   {
     name: 'Aly',
@@ -28,8 +28,8 @@ export const organizers: Organizer[] = [
     initials: 'A',
     avatarColor: 'var(--organizer-aly)',
     profileUrl: 'https://hackclub.enterprise.slack.com/team/U08AFJFPRJ7',
-    profileLabel: 'Slack profile',
+    profileLabel: 'Slack',
     photoUrl: '/organizers/aly.jpg',
-    bio: 'Campfire Dubai organizer, club leader, and community builder who is good at turning scattered maker energy into an actual room full of people shipping things.',
+    bio: 'horizons singapore org // campfire dubai poc // club leader @dubai overall goat.',
   },
 ];
