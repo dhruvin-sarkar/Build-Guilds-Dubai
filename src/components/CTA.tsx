@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
-import { EVENT_DATE_DISPLAY, EVENT_LOCATION, HC_URL, SLACK_CHANNEL } from '../data/constants';
-import { useSignupModal } from '../context/SignupModal';
+import { EVENT_DATE_DISPLAY, EVENT_LOCATION, HC_URL, SIGNUP_URL, SLACK_CHANNEL } from '../data/constants';
 import styles from './CTA.module.css';
 
 const containerVariants = {
@@ -25,7 +24,6 @@ const itemVariants = {
 };
 
 function CTA() {
-  const { open } = useSignupModal();
   const slackUrl = `${HC_URL}/slack/`;
 
   return (
@@ -50,9 +48,9 @@ function CTA() {
           </motion.div>
 
           <motion.div className={styles.actions} variants={itemVariants}>
-            <button type="button" className={styles.primaryAction} onClick={open}>
+            <a href={SIGNUP_URL} className={styles.primaryAction}>
               Reserve Your Bench Now
-            </button>
+            </a>
             <a href={slackUrl} className={styles.secondaryAction} target="_blank" rel="noopener noreferrer">
               Join Slack // {SLACK_CHANNEL}
             </a>

@@ -92,7 +92,6 @@
   font-size: var(--text-xl);
   font-weight: 700;
   line-height: var(--leading-tight);
-  text-transform: uppercase;
 }
 
 .role,

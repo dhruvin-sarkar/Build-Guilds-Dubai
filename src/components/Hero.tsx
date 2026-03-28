@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
-import { BLUEPRINT_LOGO, EVENT_DATE, EVENT_DATE_DISPLAY, EVENT_TIME, EVENT_VENUE } from '../data/constants';
-import { useSignupModal } from '../context/SignupModal';
+import { BLUEPRINT_LOGO, EVENT_DATE, EVENT_DATE_DISPLAY, EVENT_TIME, EVENT_VENUE, SIGNUP_URL } from '../data/constants';
 import Countdown from './ui/Countdown';
 import styles from './Hero.module.css';
 
@@ -29,8 +28,6 @@ const itemVariants = {
 };
 
 function Hero() {
-  const { open } = useSignupModal();
-
   return (
     <section id="hero" className={styles.hero}>
       <div className={styles.inner}>
@@ -58,9 +55,9 @@ function Hero() {
             </div>
 
             <div className={styles.actions}>
-              <button type="button" className={styles.primaryAction} onClick={open}>
+              <a href={SIGNUP_URL} className={styles.primaryAction}>
                 Reserve Your Bench Now
-              </button>
+              </a>
             </div>
           </motion.div>
         </motion.div>

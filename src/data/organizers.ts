@@ -13,7 +13,7 @@ export interface Organizer {
 
 export const organizers: Organizer[] = [
   {
-    name: 'Dhruv',
+    name: 'Dhruvin Sarkar',
     role: 'Lead Organizer',
     initials: 'D',
     avatarColor: 'var(--organizer-dhruv)',
@@ -23,7 +23,7 @@ export const organizers: Organizer[] = [
     bio: 'Game dev, hardware enthusiast, Programmer I do a lot of things.',
   },
   {
-    name: 'Aly',
+    name: 'Aly Kotb',
     role: 'Organizer',
     initials: 'A',
     avatarColor: 'var(--organizer-aly)',

@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState, type MouseEvent } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { BLUEPRINT_LOGO } from '../data/constants';
-import { useSignupModal } from '../context/SignupModal';
+import { BLUEPRINT_LOGO, SIGNUP_URL } from '../data/constants';
 import styles from './Nav.module.css';
 
 interface NavLink {
@@ -19,7 +18,6 @@ const navLinks: NavLink[] = [
 ];
 
 function Nav() {
-  const { open } = useSignupModal();
   const location = useLocation();
   const navigate = useNavigate();
   const [scrolled, setScrolled] = useState(false);
@@ -194,11 +192,6 @@ function Nav() {
     });
   }
 
-  function handleOpenSignup() {
-    setMobileOpen(false);
-    open();
-  }
-
   return (
     <>
       <header className={navClassName}>
@@ -218,9 +211,9 @@ function Nav() {
 
           <nav className={styles.desktopNav} aria-label="Primary">
             <ul className={styles.list}>{linkItems}</ul>
-            <button type="button" className={styles.cta} onClick={handleOpenSignup}>
+            <a href={SIGNUP_URL} className={styles.cta}>
               Sign Up
-            </button>
+            </a>
           </nav>
 
           <button
@@ -247,9 +240,9 @@ function Nav() {
       <aside className={`${styles.drawer} ${mobileOpen ? styles.drawerOpen : ''}`} aria-hidden={!mobileOpen}>
         <nav className={styles.mobileNav} aria-label="Mobile primary">
           <ul className={styles.mobileList}>{linkItems}</ul>
-          <button type="button" className={`${styles.cta} ${styles.mobileCta}`} onClick={handleOpenSignup}>
+          <a href={SIGNUP_URL} className={`${styles.cta} ${styles.mobileCta}`} onClick={() => setMobileOpen(false)}>
             Sign Up
-          </button>
+          </a>
         </nav>
       </aside>
     </>

@@ -90,7 +90,6 @@ function BuildsTeaser() {
           variants={containerVariants}
         >
           <motion.article className={styles.copyCard} variants={itemVariants}>
-            <p className={styles.kicker}>Blueprint projects worth studying before Dubai</p>
             <h2 id="builds-teaser-title" className={styles.title}>
               SEE WHAT OTHERS HAVE BUILT.
             </h2>
