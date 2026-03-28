@@ -1,4 +1,4 @@
-﻿import { motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import SectionLabel from './ui/SectionLabel';
 import styles from './About.module.css';
 
@@ -13,20 +13,20 @@ const aboutStrips: AboutStrip[] = [
   {
     id: 'beginner',
     command: 'BOOT_BEGINNER_PATH',
-    title: 'Start here even if you have never touched hardware.',
-    body: 'The whole day is structured so complete beginners can walk in cold, learn what the resistors, sensors, microcontrollers, and boards on the table are actually doing, and leave having built something real instead of just watching demos.',
+    title: 'Start here even if you are brand new.',
+    body: 'You do not need hardware experience. We walk through the parts, the tools, and the basics before build time starts.',
   },
   {
     id: 'pace',
     command: 'LOAD_BUILD_ENERGY',
-    title: 'Fast, hands-on, and built around actual making.',
-    body: 'This is not a corporate workshop and it is not a lecture marathon. You get crash courses, guided build time, PCB design, show and tell, and enough room to go off-script if you already ship projects or want to spend longer on the schematic-to-board, layout, or firmware-debug path.',
+    title: 'A real build day, not a lecture day.',
+    body: 'Expect short intros, guided build time, a PCB workshop, and space to ask questions while you are actually making things.',
   },
   {
     id: 'community',
     command: 'SYNC_DUBAI_SCENE',
-    title: 'Organized by people who genuinely care about Dubai builders.',
-    body: 'Dhruv and Aly put this together from real community context: a mix of first-timers and teens who already ship. Hack Club funds the day, keeps it free, and gives everyone a real on-ramp into Blueprint and hardware after the event.',
+    title: 'Built for Dubai teens who want to make things.',
+    body: 'Dhruv and Aly are organizing it locally, Hack Club is funding it, and the goal is simple: help more people in Dubai get into hardware.',
   },
 ];
 
@@ -72,19 +72,13 @@ function About() {
           </motion.div>
 
           <motion.div className={styles.copyColumn} variants={itemVariants}>
-            <p className={styles.kicker}>Teen-run // hardware-first // free to attend</p>
-            <h2 className={styles.title}>What Build Guild looks like when the local scene is actually wired in.</h2>
-          <p className={styles.lead}>
-            Build Guild Dubai is a one-day hardware meetup inside Hack Club Blueprint&apos;s global week of teen-run
-            events. It&apos;s for people who are circuit-curious, people who already ship things, and everyone in
-            between - from first breadboard questions to teens already thinking in footprints, traces, and enclosure
-            tolerances.
-          </p>
-          <p className={styles.lead}>
-            No venue cosplay. No paywall. No &quot;maybe someday&quot; energy. Just a free day to learn hardware, route a
-            PCB, talk through firmware paths, compare schematics, meet other builders, and figure out what you want to
-            make next.
-          </p>
+            <p className={styles.kicker}>Teen-run // hardware-first // beginner-friendly</p>
+            <h2 className={styles.title}>A free one-day hardware meetup for teens in Dubai.</h2>
+            <p className={styles.lead}>
+              Build Guild Dubai is part of Hack Club Blueprint&apos;s global Build Guilds week. You show up, learn the
+              basics, build with other teens, and leave with a clearer idea of how hardware projects actually come
+              together.
+            </p>
           </motion.div>
         </motion.div>
 
@@ -116,9 +110,8 @@ function About() {
         >
           <span className={styles.footerPrompt}>&gt; SYS_STATUS</span>
           <p className={styles.footerText}>
-            Free to attend. Beginner welcome. Ages 13–18. Hack Club funded. Blueprint-connected. Built for the actual
-            Dubai teen maker community and the kind of people who would rather be at a bench than just watching from
-            the sidelines.
+            Free to attend. Ages 13�18. Beginner welcome. Hack Club funded. Built to help more Dubai teens get into
+            hardware.
           </p>
         </motion.div>
       </div>

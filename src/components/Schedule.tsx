@@ -48,11 +48,11 @@ function Schedule() {
             <SectionLabel label="schedule" />
           </motion.div>
           <motion.h2 className={styles.title} variants={itemVariants}>
-            What we&apos;re actually doing all day.
+            The build-day run sheet.
           </motion.h2>
           <motion.p className={styles.lead} variants={itemVariants}>
-            Bench-style pacing: component context, signal flow, build time, PCB routing, demos from other teens, and
-            real next steps once the power rails go quiet.
+            Short version: check in, learn the parts, build, take lunch, demo what people have shipped, route a board,
+            then finish with open bench time.
           </motion.p>
         </motion.div>
 
@@ -78,11 +78,7 @@ function Schedule() {
                 <div className={styles.contentColumn}>
                   <p className={styles.time}>{item.time}</p>
                   <Card className={styles.card} highlight={item.highlight}>
-                    <div className={styles.cardHeader}>
-                      <h3 className={styles.cardTitle}>{item.title}</h3>
-                      {item.highlight ? <span className={styles.flag}>Key</span> : null}
-                    </div>
-                    <p className={styles.cardBody}>{item.description}</p>
+                    <h3 className={styles.cardTitle}>{item.title}</h3>
                   </Card>
                 </div>
               </motion.article>
@@ -91,8 +87,7 @@ function Schedule() {
         </div>
 
         <p className={styles.note}>
-          Bench timing may shift slightly as venue logistics lock in, but the build flow, solderless-debug rhythm, and
-          PCB workshop arc stay the same.
+          Final timing may shift slightly, but the 11:00 AM bench start and 7:30 PM wrap are the working plan.
         </p>
       </div>
     </section>
