@@ -20,11 +20,12 @@
 }
 
 .copy {
-  gap: var(--space-4);
+  gap: var(--space-5);
   max-width: var(--measure-copy-wide);
 }
 
 .title {
+  max-width: 16ch;
   color: var(--text-primary);
   font-size: var(--step-title);
   font-weight: 800;
@@ -42,16 +43,16 @@
 }
 
 .support {
-  max-width: var(--measure-copy);
+  max-width: 58ch;
   color: var(--text-muted);
-  font-size: var(--text-base);
-  line-height: var(--leading-copy-loose);
+  font-size: var(--text-md);
+  line-height: var(--leading-copy);
 }
 
 .actions {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-3);
+  gap: var(--space-4);
 }
 
 .primaryAction,

@@ -5,7 +5,7 @@ import Countdown from './ui/Countdown';
 import SectionLabel from './ui/SectionLabel';
 import styles from './Hero.module.css';
 
-const heroSignals = ['100% Free', 'Ages 13–18', EVENT_LOCATION];
+const heroSignals = ['100% Free', 'Ages 13-18', EVENT_LOCATION];
 const heroFacts = [EVENT_DATE_DISPLAY, EVENT_TIME, `Venue ${EVENT_VENUE}`];
 
 const containerVariants = {
@@ -97,3 +97,4 @@ function Hero() {
 }
 
 export default Hero;
+

@@ -54,33 +54,33 @@
   --space-10: 2.5rem;
   --space-12: 3rem;
   --space-14: 3.5rem;
-  --text-2xs: 0.7rem;
-  --text-xs: 0.75rem;
-  --text-sm: 0.94rem;
-  --text-base: 1rem;
-  --text-md: 1.125rem;
-  --text-lg: 1.25rem;
-  --text-xl: 1.56rem;
-  --text-2xl: clamp(1.95rem, 2.2vw, 2.5rem);
-  --text-3xl: clamp(2.45rem, 4.2vw, 3.95rem);
-  --text-4xl: clamp(3.5rem, 7.6vw, 6.2rem);
+  --text-2xs: 0.72rem;
+  --text-xs: 0.82rem;
+  --text-sm: clamp(0.96rem, 0.93rem + 0.08vw, 1rem);
+  --text-base: clamp(1rem, 0.98rem + 0.12vw, 1.06rem);
+  --text-md: clamp(1.1rem, 1.04rem + 0.22vw, 1.18rem);
+  --text-lg: clamp(1.28rem, 1.18rem + 0.38vw, 1.42rem);
+  --text-xl: clamp(1.52rem, 1.34rem + 0.72vw, 1.82rem);
+  --text-2xl: clamp(1.95rem, 1.58rem + 1.24vw, 2.56rem);
+  --text-3xl: clamp(2.45rem, 1.86rem + 2.3vw, 4rem);
+  --text-4xl: clamp(3.35rem, 2.4rem + 4vw, 6.1rem);
   --step-label: var(--text-xs);
   --step-body: var(--text-base);
   --step-body-sm: var(--text-sm);
   --step-title: var(--text-3xl);
   --step-hero: var(--text-4xl);
-  --leading-display: 0.94;
+  --leading-display: 0.92;
   --leading-title: 1.02;
-  --leading-tight: 1.28;
-  --leading-copy: 1.68;
-  --leading-copy-loose: 1.74;
-  --leading-meta: 1.45;
-  --tracking-display: 0.03em;
-  --tracking-label: 0.16em;
-  --tracking-label-wide: 0.18em;
-  --measure-copy: 64ch;
-  --measure-copy-wide: 72ch;
-  --measure-title: 12ch;
+  --leading-tight: 1.18;
+  --leading-copy: 1.62;
+  --leading-copy-loose: 1.7;
+  --leading-meta: 1.35;
+  --tracking-display: -0.03em;
+  --tracking-label: 0.12em;
+  --tracking-label-wide: 0.15em;
+  --measure-copy: 62ch;
+  --measure-copy-wide: 68ch;
+  --measure-title: 14ch;
 }
 
 *,
@@ -93,6 +93,7 @@
 }
 
 html {
+  font-size: 100%;
   scroll-behavior: smooth;
   background-color: var(--bg-primary);
 }

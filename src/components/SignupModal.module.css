@@ -42,7 +42,7 @@
 
 .headerCopy {
   display: grid;
-  gap: var(--space-4);
+  gap: var(--space-5);
   max-width: var(--measure-copy);
 }
 
@@ -64,7 +64,7 @@
 
 .lead {
   color: var(--text-muted);
-  font-size: var(--text-base);
+  font-size: var(--text-md);
   line-height: var(--leading-copy);
 }
 
@@ -105,13 +105,13 @@
 
 .form {
   display: grid;
-  gap: var(--space-8);
+  gap: var(--space-7);
 }
 
 .fieldGrid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-5);
+  gap: var(--space-6);
 }
 
 .field {
@@ -189,14 +189,14 @@
 .privacyNote {
   max-width: var(--measure-copy);
   color: var(--text-muted);
-  font-size: var(--text-xs);
+  font-size: var(--text-sm);
   line-height: var(--leading-copy);
 }
 
 .submitError {
   max-width: var(--measure-copy);
   color: var(--accent-danger);
-  font-size: var(--text-xs);
+  font-size: var(--text-sm);
   line-height: var(--leading-copy);
 }
 

@@ -18,7 +18,7 @@
 }
 
 .header {
-  gap: var(--space-4);
+  gap: var(--space-5);
   max-width: var(--measure-copy-wide);
 }
 
@@ -32,9 +32,9 @@
 
 .lead {
   color: var(--text-muted);
-  font-size: var(--text-base);
+  font-size: var(--text-md);
   line-height: var(--leading-copy);
-  max-width: var(--measure-copy);
+  max-width: 60ch;
 }
 
 .list {
@@ -79,7 +79,7 @@
 
 .question {
   color: var(--text-primary);
-  font-size: var(--text-base);
+  font-size: var(--text-md);
   font-weight: 700;
   line-height: var(--leading-tight);
   text-transform: uppercase;
@@ -106,13 +106,13 @@
 .answer {
   padding: 0 var(--space-6) var(--space-6);
   color: var(--text-muted);
-  font-size: var(--text-sm);
+  font-size: var(--text-base);
   line-height: var(--leading-copy);
-  max-width: var(--measure-copy);
+  max-width: 58ch;
 }
 
 .packetContent {
-  gap: var(--space-5);
+  gap: var(--space-6);
   padding: 0 var(--space-6) var(--space-6);
 }
 
@@ -131,9 +131,9 @@
 }
 
 .packetIntro {
-  max-width: var(--measure-copy-wide);
+  max-width: 60ch;
   color: var(--text-muted);
-  font-size: var(--text-sm);
+  font-size: var(--text-base);
   line-height: var(--leading-copy);
 }
 
@@ -153,7 +153,7 @@
 
 .packetReadoutValue {
   color: var(--text-primary);
-  font-size: var(--text-base);
+  font-size: var(--text-sm);
   line-height: var(--leading-copy);
   text-wrap: pretty;
 }

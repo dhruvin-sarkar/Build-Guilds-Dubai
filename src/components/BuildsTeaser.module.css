@@ -22,7 +22,7 @@
 
 .copy {
   align-content: start;
-  gap: var(--space-5);
+  gap: var(--space-6);
 }
 
 .copyCard,
@@ -51,24 +51,24 @@
 }
 
 .kicker {
-  max-width: 24ch;
+  max-width: 28ch;
 }
 
 .title {
-  max-width: 9.75ch;
-  margin: var(--space-2) 0 var(--space-4);
+  max-width: 11.5ch;
+  margin: var(--space-3) 0 var(--space-5);
   color: var(--text-primary);
-  font-size: clamp(2.15rem, 3vw, 3.35rem);
+  font-size: clamp(1.95rem, 2.6vw, 3rem);
   font-weight: 800;
-  line-height: 0.96;
+  line-height: 0.94;
   text-transform: uppercase;
 }
 
 .body {
-  max-width: 30ch;
+  max-width: 34ch;
   color: var(--text-muted);
-  font-size: var(--text-sm);
-  line-height: 1.92;
+  font-size: var(--text-base);
+  line-height: var(--leading-copy);
 }
 
 .link {
@@ -77,7 +77,7 @@
   justify-content: center;
   width: fit-content;
   min-height: 3rem;
-  margin-top: var(--space-4);
+  margin-top: var(--space-5);
   padding: 0 var(--space-5);
   color: var(--accent-yellow);
   font-size: var(--text-xs);
@@ -140,7 +140,7 @@
   display: grid;
   align-content: start;
   grid-template-rows: auto auto auto 1fr auto;
-  gap: var(--space-5);
+  gap: var(--space-4);
   padding: var(--space-6);
 }
 
@@ -151,13 +151,13 @@
   letter-spacing: var(--tracking-label);
   line-height: var(--leading-meta);
   text-transform: uppercase;
-  max-width: 18ch;
+  max-width: 22ch;
 }
 
 .detailTitle {
   color: var(--text-primary);
-  max-width: 10ch;
-  font-size: clamp(1.7rem, 2vw, 2.35rem);
+  max-width: 12ch;
+  font-size: clamp(1.5rem, 1.8vw, 2.15rem);
   font-weight: 800;
   line-height: 1.02;
   text-transform: uppercase;
@@ -170,14 +170,14 @@
 
 .detailSummary {
   display: -webkit-box;
-  max-width: 30ch;
+  max-width: 34ch;
   -webkit-line-clamp: 6;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
   color: var(--text-muted);
-  font-size: var(--text-sm);
-  line-height: 1.76;
+  font-size: var(--text-base);
+  line-height: var(--leading-copy);
 }
 
 .detailActions {
@@ -289,8 +289,8 @@
   }
 
   .title {
-    max-width: 10.5ch;
-    font-size: clamp(2rem, 10vw, 2.9rem);
+    max-width: 12ch;
+    font-size: clamp(1.85rem, 9vw, 2.6rem);
   }
 
   .body,

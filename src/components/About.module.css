@@ -71,7 +71,7 @@
 }
 
 .copyColumn {
-  gap: var(--space-4);
+  gap: var(--space-5);
   max-width: var(--measure-copy-wide);
 }
 
@@ -82,7 +82,7 @@
 }
 
 .title {
-  max-width: var(--measure-title);
+  max-width: 16ch;
   color: var(--text-primary);
   font-size: var(--step-title);
   font-weight: 800;
@@ -95,17 +95,18 @@
 .footerText {
   max-width: var(--measure-copy);
   color: var(--text-muted);
-  font-size: var(--text-sm);
-  line-height: var(--leading-copy-loose);
+  font-size: var(--text-base);
+  line-height: var(--leading-copy);
 }
 
 .lead {
   color: var(--text-secondary);
   font-size: var(--text-md);
+  max-width: 60ch;
 }
 
 .stripList {
-  gap: var(--space-4);
+  gap: var(--space-5);
 }
 
 .strip {
@@ -123,19 +124,19 @@
 }
 
 .stripBody {
-  gap: var(--space-3);
+  gap: var(--space-4);
 }
 
 .stripTitle {
   color: var(--text-primary);
-  font-size: var(--text-lg);
+  font-size: var(--text-md);
   font-weight: 700;
   line-height: var(--leading-tight);
   text-transform: uppercase;
 }
 
 .footerReadout {
-  gap: var(--space-3);
+  gap: var(--space-4);
   padding-top: var(--space-1);
 }
 

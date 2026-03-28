@@ -110,7 +110,7 @@ function About() {
         >
           <span className={styles.footerPrompt}>&gt; SYS_STATUS</span>
           <p className={styles.footerText}>
-            Free to attend. Ages 13–18. Beginner welcome. Hack Club funded. Built to help more Dubai teens get into
+            Free to attend. Ages 13-18. Beginner welcome. Hack Club funded. Built to help more Dubai teens get into
             hardware.
           </p>
         </motion.div>
@@ -120,3 +120,4 @@ function About() {
 }
 
 export default About;
+

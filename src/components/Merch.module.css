@@ -16,8 +16,8 @@
 }
 
 .header {
-  gap: var(--space-4);
-  max-width: var(--measure-copy);
+  gap: var(--space-5);
+  max-width: 58ch;
 }
 
 .title {
@@ -30,9 +30,9 @@
 
 .lead {
   color: var(--text-secondary);
-  font-size: var(--text-md);
+  font-size: var(--text-base);
   line-height: var(--leading-copy);
-  max-width: var(--measure-copy);
+  max-width: 58ch;
 }
 
 .grid {
@@ -85,7 +85,7 @@
 
 .cardCaption {
   color: var(--text-muted);
-  font-size: var(--text-sm);
+  font-size: var(--text-base);
   line-height: var(--leading-copy);
 }
 

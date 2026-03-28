@@ -20,7 +20,7 @@
 }
 
 .header {
-  gap: var(--space-6);
+  gap: var(--space-5);
 }
 
 .headerCopy {
@@ -38,7 +38,7 @@
 }
 
 .title {
-  max-width: 18ch;
+  max-width: 20ch;
   color: var(--text-primary);
   font-size: var(--text-3xl);
   font-weight: 800;
@@ -47,9 +47,9 @@
 }
 
 .lead {
-  max-width: var(--measure-copy-wide);
+  max-width: 62ch;
   color: var(--text-muted);
-  font-size: var(--text-md);
+  font-size: var(--text-base);
   line-height: var(--leading-copy);
 }
 
