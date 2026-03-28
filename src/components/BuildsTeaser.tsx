@@ -71,8 +71,8 @@ function BuildsTeaser() {
             </h2>
             <p className={styles.body}>
               We moved the full Blueprint project archive onto its own page so the main site stays fast and focused.
-              When you&apos;re ready to browse real boards, shipped keyboards, dev boards, and dense PCB work, head to
-              the dedicated builds view.
+              When you&apos;re ready to browse real boards, shipped keyboards, dev boards, firmware-heavy experiments,
+              and dense PCB work, head to the dedicated builds view.
             </p>
             <Link to="/builds" className={styles.link}>
               See What We&apos;ve Built &rarr;

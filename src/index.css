@@ -54,20 +54,33 @@
   --space-10: 2.5rem;
   --space-12: 3rem;
   --space-14: 3.5rem;
-  --text-xs: 0.74rem;
-  --text-sm: 0.92rem;
+  --text-2xs: 0.7rem;
+  --text-xs: 0.75rem;
+  --text-sm: 0.94rem;
   --text-base: 1rem;
-  --text-md: 1.08rem;
-  --text-lg: 1.28rem;
+  --text-md: 1.125rem;
+  --text-lg: 1.25rem;
   --text-xl: 1.56rem;
-  --text-2xl: clamp(1.9rem, 2vw, 2.5rem);
-  --text-3xl: clamp(2.35rem, 4.3vw, 3.9rem);
-  --text-4xl: clamp(3.35rem, 8vw, 6.4rem);
+  --text-2xl: clamp(1.95rem, 2.2vw, 2.5rem);
+  --text-3xl: clamp(2.45rem, 4.2vw, 3.95rem);
+  --text-4xl: clamp(3.5rem, 7.6vw, 6.2rem);
   --step-label: var(--text-xs);
   --step-body: var(--text-base);
   --step-body-sm: var(--text-sm);
   --step-title: var(--text-3xl);
   --step-hero: var(--text-4xl);
+  --leading-display: 0.94;
+  --leading-title: 1.02;
+  --leading-tight: 1.28;
+  --leading-copy: 1.68;
+  --leading-copy-loose: 1.74;
+  --leading-meta: 1.45;
+  --tracking-display: 0.03em;
+  --tracking-label: 0.16em;
+  --tracking-label-wide: 0.18em;
+  --measure-copy: 64ch;
+  --measure-copy-wide: 72ch;
+  --measure-title: 12ch;
 }
 
 *,
@@ -91,7 +104,7 @@ body {
   color: var(--text-primary);
   font-family: var(--font-body);
   font-size: var(--text-base);
-  line-height: 1.7;
+  line-height: var(--leading-copy);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -104,6 +117,7 @@ h4,
 h5,
 h6 {
   font-family: var(--font-display);
+  text-wrap: balance;
 }
 
 p,
@@ -112,6 +126,7 @@ input,
 textarea,
 select {
   font-family: var(--font-body);
+  text-wrap: pretty;
 }
 
 a {

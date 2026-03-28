@@ -112,9 +112,9 @@
   padding: 0.45rem 0.6rem;
   color: var(--text-primary);
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: var(--text-2xs);
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   background: color-mix(in srgb, var(--bg-primary) 72%, transparent);
   border: 1px solid color-mix(in srgb, var(--border-strong) 82%, transparent);
@@ -224,7 +224,7 @@
   .badge,
   .badgeSecondary {
     left: 0.85rem;
-    font-size: 0.62rem;
+    font-size: var(--text-2xs);
   }
 }
 

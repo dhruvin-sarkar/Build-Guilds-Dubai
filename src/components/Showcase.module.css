@@ -26,14 +26,14 @@
 .headerCopy {
   position: relative;
   gap: var(--space-4);
-  max-width: 64rem;
+  max-width: var(--measure-copy-wide);
 }
 
 .kicker {
   color: var(--text-secondary);
   font-size: var(--text-xs);
   font-weight: 700;
-  letter-spacing: 0.16em;
+  letter-spacing: var(--tracking-label);
   text-transform: uppercase;
 }
 
@@ -42,15 +42,15 @@
   color: var(--text-primary);
   font-size: var(--text-3xl);
   font-weight: 800;
-  line-height: 1;
+  line-height: var(--leading-title);
   text-transform: uppercase;
 }
 
 .lead {
-  max-width: 52rem;
+  max-width: var(--measure-copy-wide);
   color: var(--text-muted);
   font-size: var(--text-md);
-  line-height: 1.85;
+  line-height: var(--leading-copy);
 }
 
 @media (max-width: 768px) {

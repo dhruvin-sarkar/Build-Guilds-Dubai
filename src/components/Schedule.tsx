@@ -51,8 +51,8 @@ function Schedule() {
             What we&apos;re actually doing all day.
           </motion.h2>
           <motion.p className={styles.lead} variants={itemVariants}>
-            Bench-style pacing: component context, build time, PCB routing, demos from other teens, and real next
-            steps once the power rails go quiet.
+            Bench-style pacing: component context, signal flow, build time, PCB routing, demos from other teens, and
+            real next steps once the power rails go quiet.
           </motion.p>
         </motion.div>
 
@@ -91,7 +91,8 @@ function Schedule() {
         </div>
 
         <p className={styles.note}>
-          Bench timing may shift slightly as venue logistics lock in, but the build flow stays the same.
+          Bench timing may shift slightly as venue logistics lock in, but the build flow, solderless-debug rhythm, and
+          PCB workshop arc stay the same.
         </p>
       </div>
     </section>

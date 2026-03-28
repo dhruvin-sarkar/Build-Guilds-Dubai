@@ -20,7 +20,7 @@ const aboutStrips: AboutStrip[] = [
     id: 'pace',
     command: 'LOAD_BUILD_ENERGY',
     title: 'Fast, hands-on, and built around actual making.',
-    body: 'This is not a corporate workshop and it is not a lecture marathon. You get crash courses, guided build time, PCB design, show and tell, and enough room to go off-script if you already ship projects or want to spend longer on the schematic-to-board path.',
+    body: 'This is not a corporate workshop and it is not a lecture marathon. You get crash courses, guided build time, PCB design, show and tell, and enough room to go off-script if you already ship projects or want to spend longer on the schematic-to-board, layout, or firmware-debug path.',
   },
   {
     id: 'community',
@@ -74,15 +74,17 @@ function About() {
           <motion.div className={styles.copyColumn} variants={itemVariants}>
             <p className={styles.kicker}>Teen-run // hardware-first // free to attend</p>
             <h2 className={styles.title}>What Build Guild looks like when the local scene is actually wired in.</h2>
-            <p className={styles.lead}>
-              Build Guild Dubai is a one-day hardware meetup inside Hack Club Blueprint&apos;s global week of teen-run
-              events. It&apos;s for people who are circuit-curious, people who already ship things, and everyone in
-              between.
-            </p>
-            <p className={styles.lead}>
-              No venue cosplay. No paywall. No &quot;maybe someday&quot; energy. Just a free day to learn hardware, route a
-              PCB, talk through firmware paths, meet other builders, and figure out what you want to make next.
-            </p>
+          <p className={styles.lead}>
+            Build Guild Dubai is a one-day hardware meetup inside Hack Club Blueprint&apos;s global week of teen-run
+            events. It&apos;s for people who are circuit-curious, people who already ship things, and everyone in
+            between - from first breadboard questions to teens already thinking in footprints, traces, and enclosure
+            tolerances.
+          </p>
+          <p className={styles.lead}>
+            No venue cosplay. No paywall. No &quot;maybe someday&quot; energy. Just a free day to learn hardware, route a
+            PCB, talk through firmware paths, compare schematics, meet other builders, and figure out what you want to
+            make next.
+          </p>
           </motion.div>
         </motion.div>
 
@@ -115,7 +117,8 @@ function About() {
           <span className={styles.footerPrompt}>&gt; SYS_STATUS</span>
           <p className={styles.footerText}>
             Free to attend. Beginner welcome. Ages 13–18. Hack Club funded. Blueprint-connected. Built for the actual
-            Dubai teen maker community.
+            Dubai teen maker community and the kind of people who would rather be at a bench than just watching from
+            the sidelines.
           </p>
         </motion.div>
       </div>

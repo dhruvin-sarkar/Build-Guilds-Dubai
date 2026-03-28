@@ -15,19 +15,19 @@ const merchItems: MerchItem[] = [
     id: 'stickers',
     label: 'Sticker sheet',
     title: 'Stickers',
-    caption: 'Logo marks, board references, and Dubai build motifs. Placeholder art goes here.',
+    caption: 'Logo marks, board traces, and Dubai build motifs. Placeholder art goes here.',
   },
   {
     id: 'posters',
     label: 'Poster layout',
     title: 'Posters',
-    caption: 'Event posters, social graphics, and printable announcements for the run-up to April 18.',
+    caption: 'Event posters, bench diagrams, and printable announcements for the run-up to April 18.',
   },
   {
     id: 'event-art',
     label: 'Art drop',
     title: 'Event Art',
-    caption: 'Illustrations, lockups, and visual extras for merch, stage graphics, and promo assets.',
+    caption: 'Illustrations, lockups, and visual extras for merch, stage graphics, and oscilloscope-adjacent promo assets.',
   },
 ];
 

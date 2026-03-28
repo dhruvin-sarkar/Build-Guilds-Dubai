@@ -49,7 +49,8 @@ function Organizers() {
           </motion.h2>
           <motion.p className={styles.lead} variants={itemVariants}>
             Dhruv and Aly are shaping this like the kind of hardware day they would want to attend themselves:
-            practical, welcoming, and genuinely worth clearing a Saturday for.
+            practical, welcoming, and genuinely worth clearing a Saturday for if you care about boards, components,
+            tools, and the people behind them.
           </motion.p>
         </motion.div>
 

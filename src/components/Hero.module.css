@@ -31,12 +31,12 @@
 }
 
 .kicker {
-  max-width: 38rem;
+  max-width: var(--measure-copy);
   color: var(--text-secondary);
   font-size: var(--text-xs);
   font-weight: 700;
-  letter-spacing: 0.18em;
-  line-height: 1.65;
+  letter-spacing: var(--tracking-label-wide);
+  line-height: var(--leading-meta);
   text-transform: uppercase;
 }
 
@@ -45,17 +45,17 @@
   color: var(--text-primary);
   font-size: var(--step-hero);
   font-weight: 800;
-  letter-spacing: 0.04em;
-  line-height: 0.92;
+  letter-spacing: var(--tracking-display);
+  line-height: var(--leading-display);
   text-transform: uppercase;
 }
 
 .subline,
 .support {
-  max-width: 42rem;
+  max-width: var(--measure-copy);
   color: var(--text-secondary);
   font-size: var(--text-md);
-  line-height: 1.82;
+  line-height: var(--leading-copy-loose);
 }
 
 .support {
@@ -77,7 +77,7 @@
   color: var(--text-primary);
   font-size: var(--text-xs);
   font-weight: 700;
-  letter-spacing: 0.16em;
+  letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -99,7 +99,7 @@
   border: 1px solid var(--border-strong);
   font-size: var(--text-xs);
   font-weight: 700;
-  letter-spacing: 0.16em;
+  letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   transition:
     background 0.2s ease,
@@ -148,7 +148,7 @@
   color: var(--text-secondary);
   font-size: var(--text-xs);
   font-weight: 700;
-  letter-spacing: 0.16em;
+  letter-spacing: var(--tracking-label);
   text-transform: uppercase;
 }
 
@@ -168,7 +168,8 @@
   color: var(--text-primary);
   font-size: var(--text-xs);
   font-weight: 700;
-  letter-spacing: 0.18em;
+  letter-spacing: var(--tracking-label-wide);
+  line-height: var(--leading-meta);
   text-transform: uppercase;
 }
 
@@ -186,8 +187,8 @@
 
 .readoutValue {
   color: var(--text-primary);
-  font-size: var(--text-sm);
-  line-height: 1.75;
+  font-size: var(--text-base);
+  line-height: var(--leading-copy);
 }
 
 .countdown {

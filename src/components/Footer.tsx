@@ -72,8 +72,8 @@ function Footer() {
           <p className={styles.label}>[ SYS://FOOTER ]</p>
           <p className={styles.title}>Build Guild Dubai // Blueprint hardware week, routed through Dubai</p>
           <p className={styles.summaryText}>
-            Built for teens who want more than spectator energy — more schematics, more board bring-up, more real
-            local builders to learn from.
+            Built for teens who want more than spectator energy — more schematics, more board bring-up, more debug
+            notes, and more real local builders to learn from.
           </p>
         </div>
 

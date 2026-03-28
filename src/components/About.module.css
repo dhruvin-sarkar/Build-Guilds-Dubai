@@ -44,7 +44,7 @@
 .footerPrompt {
   font-size: var(--text-xs);
   font-weight: 700;
-  letter-spacing: 0.16em;
+  letter-spacing: var(--tracking-label);
   text-transform: uppercase;
 }
 
@@ -57,46 +57,46 @@
   color: var(--text-primary);
   font-size: clamp(3.4rem, 10vw, 5.8rem);
   font-weight: 800;
-  letter-spacing: 0.03em;
-  line-height: 0.9;
+  letter-spacing: var(--tracking-display);
+  line-height: var(--leading-display);
   text-transform: uppercase;
 }
 
 .statCaption {
-  max-width: 13rem;
+  max-width: 18ch;
   color: var(--text-muted);
   font-size: var(--text-sm);
-  line-height: 1.75;
+  line-height: var(--leading-copy);
   text-transform: uppercase;
 }
 
 .copyColumn {
   gap: var(--space-4);
-  max-width: 44rem;
+  max-width: var(--measure-copy-wide);
 }
 
 .kicker {
-  max-width: 34rem;
+  max-width: var(--measure-copy);
   color: var(--text-secondary);
-  line-height: 1.7;
+  line-height: var(--leading-meta);
 }
 
 .title {
-  max-width: 13ch;
+  max-width: var(--measure-title);
   color: var(--text-primary);
   font-size: var(--step-title);
   font-weight: 800;
-  line-height: 1.02;
+  line-height: var(--leading-title);
   text-transform: uppercase;
 }
 
 .lead,
 .stripText,
 .footerText {
-  max-width: 40rem;
+  max-width: var(--measure-copy);
   color: var(--text-muted);
   font-size: var(--text-sm);
-  line-height: 1.85;
+  line-height: var(--leading-copy-loose);
 }
 
 .lead {
@@ -130,7 +130,7 @@
   color: var(--text-primary);
   font-size: var(--text-lg);
   font-weight: 700;
-  line-height: 1.35;
+  line-height: var(--leading-tight);
   text-transform: uppercase;
 }
 

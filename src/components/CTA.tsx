@@ -45,10 +45,10 @@ function CTA() {
             <p className={styles.meta}>
               {EVENT_DATE_DISPLAY} // {EVENT_LOCATION} // Free
             </p>
-            <p className={styles.support}>
-              If you want a real day of parts, traces, PCB workshop time, and people who can help you get from idea to
-              first board spin, this is your sign to register.
-            </p>
+          <p className={styles.support}>
+            If you want a real day of parts, traces, PCB workshop time, and people who can help you get from idea to
+            first board spin, first firmware flash, or first working prototype, this is your sign to register.
+          </p>
           </motion.div>
 
           <motion.div className={styles.actions} variants={itemVariants}>

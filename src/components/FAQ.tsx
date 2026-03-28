@@ -45,7 +45,8 @@ function FAQ() {
             The practical questions, answered.
           </motion.h2>
           <motion.p className={styles.lead} variants={itemVariants}>
-            Travel light, ask the obvious questions, and show up curious — here’s the rest of the pre-flight check.
+            Travel light, ask the obvious questions, and treat this like the pre-flight check before a long bench day -
+            here&apos;s the rest of the packet.
           </motion.p>
         </motion.div>
 

@@ -11,15 +11,15 @@ const heroFacts = [EVENT_DATE_DISPLAY, EVENT_TIME, EVENT_LOCATION, `Venue ${EVEN
 const eventPacketItems = [
   {
     label: 'Bench mix',
-    value: 'Beginners, return builders, and people already carrying half-routed ideas.',
+    value: 'Beginners, return builders, and people already carrying half-routed boards or half-flashed ideas.',
   },
   {
     label: 'Bring list',
-    value: 'Laptop optional // hardware demos welcome // questions encouraged.',
+    value: 'Laptop optional // dev boards and hardware demos welcome // questions about parts, traces, or firmware encouraged.',
   },
   {
     label: 'After today',
-    value: 'Blueprint, Hackpad, and next-step project routes before you head home.',
+    value: 'Blueprint, Hackpad, and next-step project routes once the bench supply clicks off.',
   },
 ];
 
@@ -61,8 +61,9 @@ function Hero() {
               the people building in Dubai instead of just hearing about them online.
             </p>
             <p className={styles.support}>
-              We&apos;re designing this like a real bench day: parts on the table, signal paths explained, show-and-tell
-              from teens already shipping, and enough room for complete beginners to start without feeling behind.
+              We&apos;re designing this like a real bench day: parts on the table, signal paths explained, schematic
+              notes turned into actual traces, show-and-tell from teens already shipping, and enough room for complete
+              beginners to probe, ask, and start without feeling behind.
             </p>
 
             <div className={styles.facts}>
