@@ -8,24 +8,33 @@
   margin: 0 auto;
 }
 
-.grid {
-  display: block;
+.heroBody {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-5);
+  text-align: center;
 }
 
 .copy,
+.brandLockup,
+.metaBlock,
+.signalRow,
 .countdownHeader,
 .countdownWrap {
   display: grid;
 }
 
-.copy {
-  gap: var(--space-5);
-  padding-top: var(--space-4);
-  max-width: min(100%, 48rem);
+.brandLockup {
+  justify-items: center;
+  gap: var(--space-3);
 }
 
-.kicker {
-  max-width: var(--measure-copy);
+.brandLogo {
+  width: clamp(10rem, 18vw, 14rem);
+  height: auto;
+}
+
+.brandMeta {
   color: var(--text-secondary);
   font-size: var(--text-xs);
   font-weight: 700;
@@ -34,8 +43,14 @@
   text-transform: uppercase;
 }
 
+.copy {
+  justify-items: center;
+  gap: var(--space-4);
+  max-width: min(100%, 44rem);
+}
+
 .title {
-  max-width: 7.4ch;
+  max-width: 9ch;
   color: var(--text-primary);
   font-size: var(--step-hero);
   font-weight: 800;
@@ -44,43 +59,53 @@
   text-transform: uppercase;
 }
 
-.subline,
-.support {
-  max-width: var(--measure-copy);
+.subline {
+  max-width: 36ch;
   color: var(--text-secondary);
   font-size: var(--text-md);
   line-height: var(--leading-copy-loose);
 }
 
-.support {
-  color: var(--text-muted);
-  font-size: var(--text-sm);
-}
-
+.signalRow,
 .facts {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: var(--space-3);
 }
 
+.signalChip,
 .factChip {
   display: inline-flex;
   align-items: center;
   min-height: 3rem;
   padding: 0 var(--space-4);
-  color: var(--text-primary);
   font-size: var(--text-xs);
   font-weight: 700;
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
+}
+
+.signalChip {
+  color: var(--accent-yellow);
+  background: color-mix(in srgb, var(--accent-yellow) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-yellow) 42%, var(--border));
+}
+
+.metaBlock {
+  justify-items: center;
+  gap: var(--space-4);
+}
+
+.factChip {
+  color: var(--text-primary);
   background: var(--bg-card);
   border: 1px solid var(--border);
 }
 
 .actions {
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-3);
+  justify-content: center;
 }
 
 .primaryAction,
@@ -136,11 +161,11 @@
 }
 
 .countdownWrap {
-  margin-top: var(--space-6);
+  margin-top: var(--space-8);
 }
 
 .countdownFrame {
-  width: 100%;
+  width: min(100%, 62rem);
   display: grid;
   gap: var(--space-5);
   padding: var(--space-6);
@@ -151,6 +176,7 @@
 
 .countdownHeader {
   align-items: start;
+  justify-items: center;
 }
 
 .countdownMeta {
@@ -160,6 +186,10 @@
   letter-spacing: var(--tracking-label-wide);
   line-height: var(--leading-meta);
   text-transform: uppercase;
+}
+
+.countdownLabel {
+  width: min(100%, 28rem);
 }
 
 .countdown {
@@ -173,6 +203,10 @@
     padding: calc(var(--nav-height) + var(--space-8)) var(--page-padding) var(--section-space-mobile);
   }
 
+  .brandLogo {
+    width: clamp(8.5rem, 34vw, 11rem);
+  }
+
   .title {
     max-width: 8ch;
     font-size: clamp(2.9rem, 14vw, 4.8rem);
@@ -180,10 +214,12 @@
 
   .subline {
     font-size: var(--text-base);
+    max-width: 32ch;
   }
 
   .actions {
     display: grid;
+    width: min(100%, 24rem);
   }
 
   .primaryAction,
@@ -199,7 +235,8 @@
   }
 }
 
-.kicker,
+.brandMeta,
+.signalChip,
 .factChip,
 .countdownMeta {
   font-family: var(--font-mono);
@@ -211,7 +248,6 @@
   font-family: var(--font-display);
 }
 
-.subline,
-.support {
+.subline {
   font-family: var(--font-body);
 }

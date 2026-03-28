@@ -4,19 +4,19 @@ export interface EventPacketItem {
 }
 
 export const eventPacketIntro =
-  'Treat this as the practical show-up brief: what kind of room you are walking into, what to bring, and where the day points once the bench clears.';
+  "Think of this as the practical show-up brief: what kind of room you're walking into, what to bring, and where the day points once the bench clears.";
 
 export const eventPacketItems: EventPacketItem[] = [
   {
     label: 'Bench mix',
-    value: 'Beginners, return builders, and people already carrying half-routed boards or half-flashed ideas.',
+    value: 'A mix of complete beginners, return builders, and teens already carrying half-routed boards or half-flashed ideas.',
   },
   {
     label: 'Bring list',
-    value: 'Laptop optional // dev boards and hardware demos welcome // questions about parts, traces, or firmware encouraged.',
+    value: 'Bring a laptop if you have one. Dev boards, hardware demos, and obvious questions about parts, traces, or firmware are all welcome.',
   },
   {
     label: 'After today',
-    value: 'Blueprint, Hackpad, and next-step project routes once the bench supply clicks off.',
+    value: 'You should leave with clearer next steps into Blueprint, Hackpad, and whatever you want to prototype once the bench supply clicks off.',
   },
 ];

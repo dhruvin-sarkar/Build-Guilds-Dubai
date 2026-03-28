@@ -65,7 +65,7 @@ function FAQ() {
             aria-expanded={packetOpen}
             onClick={() => setPacketOpen((currentValue) => !currentValue)}
           >
-            <span className={styles.question}>What should I bring / how should I show up?</span>
+            <span className={styles.question}>What should I bring? How should I show up?</span>
             <span className={styles.icon}>{packetOpen ? '[-]' : '[+]'}</span>
           </button>
 
