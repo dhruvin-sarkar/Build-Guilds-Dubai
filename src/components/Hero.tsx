@@ -40,8 +40,8 @@ function Hero() {
           <motion.div className={styles.copy} variants={itemVariants}>
             <h1 className={styles.title}>Build Guild Dubai</h1>
             <p className={styles.subline}>
-              A one-day hardware meetup in Dubai for teens who want to learn real components, build real boards, and
-              meet the local scene actually shipping things.
+              Free in-person hardware meetup for high schoolers in Dubai. Join us for a day of workshops,
+              tinkering, and socialising! (free food & snacks included)
             </p>
           </motion.div>
 
@@ -83,4 +83,3 @@ function Hero() {
 }
 
 export default Hero;
-
