@@ -39,13 +39,13 @@ This repo is the event website — built to inform, hype up, and sign up attende
 
 ## What Was Happening on the Day
 
-- Intro to Hardware — crash course on PCBs, firmware, embedded systems  
-- Components Crash Course + Hands-On Build Time  
-- Lunch (included)  
-- Show & Tell — bring your hardware projects  
-- PCB Workshop — design a hacker card or keychain in EasyEDA / KiCad  
-- Intro to Hack Club, Blueprint & Hackpad — how to get funded for your own builds  
-- Open Build Time + Wind Down  
+- Intro to Hardware — crash course on PCBs, firmware, embedded systems
+- Components Crash Course + Hands-On Build Time
+- Lunch (included)
+- Show & Tell — bring your hardware projects
+- PCB Workshop — design a hacker card or keychain in EasyEDA / KiCad
+- Intro to Hack Club, Blueprint & Hackpad — how to get funded for your own builds
+- Open Build Time + Wind Down
 
 ---
 
@@ -61,9 +61,9 @@ We were supported by the **JLCPCB Group**, including:
   <img src="https://easyeda.com/images/logo.png" height="50"/>
 </p>
 
-- **JLCPCB** — PCB manufacturing  
-- **OSHWA Labs** — open-source hardware ecosystem  
-- **EasyEDA** — PCB design tools  
+- **JLCPCB** — PCB manufacturing
+- **OSHWA Labs** — open-source hardware ecosystem
+- **EasyEDA** — PCB design tools
 
 ---
 
@@ -85,9 +85,9 @@ Thanks to everyone for being patient and helpful during this. It really means a 
 
 ## Tech Stack
 
-- React 18 + TypeScript via Vite  
-- Framer Motion for animations  
-- CSS Modules with CSS custom properties  
+- React 18 + TypeScript via Vite
+- Framer Motion for animations
+- CSS Modules with CSS custom properties
 
 ---
 
