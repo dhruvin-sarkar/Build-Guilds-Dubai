@@ -1,7 +1,8 @@
 # Build Guild Dubai
 
-![Hack Club](https://assets.hackclub.com/flag-orpheus-top.svg)
-![Blueprint HackPad](https://blueprint.hackclub.com/assets/hackpad-9b1661c1.webp)
+<p align="center">
+  <img src="https://assets.hackclub.com/flag-standalone.svg" width="120" />
+</p>
 
 > **Update:** This event has been called off.
 >
@@ -15,7 +16,7 @@ Open to any teen aged **13–18** in or near Dubai. No hardware experience neede
 
 ## What Was This
 
-Build Guild Dubai was a local satellite event of [Hack Club Blueprint](https://blueprint.hackclub.com) — a program by Hack Club where teens design and build hardware projects and get funding to make them real. Hack Club funds local organizers to run meetups in their cities during Build Guilds week.
+Build Guild Dubai was a local satellite event of [Hack Club Blueprint](https://blueprint.hackclub.com) — a program by Hack Club where teens design and build hardware projects and get funding to make them real.
 
 This repo is the event website — built to inform, hype up, and sign up attendees.
 
@@ -32,25 +33,43 @@ This repo is the event website — built to inform, hype up, and sign up attende
 | **Cost** | Free |
 | **Age** | 13–18 |
 
-**Sign up →** [blueprint.hackclub.com/guilds/invite/dubai](https://blueprint.hackclub.com/guilds/invite/dubai)
+**Sign up →** https://blueprint.hackclub.com/guilds/invite/dubai
 
 ---
 
 ## What Was Happening on the Day
 
-- Intro to Hardware — crash course on PCBs, firmware, embedded systems
-- Components Crash Course + Hands-On Build Time
-- Lunch (included)
-- Show & Tell — bring your hardware projects
-- PCB Workshop — design a hacker card or keychain in EasyEDA / KiCad
-- Intro to Hack Club, Blueprint & Hackpad — how to get funded for your own builds
-- Open Build Time + Wind Down
+- Intro to Hardware — crash course on PCBs, firmware, embedded systems  
+- Components Crash Course + Hands-On Build Time  
+- Lunch (included)  
+- Show & Tell — bring your hardware projects  
+- PCB Workshop — design a hacker card or keychain in EasyEDA / KiCad  
+- Intro to Hack Club, Blueprint & Hackpad — how to get funded for your own builds  
+- Open Build Time + Wind Down  
+
+---
+
+## Sponsors
+
+We were supported by the **JLCPCB Group**, including:
+
+<p align="center">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/JLCPCB_logo.png" height="50"/>
+  &nbsp;&nbsp;&nbsp;
+  <img src="https://oshwa.org/wp-content/uploads/2016/09/oshw-logo.svg" height="50"/>
+  &nbsp;&nbsp;&nbsp;
+  <img src="https://easyeda.com/images/logo.png" height="50"/>
+</p>
+
+- **JLCPCB** — PCB manufacturing  
+- **OSHWA Labs** — open-source hardware ecosystem  
+- **EasyEDA** — PCB design tools  
 
 ---
 
 ## Cancellation Note
 
-Hey everyone, I just finalised this 15 minutes ago.
+Hey everyone,
 
 Because of what's going on in Dubai right now, it has been very hard to find a place to hold the event. I contacted cafes, makerspaces, public places, colleges, universities, and schools, but most of them said they could not host because of the current situation. Aly has been very helpful the whole time, but unfortunately he has not been able to stay because of exams.
 
@@ -66,46 +85,10 @@ Thanks to everyone for being patient and helpful during this. It really means a 
 
 ## Tech Stack
 
-- React 18 + TypeScript via Vite
-- Framer Motion for scroll and mount animations
-- CSS Modules with CSS custom properties
-- Deployed on Vercel
+- React 18 + TypeScript via Vite  
+- Framer Motion for animations  
+- CSS Modules with CSS custom properties  
 
 ---
 
-## Running Locally
-
-```bash
-git clone https://github.com/dhruvin-sarkar/Build-Guilds-Dubai
-cd Build-Guilds-Dubai
-npm install
-npm run dev
-```
-
-To refresh Blueprint project data for the builds archive:
-
-```bash
-npm run fetch-projects
-npm run build
-```
-
----
-
-## Organizers
-
-- **Dhruv** — Lead Organizer
-- **Aly** — Organizer
-
-Join **#build-guild-dubai** on [Hack Club Slack](https://hackclub.com/slack) for updates.
-
----
-
-## Visuals
-
-![Hack Club Brand](https://assets.hackclub.com/hcb-light.svg)
-
-![Blueprint HackPad Inside](https://blueprint.hackclub.com/assets/hackpad_inside-de1e1d7a.webp)
-
----
-
-*Archived Build Guild Dubai site — Dubai, UAE — April 18, 2026*
+*Build Guild Dubai — Dubai, UAE — April 18, 2026*
