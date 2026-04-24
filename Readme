@@ -1,3 +1,111 @@
-few tasks
-making stuff look better??
-Adding stickers and art throught the empty space.
+# Build Guild Dubai
+
+![Hack Club](https://assets.hackclub.com/flag-orpheus-top.svg)
+![Blueprint HackPad](https://blueprint.hackclub.com/assets/hackpad-9b1661c1.webp)
+
+> **Update:** This event has been called off.
+>
+> Thanks to everyone who supported Build Guild Dubai and helped us push this as far as we could. The full event write-up below is kept as an archive of what we planned to run.
+
+The official website for **Build Guild Dubai** — a free 1-day hardware meetup that was planned for **April 18, 2026**, as part of Hack Club Blueprint's global **Build Guilds** week (April 13–19).
+
+Open to any teen aged **13–18** in or near Dubai. No hardware experience needed.
+
+---
+
+## What Was This
+
+Build Guild Dubai was a local satellite event of [Hack Club Blueprint](https://blueprint.hackclub.com) — a program by Hack Club where teens design and build hardware projects and get funding to make them real. Hack Club funds local organizers to run meetups in their cities during Build Guilds week.
+
+This repo is the event website — built to inform, hype up, and sign up attendees.
+
+---
+
+## Event Details
+
+| | |
+|---|---|
+| **Date** | April 18, 2026 |
+| **Time** | 10:00 AM – 8:00 PM |
+| **Location** | Dubai, UAE |
+| **Venue** | TBD |
+| **Cost** | Free |
+| **Age** | 13–18 |
+
+**Sign up →** [blueprint.hackclub.com/guilds/invite/dubai](https://blueprint.hackclub.com/guilds/invite/dubai)
+
+---
+
+## What Was Happening on the Day
+
+- Intro to Hardware — crash course on PCBs, firmware, embedded systems
+- Components Crash Course + Hands-On Build Time
+- Lunch (included)
+- Show & Tell — bring your hardware projects
+- PCB Workshop — design a hacker card or keychain in EasyEDA / KiCad
+- Intro to Hack Club, Blueprint & Hackpad — how to get funded for your own builds
+- Open Build Time + Wind Down
+
+---
+
+## Cancellation Note
+
+Hey everyone, I just finalised this 15 minutes ago.
+
+Because of what's going on in Dubai right now, it has been very hard to find a place to hold the event. I contacted cafes, makerspaces, public places, colleges, universities, and schools, but most of them said they could not host because of the current situation. Aly has been very helpful the whole time, but unfortunately he has not been able to stay because of exams.
+
+We were holding on to some hope with the ceasefire, but we had almost everything in place except for the final details about the venue and the BOM. Shipping has been very hard lately, and with the current airspace restrictions and the high costs and delays involved in getting the BOM from JLCPCB or PCBWay, it has not been possible to get everything delivered on time. I also talked to JLCPCB, which includes OSHWA Labs and EasyEDA, and looked into a counter-sponsorship with PCBWay, but sadly none of this could come together in a way that would work for the event in the time we had.
+
+It is not realistic anymore because I have SATs on May 2nd and I still need time to find a place, get everything ready, and plan everything to the level we want. I do not want to put together something quickly or poorly, especially since Aly and I were both really looking forward to making this event special.
+
+This is hard to say after being let down by the cancellation of Dubai Campfire, which we were both looking forward to even more so for Aly since he put so much effort into organizing it at the beginning of everything, but I think the best thing to do right now is to call off the event.
+
+Thanks to everyone for being patient and helpful during this. It really means a lot.
+
+---
+
+## Tech Stack
+
+- React 18 + TypeScript via Vite
+- Framer Motion for scroll and mount animations
+- CSS Modules with CSS custom properties
+- Deployed on Vercel
+
+---
+
+## Running Locally
+
+```bash
+git clone https://github.com/dhruvin-sarkar/Build-Guilds-Dubai
+cd Build-Guilds-Dubai
+npm install
+npm run dev
+```
+
+To refresh Blueprint project data for the builds archive:
+
+```bash
+npm run fetch-projects
+npm run build
+```
+
+---
+
+## Organizers
+
+- **Dhruv** — Lead Organizer
+- **Aly** — Organizer
+
+Join **#build-guild-dubai** on [Hack Club Slack](https://hackclub.com/slack) for updates.
+
+---
+
+## Visuals
+
+![Hack Club Brand](https://assets.hackclub.com/hcb-light.svg)
+
+![Blueprint HackPad Inside](https://blueprint.hackclub.com/assets/hackpad_inside-de1e1d7a.webp)
+
+---
+
+*Archived Build Guild Dubai site — Dubai, UAE — April 18, 2026*
